@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using System.Configuration;
 
 
 namespace DataAccessLayer.Otros
@@ -21,7 +18,7 @@ namespace DataAccessLayer.Otros
             get
          {
              if (_connection == null)
-                 _connection = new SqlConnection(@"data source = HOEPELMAN-PC\SQLEXPRESS; integrated security = true; initial catalog = SGF; user id = sa; password = Dylan300903");
+                 _connection = new SqlConnection(ConfigurationManager.ConnectionStrings["aPrestentationLayer.Properties.Settings.SGFConnectionString"].ConnectionString);
              return _connection;
          }
         }
