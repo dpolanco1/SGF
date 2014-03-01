@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4D7F51B4-B3D0-4A66-B566-D02839CC5384}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ReportLayer</RootNamespace>
+    <AssemblyName>ReportLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administracion\Listados\Frm_Rpt_Gastos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracion\Listados\Frm_Rpt_Gastos.Designer.cs">
+      <DependentUpon>Frm_Rpt_Gastos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\Listados\Frm_Rpt_Articulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\Listados\Frm_Rpt_Articulos.Designer.cs">
+      <DependentUpon>Frm_Rpt_Articulos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SGFDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SGFDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SGFDataSetInventario.cs">
+      <DependentUpon>SGFDataSetInventario.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SGFDataSetInventario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SGFDataSetInventario.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Administracion\Formatos\" />
+    <Folder Include="Administracion\Generales\" />
+    <Folder Include="Administracion\Graficos\" />
+    <Folder Include="CxC_Ventas\Formatos\" />
+    <Folder Include="CxC_Ventas\Generales\" />
+    <Folder Include="CxC_Ventas\Graficos\" />
+    <Folder Include="CxC_Ventas\Listados\" />
+    <Folder Include="CxP_Compras\Formatos\" />
+    <Folder Include="CxP_Compras\Generales\" />
+    <Folder Include="CxP_Compras\Graficos\" />
+    <Folder Include="CxP_Compras\Listados\" />
+    <Folder Include="Inventario\Formatos\" />
+    <Folder Include="Inventario\Generales\" />
+    <Folder Include="Inventario\Graficos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Administracion\Listados\Frm_Rpt_Gastos.resx">
+      <DependentUpon>Frm_Rpt_Gastos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administracion\Listados\Rpt_Gastos.rdlc" />
+    <EmbeddedResource Include="Inventario\Listados\Frm_Rpt_Articulos.resx">
+      <DependentUpon>Frm_Rpt_Articulos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\Listados\Rpt_Articulos.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="SGFDataSet.xsc">
+      <DependentUpon>SGFDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SGFDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SGFDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SGFDataSet.xss">
+      <DependentUpon>SGFDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SGFDataSetInventario.xsc">
+      <DependentUpon>SGFDataSetInventario.xsd</DependentUpon>
+    </None>
+    <None Include="SGFDataSetInventario.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SGFDataSetInventario.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SGFDataSetInventario.xss">
+      <DependentUpon>SGFDataSetInventario.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\EntityLayer.csproj">
+      <Project>{d229d21a-fd32-4ae4-9e2d-f52a23574478}</Project>
+      <Name>EntityLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

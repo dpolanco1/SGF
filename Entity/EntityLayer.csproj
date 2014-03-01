@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D229D21A-FD32-4AE4-9E2D-F52A23574478}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EntityLayer</RootNamespace>
+    <AssemblyName>Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administracion\Enl_Compania.cs" />
+    <Compile Include="Administracion\Enl_DatosDeSession.cs" />
+    <Compile Include="Administracion\Enl_Empleados.cs" />
+    <Compile Include="Administracion\Enl_Gastos.cs" />
+    <Compile Include="Administracion\Enl_Impuestos.cs" />
+    <Compile Include="Administracion\Enl_Login.cs" />
+    <Compile Include="Administracion\Enl_MododePago.cs" />
+    <Compile Include="Administracion\Enl_Numeracion.cs" />
+    <Compile Include="Administracion\Enl_Usuarios.cs" />
+    <Compile Include="CxC_Ventas\Enl_Caja.cs" />
+    <Compile Include="CxC_Ventas\Enl_CategoriaClientes.cs" />
+    <Compile Include="CxC_Ventas\Enl_Clientes.cs" />
+    <Compile Include="CxC_Ventas\Enl_CotizacionesDetail.cs" />
+    <Compile Include="CxC_Ventas\Enl_CotizacionesMaster.cs" />
+    <Compile Include="CxC_Ventas\Enl_FacBalancePendientes.cs" />
+    <Compile Include="CxC_Ventas\Enl_FacturaDetail.cs" />
+    <Compile Include="CxC_Ventas\Enl_FacturaMaster.cs" />
+    <Compile Include="CxC_Ventas\Enl_NotaCredito.cs" />
+    <Compile Include="CxC_Ventas\Enl_NotaDebito.cs" />
+    <Compile Include="CxC_Ventas\Enl_ReciboMaster.cs" />
+    <Compile Include="CxC_Ventas\Enl_SubCategoriaClientes.cs" />
+    <Compile Include="CxC_Ventas\Enl_Termino.cs" />
+    <Compile Include="CxP_Compras\Enl_CategoriaSuplidores.cs" />
+    <Compile Include="CxP_Compras\Enl_ComprasDetail.cs" />
+    <Compile Include="CxP_Compras\Enl_NotaCredito.cs" />
+    <Compile Include="CxP_Compras\Enl_NotaDebito.cs" />
+    <Compile Include="CxP_Compras\Enl_OrdenesCompras.cs" />
+    <Compile Include="CxP_Compras\Enl_SubCategoriaSuplidores.cs" />
+    <Compile Include="CxP_Compras\Enl_Suplidores.cs" />
+    <Compile Include="CxP_Compras\Enl_ComprasMaster.cs" />
+    <Compile Include="Inventario\Enl_Almacen.cs" />
+    <Compile Include="Inventario\Enl_Articulos.cs" />
+    <Compile Include="Inventario\Enl_CategoriaArticulos.cs" />
+    <Compile Include="Inventario\Enl_Marcas.cs" />
+    <Compile Include="Inventario\Enl_SubCategoriaArticulos.cs" />
+    <Compile Include="Inventario\Enl_TransfAlmacenesDetail.cs" />
+    <Compile Include="Inventario\Enl_TransfAlmacenesMaster.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
