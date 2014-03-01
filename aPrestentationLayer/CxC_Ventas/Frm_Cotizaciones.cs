@@ -1,29 +1,31 @@
-﻿using System;
+﻿using aPrestentationLayer.Administracion;
+using aPrestentationLayer.Plantillas;
+using BusinessLogicLayer.Administracion;
+using BusinessLogicLayer.CxC_Ventas;
+using BusinessLogicLayer.Inventario;
+using BusinessLogicLayer.Otros;
+using EntityLayer.CxC_Ventas;
+using EntityLayer.Inventario;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Globalization;
 using System.Windows.Forms;
-using aPrestentationLayer.Plantillas;
-using EntityLayer.CxC_Ventas;
-using BusinessLogicLayer.CxC_Ventas;
-using BusinessLogicLayer.Administracion;
-using BusinessLogicLayer.Otros;
-using aPrestentationLayer.Administracion;
-using EntityLayer.Inventario;
-using BusinessLogicLayer.Inventario;
+
+
 
 
 namespace aPrestentationLayer.CxC_Ventas
 {
     public partial class Frm_Cotizaciones : Frm_Plantilla, Icotizaciones
     {
+        
         string Estado = string.Empty;
         const string NUEVO = "Creando";
         const string EDITAR = "Editando";
         const string CONSULTA = "Consultando";
+        CultureInfo ci = new CultureInfo("es-DO");
 
         bool ActualizarDGV = false;
 
@@ -123,10 +125,10 @@ namespace aPrestentationLayer.CxC_Ventas
             enlCotizacionMaster.Terminos = txtTerminos.Text;
             enlCotizacionMaster.Descuento = nudDescuento.Value;
             enlCotizacionMaster.Vendedor = txtVendedor.Text;
-            enlCotizacionMaster.SubTotal = Convert.ToDecimal(txtSubTotal.Text);
-            enlCotizacionMaster.TotalImpuesto = Convert.ToDecimal(txtTotalImpuesto.Text);
-            enlCotizacionMaster.TotalDescuento = Convert.ToDecimal(txtTotalDescuento.Text);
-            enlCotizacionMaster.TotalCotizacion = Convert.ToDecimal(txtTotalCotizacion.Text);
+            enlCotizacionMaster.SubTotal = Convert.ToDecimal(string.Format(txtSubTotal.Text.ToString().Replace("RD$","")));
+            enlCotizacionMaster.TotalImpuesto = Convert.ToDecimal(txtTotalImpuesto.Text.ToString().Replace("RD$", ""));
+            enlCotizacionMaster.TotalDescuento = Convert.ToDecimal(txtTotalDescuento.Text.ToString().Replace("RD$", ""));
+            enlCotizacionMaster.TotalCotizacion = Convert.ToDecimal(txtTotalCotizacion.Text.ToString().Replace("RD$", ""));
 
             if (Estado == "Creando")
             {
@@ -152,6 +154,7 @@ namespace aPrestentationLayer.CxC_Ventas
                 }
 
                 MessageBox.Show("Registro Guardado Correctamente", "SGF");
+                
 
             }
             else
@@ -409,33 +412,65 @@ namespace aPrestentationLayer.CxC_Ventas
 
                     list.Add(enlCotizacionDetail);
 
+
+
                     DGV_DetailCotizaciones.DataSource = null;
                     DGV_DetailCotizaciones.DataSource = list;
 
                 }
                 else
                 {
+                    if (DGV_DetailCotizaciones.Rows.Count > 0)
+                    {
+                        int cantidadgridLinea;
+                        decimal preciogridLinea;
+                        decimal totalgridLinea;
 
-                    DGV_DetailCotizaciones.Rows.Insert(0, txtArticulo.Text, txtDescripcion.Text, precio, cantidad, 0, totalLinea);
+                        foreach (DataGridViewRow row in DGV_DetailCotizaciones.Rows)
+                        {
+                            //Si el producto ya existe en el datagridview
+                            if (row.Cells["ArticuloCotizacion"].Value.Equals(txtArticulo.Text))
+                            {
+                                cantidadgridLinea = Convert.ToInt32(row.Cells["CantidadCotizacion"].Value);
+                                totalgridLinea = Convert.ToDecimal(row.Cells["TotalLineaCotizaciong"].Value);
+                                preciogridLinea = Convert.ToDecimal(row.Cells["PrecioCotizacion"].Value);
+
+                                //precio digitado
+                                row.Cells["PrecioCotizacion"].Value = txtPrecio.Text;
+                                //cantidad actual + digitada
+                                row.Cells["CantidadCotizacion"].Value = (cantidadgridLinea + Convert.ToInt32(txtCantidad.Text));
+                                //precio * cantiad
+                                row.Cells["TotalLineaCotizaciong"].Value = (int)row.Cells["CantidadCotizacion"].Value *  Convert.ToDecimal(row.Cells["PrecioCotizacion"].Value);
+
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        DGV_DetailCotizaciones.Rows.Insert(0, txtArticulo.Text, txtDescripcion.Text, precio, cantidad, 0, totalLinea);
+                    }
+                    
                 }
 
-              //  TotalLineaCotizacion = 0;
-                TotalImpuestoCotizacion = 0;
+                //actualizar valores grid.
+                ActualizarGrid();
+             
+                #region "codigo comentado"
+                /*TotalImpuestoCotizacion = 0;
                 foreach (DataGridViewRow row in DGV_DetailCotizaciones.Rows)
                 {
                     TotalLineaCotizacion += Convert.ToDecimal(row.Cells["TotalLineaCotizaciong"].Value);
                     TotalImpuestoCotizacion += Convert.ToDecimal(row.Cells["ImpuestoCotizacion"].Value);
                 }
+                
                 Porcentaje = nudDescuento.Value / 100;
                 SubTotalCotizacion = TotalLineaCotizacion - TotalImpuestoCotizacion;
                 TotalDescuentoCotizacion = SubTotalCotizacion * Porcentaje;
-                TotalCotizacion = SubTotalCotizacion + TotalImpuestoCotizacion - TotalDescuentoCotizacion;
+                TotalCotizacion = SubTotalCotizacion + TotalImpuestoCotizacion - TotalDescuentoCotizacion;*/
+                #endregion
 
-                txtSubTotal.Text = Convert.ToString(SubTotalCotizacion.ToString("C"));
-                txtTotalImpuesto.Text = Convert.ToString(TotalImpuestoCotizacion.ToString("C"));
-                txtTotalDescuento.Text = Convert.ToString(TotalDescuentoCotizacion.ToString("C"));
-                txtTotalCotizacion.Text = Convert.ToString(TotalCotizacion.ToString("C"));
 
+                //limpiar Textbox
                 txtArticulo.Text = String.Empty;
                 txtDescripcion.Text = String.Empty;
                 txtPrecio.Text = String.Empty;
@@ -443,6 +478,17 @@ namespace aPrestentationLayer.CxC_Ventas
 
                 txtArticulo.Focus();
             }
+        }
+
+        private void ActualizarGrid ()
+        {
+            //Calculamos los valores en el grid y devolvemos los totales
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100));
+
+            txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
+            txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());
+            txtTotalDescuento.Text = Helper.ConvertirANumero(valores[2].ToString()).ToString("C2");//Convert.ToString(TotalDescuentoCotizacion.ToString());
+            txtTotalCotizacion.Text = Helper.ConvertirANumero(valores[3].ToString()).ToString("C2");//Convert.ToString(TotalCotizacion.ToString());
         }
 
         private void txtArticulo_Validating(object sender, CancelEventArgs e)
@@ -467,7 +513,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
                     txtArticulo.Text = list[0].Codigo;
                     txtDescripcion.Text = list[0].Descripcion;
-                    txtPrecio.Text = Convert.ToString(list[0].Precio);
+                    txtPrecio.Text = list[0].Precio.ToString("C2").Replace("RD$", "");
                     txtCantidad.Text = "1";
                    // txtCosto.Text = Convert.ToString(list[0].Costo);
 
@@ -507,7 +553,7 @@ namespace aPrestentationLayer.CxC_Ventas
                 {
                     sumatoria += Convert.ToDecimal(row.Cells["TotalLineaCotizaciong"].Value);
                 }
-                txtSubTotal.Text = Convert.ToString(sumatoria.ToString("C"));
+                txtSubTotal.Text = Convert.ToString(sumatoria.ToString("C2"));
 
             }
         }
@@ -522,6 +568,8 @@ namespace aPrestentationLayer.CxC_Ventas
             TotalLineaGrid = precioGrid * cantidadGrid + impuestoGrid;
             DGV_DetailCotizaciones[5, DGV_DetailCotizaciones.CurrentCell.RowIndex].Value = TotalLineaGrid;
 
+            #region "Codigo Comentado"
+            /*
             TotalLineaCotizacion = 0;
             TotalImpuestoCotizacion = 0;
             foreach (DataGridViewRow row in DGV_DetailCotizaciones.Rows)
@@ -535,13 +583,72 @@ namespace aPrestentationLayer.CxC_Ventas
             TotalDescuentoCotizacion = SubTotalCotizacion * Porcentaje;
             TotalCotizacion = SubTotalCotizacion + TotalImpuestoCotizacion - TotalDescuentoCotizacion;
 
-            txtSubTotal.Text = Convert.ToString(SubTotalCotizacion.ToString("C"));
-            txtTotalImpuesto.Text = Convert.ToString(TotalImpuestoCotizacion.ToString("C"));
-            txtTotalDescuento.Text = Convert.ToString(TotalDescuentoCotizacion.ToString("C"));
-            txtTotalCotizacion.Text = Convert.ToString(TotalCotizacion.ToString("C"));
+            txtSubTotal.Text = Convert.ToString(SubTotalCotizacion.ToString());
+            txtTotalImpuesto.Text = Convert.ToString(TotalImpuestoCotizacion.ToString());
+            txtTotalDescuento.Text = Convert.ToString(TotalDescuentoCotizacion.ToString());
+            txtTotalCotizacion.Text = Convert.ToString(TotalCotizacion.ToString());
+             
+             */
+            #endregion
+
+            //Calculamos los valores en el grid y devolvemos los totales
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100));
+
+            txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
+            txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());
+            txtTotalDescuento.Text = Helper.ConvertirANumero(valores[2].ToString()).ToString("C2");//Convert.ToString(TotalDescuentoCotizacion.ToString());
+            txtTotalCotizacion.Text = Helper.ConvertirANumero(valores[3].ToString()).ToString("C2");//Convert.ToString(TotalCotizacion.ToString());
+
+
+
         }
 
-      
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Para obligar a que sólo se introduzcan números 
+            if (Char.IsDigit(e.KeyChar))
+                e.Handled = false;
+            else
+            {
+                if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso 
+                    e.Handled = false;
+                    else if (e.KeyChar == '.')//permitir el punto (0)
+                     e.Handled = false;
 
+                else
+                    //el resto de teclas pulsadas se desactivan 
+                    e.Handled = true;
+            }
+        }
+
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Para obligar a que sólo se introduzcan números 
+            if (Char.IsDigit(e.KeyChar))
+                e.Handled = false;
+            else
+            {
+                if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso 
+                    e.Handled = false;
+                else
+                    //el resto de teclas pulsadas se desactivan 
+                    e.Handled = true;
+            }
+        }
+
+
+        private void nudDescuento_Validating(object sender, CancelEventArgs e)
+        {
+                ActualizarGrid();
+        }
+
+        private void txtPrecio_Validating(object sender, CancelEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPrecio.Text))
+            {
+                string precio = Convert.ToDecimal(txtPrecio.Text).ToString("C2").Replace("RD$", "");
+                txtPrecio.Text = precio;
+            }
+        }
     }
 }
