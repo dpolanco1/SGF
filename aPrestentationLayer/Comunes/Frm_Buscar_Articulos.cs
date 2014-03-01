@@ -33,29 +33,7 @@ namespace aPrestentationLayer.Comunes
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            //var list = new List<Enl_Articulos>();
-
-            //for (int a = 0; a < DGV_Articulos.RowCount; a++)
-            //{
-            //    if (DGV_Articulos[0, a].Value != null)
-            //    {
-            //        // Verificar si el Check Box esta True
-            //        if ((bool)(DGV_Articulos[0, a].Value) == true)
-            //        {
-
-            //            list.Add(new Enl_Articulos
-            //            {
-            //                Codigo = DGV_Articulos[1, a].Value.ToString(),
-            //                Descripcion = DGV_Articulos[2, a].Value.ToString()
-            //                //Cantidad = Convert.ToDecimal(DGV_Articulos[3, a].Value)
-                            
-
-            //            });
-            //        }
-            //    }
-            //}
-
-
+            
             for (int a = 0; a < DGV_Articulos.RowCount; a++)
             {
                 if (DGV_Articulos[0, a].Value != null)
