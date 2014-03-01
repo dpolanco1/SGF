@@ -21,7 +21,7 @@ namespace DataAccessLayer.Otros
             get
          {
              if (_connection == null)
-                 _connection = new SqlConnection(@"data source = (local); integrated security = true; initial catalog = SGF; user id = sa; password = Dylan300903");
+                 _connection = new SqlConnection(@"data source = HOEPELMAN-PC\SQLEXPRESS; integrated security = true; initial catalog = SGF; user id = sa; password = Dylan300903");
              return _connection;
          }
         }
