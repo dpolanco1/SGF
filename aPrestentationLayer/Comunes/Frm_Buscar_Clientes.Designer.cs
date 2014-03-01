@@ -33,10 +33,12 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.DGV_Articulos = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAgregarCliente = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Articulos)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -46,7 +48,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(510, 345);
+            this.tabControl1.Size = new System.Drawing.Size(625, 379);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -56,7 +58,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(502, 319);
+            this.tabPage1.Size = new System.Drawing.Size(617, 353);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -66,7 +68,7 @@
             this.groupBox2.Controls.Add(this.DGV_Articulos);
             this.groupBox2.Location = new System.Drawing.Point(14, 83);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(461, 189);
+            this.groupBox2.Size = new System.Drawing.Size(570, 248);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -78,23 +80,33 @@
             this.DGV_Articulos.Location = new System.Drawing.Point(16, 19);
             this.DGV_Articulos.Name = "DGV_Articulos";
             this.DGV_Articulos.ReadOnly = true;
-            this.DGV_Articulos.Size = new System.Drawing.Size(430, 164);
+            this.DGV_Articulos.Size = new System.Drawing.Size(548, 223);
             this.DGV_Articulos.TabIndex = 0;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnAgregarCliente);
             this.groupBox1.Location = new System.Drawing.Point(14, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(461, 48);
+            this.groupBox1.Size = new System.Drawing.Size(570, 48);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
+            // 
+            // btnAgregarCliente
+            // 
+            this.btnAgregarCliente.Location = new System.Drawing.Point(495, 19);
+            this.btnAgregarCliente.Name = "btnAgregarCliente";
+            this.btnAgregarCliente.Size = new System.Drawing.Size(69, 22);
+            this.btnAgregarCliente.TabIndex = 0;
+            this.btnAgregarCliente.Text = "Nuevo...";
+            this.btnAgregarCliente.UseVisualStyleBackColor = true;
             // 
             // Frm_Buscar_Clientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(510, 345);
+            this.ClientSize = new System.Drawing.Size(625, 379);
             this.Controls.Add(this.tabControl1);
             this.Name = "Frm_Buscar_Clientes";
             this.Text = "Frm_Buscar_Clientes";
@@ -102,6 +114,7 @@
             this.tabPage1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Articulos)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -113,5 +126,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView DGV_Articulos;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnAgregarCliente;
     }
 }
