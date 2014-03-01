@@ -39,10 +39,13 @@ namespace BusinessLogicLayer.CxC_Ventas
                 {
                     MessageBox.Show("El Numero de Factura es Obligatorio", "SGF");
                     return enlFacturasMaster.Numero;
-
                 }
 
             }
+
+
+   // if enlFacturasMaster.Cliente
+
 
             if (dalFacturasMaster.Search(enlFacturasMaster).Count == 0)
             {

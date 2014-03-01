@@ -31,12 +31,8 @@ namespace aPrestentationLayer.Comunes
             DGV_Buscar_Cotizaciones.AutoGenerateColumns = false;
             this.numeroCliente = cliente;
            // Data.AutoGenerateColumns = false;
-        
-
+       
         }
-
-     
-      
 
         private void Frm_Buscar_Cotizacion_Load(object sender, EventArgs e)
         {
@@ -74,9 +70,7 @@ namespace aPrestentationLayer.Comunes
         private void btnAceptar_Click(object sender, EventArgs e)
         {
 
-            
-
-            for (int a = 0; a < DGV_Buscar_Cotizaciones.RowCount; a++)
+    for (int a = 0; a < DGV_Buscar_Cotizaciones.RowCount; a++)
             {
                 if (DGV_Buscar_Cotizaciones[0, a].Value != null)
                 {

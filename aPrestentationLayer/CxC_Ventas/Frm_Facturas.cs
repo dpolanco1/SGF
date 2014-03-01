@@ -50,6 +50,10 @@ namespace aPrestentationLayer.CxC_Ventas
 
         IList<Enl_FacturaDetail> list ;
         IList<Enl_CotizacionesMaster> listCotiza;
+       
+       
+        IList<Enl_Articulos> listArticulos = new  List<Enl_Articulos>();
+      
 
         decimal TotalLineaCompra, linea, cantidad, costo,
         impuesto, TotalImpuestoCompra, SubTotalCompra,
@@ -210,8 +214,8 @@ namespace aPrestentationLayer.CxC_Ventas
                 txtNoFactura.Text = bllFacturaMaster.Insert(enlFacturaMaster);
 
                      //hago la insercion en los DGV
-               for (int a = 0; a < DGV_DetailFactura.RowCount - 1; a++)
-                 {
+                for (int a = 0; a < DGV_DetailFactura.RowCount; a++)
+                {
                     enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
                     enlFacturaDetail.Articulo = DGV_DetailFactura[0, a].Value.ToString();
                     enlFacturaDetail.Descripcion = DGV_DetailFactura[1, a].Value.ToString();
@@ -462,10 +466,11 @@ namespace aPrestentationLayer.CxC_Ventas
 
             enlFacturaMaster.DesdeFecha = dtpDesde.Value.Date;
             enlFacturaMaster.HastaFecha = dtpHasta.Value.Date;
+            
 
             DGV_Facturas.DataSource = bllFacturaMaster.Search(enlFacturaMaster);
 
-            
+            cmbTipo.SelectedIndex = cmbTipo.Items.IndexOf("Contado");
 
         }
 
@@ -554,8 +559,17 @@ namespace aPrestentationLayer.CxC_Ventas
 
                 }
                 else
-                {
-                    DGV_DetailFactura.Rows.Insert(0, txtArticulo.Text, txtDescripcion.Text, costo, cantidad, 0, linea);
+                {                   
+                    this.listArticulos.Add(new Enl_Articulos() {
+                      Codigo = txtArticulo.Text,
+                      Descripcion = txtDescripcion.Text,
+                      Precio = decimal.Parse(txtPrecio.Text),
+                      Cantidad = int.Parse(txtCantidad.Text),
+                      Impuesto = "0"
+                    });
+                    DGV_DetailFactura.DataSource = null;
+                    DGV_DetailFactura.DataSource = this.listArticulos;
+                    lblCantidaArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailFactura.RowCount);
                 }
                 ////Método con el que recorreremos todas las filas de nuestro Datagridview
 
@@ -564,8 +578,8 @@ namespace aPrestentationLayer.CxC_Ventas
 
                 foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
                 {
-                    TotalLineaCompra += Convert.ToDecimal(row.Cells["TotalLinea"].Value);
-                    TotalImpuestoCompra += Convert.ToDecimal(row.Cells["Impuesto"].Value);
+                    TotalLineaCompra += Convert.ToDecimal(row.Cells["TotalLineaFacturaGrid"].Value);
+                    TotalImpuestoCompra += Convert.ToDecimal(row.Cells["ImpuestoFacturaGrid"].Value);
                 }
 
                 Porcentaje = nudDescuento.Value / 100;
@@ -573,10 +587,10 @@ namespace aPrestentationLayer.CxC_Ventas
                 TotalDescuentoCompra = SubTotalCompra * Porcentaje;
                 TotalCompraCompra = SubTotalCompra + TotalImpuestoCompra - TotalDescuentoCompra;
 
-                txtSubTotal.Text = Convert.ToString(SubTotalCompra.ToString("C"));
-                txtTotalImpuesto.Text = Convert.ToString(TotalImpuestoCompra.ToString("C"));
-                txtTotalDescuento.Text = Convert.ToString(TotalDescuentoCompra.ToString("C"));
-                txtTotalFactura.Text = Convert.ToString(TotalCompraCompra.ToString("C"));
+                txtSubTotal.Text = Convert.ToString(SubTotalCompra.ToString());
+                txtTotalImpuesto.Text = Convert.ToString(TotalImpuestoCompra.ToString());
+                txtTotalDescuento.Text = Convert.ToString(TotalDescuentoCompra.ToString());
+                txtTotalFactura.Text = Convert.ToString(TotalCompraCompra.ToString());
 
 
                 txtArticulo.Text = String.Empty;
@@ -606,15 +620,16 @@ namespace aPrestentationLayer.CxC_Ventas
                 {
 
                     DGV_DetailFactura.Rows.RemoveAt(DGV_DetailFactura.CurrentRow.Index);
+                    lblCantidaArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailFactura.RowCount);
 
                 }
                 decimal sumatoria = 0;
 
                 foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
                 {
-                    sumatoria += Convert.ToDecimal(row.Cells["TotalLinea"].Value);
+                    sumatoria += Convert.ToDecimal(row.Cells["TotalLineaFacturagrid"].Value);
                 }
-                txtSubTotal.Text = Convert.ToString(sumatoria.ToString("C"));
+                txtSubTotal.Text = Convert.ToString(sumatoria.ToString());
 
             }
         }
@@ -682,7 +697,112 @@ namespace aPrestentationLayer.CxC_Ventas
                   
         }
 
+        private void txtArticulo_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+
+
+                enlArticulos.Codigo = txtArticulo.Text;
+                enlArticulos.Nombre = string.Empty;
+                enlArticulos.Descripcion = string.Empty;
+                enlArticulos.Impuesto = string.Empty;
+                enlArticulos.Marca = string.Empty;
+                enlArticulos.Categoria = string.Empty;
+                enlArticulos.SubCategoria = string.Empty;
+
+                if (!String.IsNullOrEmpty(txtArticulo.Text))
+                {
+                    //MessageBox.Show  (Convert.ToString( bllArticulos.Search(enlArticulos).Count));
+
+                    var list = bllArticulos.Search(enlArticulos);
+
+                    txtArticulo.Text = list[0].Codigo;
+                    txtDescripcion.Text = list[0].Descripcion;
+                    txtPrecio.Text = Convert.ToString(list[0].Precio);
+                    txtCantidad.Text = "1";
+                    txtCosto.Text = Convert.ToString(list[0].Costo);
+
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Articulo no Existe");
+            }  
+            
+        }
+
+        private void lblBuscarArticulos_Click(object sender, EventArgs e)
+        {
+
+            if (Estado != CONSULTA)
+            {
+
+           
+               Frm_Buscar_Articulos frmBuscarArticulos = new Frm_Buscar_Articulos();
+               if (frmBuscarArticulos.ShowDialog() == DialogResult.OK)
+               {
+                   if (DGV_DetailFactura.RowCount == 0)
+	                {
+                        listArticulos = frmBuscarArticulos.ListaArticulos;
+                        DGV_DetailFactura.DataSource = this.listArticulos;
+                        lblCantidaArticulos.Text = string.Format("Cantidad: {0}",DGV_DetailFactura.RowCount);
+	                }
+                   else if (frmBuscarArticulos.ListaArticulos.Count != 0)
+                   {
+                       foreach (Enl_Articulos item in frmBuscarArticulos.ListaArticulos)
+                       {
+                           this.listArticulos.Add(item);
+                       }
+                       DGV_DetailFactura.DataSource = null;
+                       DGV_DetailFactura.DataSource = this.listArticulos;
+                       lblCantidaArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailFactura.RowCount);
+                       //listArticulos = frmBuscarArticulos.ListaArticulos;
+                       //if(DGV_DetailFactura.RowCount != 0)
+                       //{
+                       //    //for (int a = 0; a < DGV_DetailFactura.RowCount; a++)
+                       //    //{
+                       //    //    listArticulos.Add(new Enl_Articulos
+                       //    //    {
+                       //    //        Codigo = DGV_DetailFactura[1, a].Value.ToString(),
+                       //    //        Descripcion = DGV_DetailFactura[2, a].Value.ToString(),
+                       //    //        Precio = Convert.ToDecimal(DGV_DetailFactura[3, a].Value),
+                       //    //        Impuesto = DGV_DetailFactura[5, a].Value.ToString()
+
+
+                       //    //    });
+
+
+
+                       //    DGV_DetailFactura.DataSource = listArticulos;
+                       //}
+
+                       //else
+                       //{
+                       //    DGV_DetailFactura.DataSource = listArticulos;
+
+                       //}
+
+                       //foreach (Enl_Articulos articulos in frmBuscarArticulos.ListaArticulos)
+                       //{
+                       //    DGV_DetailFactura.Rows.Add(new List<>().Add(articulos));
+                       //}
+                   }
+               }
+
+              
+
+             }
+               
+            
+            
+            }
+        }
+
+ 
+
 
        }
-    }
+ 
 

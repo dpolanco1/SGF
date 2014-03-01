@@ -16,9 +16,12 @@ namespace aPrestentationLayer.Comunes
         Enl_Articulos enlArticulos = new Enl_Articulos();
         Bll_Articulos bllArticulos = new Bll_Articulos();
 
+        public List<Enl_Articulos> ListaArticulos = new List<Enl_Articulos>();
+
         public Frm_Buscar_Articulos()
         {
             InitializeComponent();
+            DGV_Articulos.AutoGenerateColumns = false;
         }
 
         public string LlamadoDesde { get; set; }
@@ -30,7 +33,28 @@ namespace aPrestentationLayer.Comunes
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            var list = new List<Enl_Articulos>();
+            //var list = new List<Enl_Articulos>();
+
+            //for (int a = 0; a < DGV_Articulos.RowCount; a++)
+            //{
+            //    if (DGV_Articulos[0, a].Value != null)
+            //    {
+            //        // Verificar si el Check Box esta True
+            //        if ((bool)(DGV_Articulos[0, a].Value) == true)
+            //        {
+
+            //            list.Add(new Enl_Articulos
+            //            {
+            //                Codigo = DGV_Articulos[1, a].Value.ToString(),
+            //                Descripcion = DGV_Articulos[2, a].Value.ToString()
+            //                //Cantidad = Convert.ToDecimal(DGV_Articulos[3, a].Value)
+                            
+
+            //            });
+            //        }
+            //    }
+            //}
+
 
             for (int a = 0; a < DGV_Articulos.RowCount; a++)
             {
@@ -40,11 +64,14 @@ namespace aPrestentationLayer.Comunes
                     if ((bool)(DGV_Articulos[0, a].Value) == true)
                     {
 
-                        list.Add(new Enl_Articulos
+                        ListaArticulos.Add(new Enl_Articulos()
                         {
                             Codigo = DGV_Articulos[1, a].Value.ToString(),
-                            Descripcion = DGV_Articulos[2, a].Value.ToString()
-                            //Cantidad = Convert.ToDecimal(DGV_Articulos[3, a].Value)
+                            Descripcion = DGV_Articulos[2, a].Value.ToString(),
+                            Precio = Convert.ToDecimal(DGV_Articulos[3, a].Value),
+                            Costo = Convert.ToDecimal(DGV_Articulos[4, a].Value),
+                            Cantidad = 1,
+                            Impuesto = "0"
                             
 
                         });
@@ -52,6 +79,8 @@ namespace aPrestentationLayer.Comunes
                 }
             }
 
+
+            Close();
 
         }
 
@@ -77,6 +106,23 @@ namespace aPrestentationLayer.Comunes
                     break;
 
             }
+        }
+
+        private void Frm_Buscar_Articulos_Load(object sender, EventArgs e)
+        {
+
+            enlArticulos.Codigo = string.Empty;
+            enlArticulos.Nombre = string.Empty;
+            enlArticulos.Descripcion = string.Empty;
+            enlArticulos.Impuesto = string.Empty;
+            enlArticulos.Marca = string.Empty;
+            enlArticulos.Categoria = string.Empty;
+            enlArticulos.SubCategoria = string.Empty;
+
+
+
+            DGV_Articulos.DataSource = bllArticulos.Search(enlArticulos);
+       
         }
     }
 }

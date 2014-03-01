@@ -19,6 +19,7 @@ namespace EntityLayer.Inventario
       public string Impuesto { get; set; }
       public Decimal Existencia { get; set; }
       public string CodigoBarra { get; set; }
+      public int Cantidad { get; set; }
 
 
 
