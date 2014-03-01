@@ -407,9 +407,11 @@ namespace aPrestentationLayer.CxC_Ventas
                 if (txtArticulo.Text != String.Empty && txtPrecio.Text != String.Empty && txtCantidad.Text != String.Empty)
                 {
 
-                    decimal precio, cantidad, totalLinea;
+                    decimal precio;
+                    int cantidad;
+                    decimal totalLinea;
                     precio = Convert.ToDecimal(txtPrecio.Text);
-                    cantidad = Convert.ToDecimal(txtCantidad.Text);
+                    cantidad = Convert.ToInt32(txtCantidad.Text);
                     totalLinea = precio * cantidad;
                     //   costo = Convert.ToDecimal(txtCosto.Text);
 
@@ -422,7 +424,7 @@ namespace aPrestentationLayer.CxC_Ventas
                             Articulo = txtArticulo.Text,
                             Descripcion = txtDescripcion.Text,
                             Precio = Convert.ToDecimal(txtPrecio.Text),
-                            Cantidad = Convert.ToDecimal(txtCantidad.Text),
+                            Cantidad = Convert.ToInt32(txtCantidad.Text),
                             TotalLinea = Convert.ToDecimal(txtPrecio.Text) * Convert.ToDecimal(txtCantidad.Text),
                             //   Costo = Convert.ToDecimal(txtCosto.Text)
                         });
@@ -685,6 +687,7 @@ namespace aPrestentationLayer.CxC_Ventas
                         DGV_DetailCotizaciones.DataSource = this.listArticulos;
                         lblCantidadArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailCotizaciones.RowCount);
                     }
+                        //Formulario que trae la lista de articulos
                     else if (frmBuscarArticulos.ListaArticulos.Count != 0)
                     {
                         foreach (Enl_Articulos item in frmBuscarArticulos.ListaArticulos)
@@ -695,8 +698,37 @@ namespace aPrestentationLayer.CxC_Ventas
                         DGV_DetailCotizaciones.DataSource = this.listArticulos;
                         lblCantidadArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailCotizaciones.RowCount);
                     }
+
+                    ActualizarGrid();
                 }
             }
+        }
+
+        private void DGV_DetailCotizaciones_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if ((int)(((System.Windows.Forms.DataGridView)(sender)).CurrentCell.ColumnIndex) == 2 || ((int)(((System.Windows.Forms.DataGridView)(sender)).CurrentCell.ColumnIndex) == 3))
+            {
+                e.Control.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
+            }
+        }
+
+        private void DGV_DetailCotizaciones_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            decimal totalLineagrid = 0.00m;
+            decimal impuestoLineagrid = 0.00m;
+
+            foreach (DataGridViewRow row in DGV_DetailCotizaciones.Rows)
+            {
+                totalLineagrid += Convert.ToDecimal(row.Cells["PrecioCotizacion"].Value) * Convert.ToInt32(row.Cells["CantidadCotizacion"].Value);
+                row.Cells["TotalLineaCotizaciong"].Value = totalLineagrid;
+                totalLineagrid = 0.00m;
+
+                impuestoLineagrid += (Convert.ToDecimal(row.Cells["PrecioCotizacion"].Value) * Convert.ToDecimal(row.Cells["ImpuestoCotizacion"].Value) / 100);
+                row.Cells["ImpuestoCotizacion"].Value = impuestoLineagrid;
+                impuestoLineagrid = 0.00m;
+            }
+
+            
         }
 
 
