@@ -15,6 +15,7 @@ using BusinessLogicLayer.Inventario;
 using BusinessLogicLayer.Otros;
 using aPrestentationLayer.CxC_Ventas.Reportes.Formatos;
 using aPrestentationLayer.Comunes;
+using EntityLayer.Administracion;
 
 
 namespace aPrestentationLayer.CxC_Ventas
@@ -40,20 +41,24 @@ namespace aPrestentationLayer.CxC_Ventas
         Enl_Articulos enlArticulos = new Enl_Articulos();
         Bll_Articulos bllArticulos = new Bll_Articulos();
 
+        Enl_Impuestos enlImpuestos = new Enl_Impuestos();
+        Bll_Impuestos bllImpuestos = new Bll_Impuestos();
+
+
         Enl_CotizacionesMaster enlCotizacionMaster = new Enl_CotizacionesMaster();
         Enl_CotizacionesDetail enlCotizacionDetail = new Enl_CotizacionesDetail();
         Bll_CotizacionesDetail bllCotizacionDetail = new Bll_CotizacionesDetail();
-       
+
 
 
         Bll_Numeracion bllNumeracion = new Bll_Numeracion();
 
-        IList<Enl_FacturaDetail> list ;
+        IList<Enl_FacturaDetail> list;
         IList<Enl_CotizacionesMaster> listCotiza;
-       
-       
-        IList<Enl_Articulos> listArticulos = new  List<Enl_Articulos>();
-      
+
+
+        IList<Enl_Articulos> listArticulos = new List<Enl_Articulos>();
+
 
         decimal TotalLineaCompra, linea, cantidad, costo,
         impuesto, TotalImpuestoCompra, SubTotalCompra,
@@ -61,7 +66,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
 
 
-       // IList<Enl_CotizacionesMaster> listCotizacionMaster;
+        // IList<Enl_CotizacionesMaster> listCotizacionMaster;
 
         public Frm_Facturas()//IList<Enl_CotizacionesMaster> enlCotizacionMasterIlist)
         {
@@ -71,7 +76,7 @@ namespace aPrestentationLayer.CxC_Ventas
             btnEditar.Click += btnEditar_Click;
             btnCancelar.Click += btnCancelar_Click;
             btnEliminar.Click += btnEliminar_Click;
-          
+
             btnImprimir.Click += btnImprimir_Click;
             btnVista.Click += btnVista_Click;
 
@@ -79,7 +84,7 @@ namespace aPrestentationLayer.CxC_Ventas
             this.DGV_Facturas.AutoGenerateColumns = false;
             this.DGV_Cotizaciones.AutoGenerateColumns = false;
 
-           // this.listCotizacionMaster = enlCotizacionMasterIlist;
+            // this.listCotizacionMaster = enlCotizacionMasterIlist;
 
         }
 
@@ -116,10 +121,10 @@ namespace aPrestentationLayer.CxC_Ventas
                     tabControl1.TabPages.Add(tbpMaster);
                     tabControl1.SelectTab(tbpMaster);
 
-                    }
+                }
 
-                 if(DGV_Facturas.Rows.Count != 0 )
-                 {
+                if (DGV_Facturas.Rows.Count != 0)
+                {
 
                     txtNoFactura.Text = DGV_Facturas[0, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtCliente.Text = DGV_Facturas[1, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
@@ -127,20 +132,20 @@ namespace aPrestentationLayer.CxC_Ventas
                     txtAlmacen.Text = DGV_Facturas[3, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtTerminos.Text = DGV_Facturas[4, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     cmbTipo.Text = DGV_Facturas[5, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
-                    nudDescuento.Value   = Convert.ToDecimal ( DGV_Facturas[6, DGV_Facturas.CurrentCell.RowIndex].Value) ;
+                    nudDescuento.Value = Convert.ToDecimal(DGV_Facturas[6, DGV_Facturas.CurrentCell.RowIndex].Value);
                     txtVendedor.Text = DGV_Facturas[7, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtCaja.Text = DGV_Facturas[8, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtSubTotal.Text = DGV_Facturas[9, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtTotalImpuesto.Text = DGV_Facturas[10, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtTotalDescuento.Text = DGV_Facturas[11, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtTotalFactura.Text = DGV_Facturas[12, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
-                 }
-                    }
-                    enlFacturaDetail.NoFactura = txtNoFactura.Text;
-
-                    DGV_DetailFactura.DataSource = bllFacturaDetail.Search(enlFacturaDetail);
-
                 }
+            }
+            enlFacturaDetail.NoFactura = txtNoFactura.Text;
+
+            DGV_DetailFactura.DataSource = bllFacturaDetail.Search(enlFacturaDetail);
+
+        }
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -156,7 +161,7 @@ namespace aPrestentationLayer.CxC_Ventas
             }
 
             BotonNuevo();
-           // DGV_DetailFactura.Rows.Clear();
+            // DGV_DetailFactura.Rows.Clear();
             DGV_DetailFactura.DataSource = null;
 
             if (bllNumeracion.ObtenerTipo("Facturas") == "Automatico")
@@ -188,10 +193,10 @@ namespace aPrestentationLayer.CxC_Ventas
             enlFacturaMaster.Caja = txtCaja.Text;
             enlFacturaMaster.Status = "Prueba";
 
-            enlFacturaMaster.SubTotal =  Convert.ToDecimal(txtSubTotal.Text);
-            enlFacturaMaster.TotalImpuesto = Convert.ToDecimal ( txtTotalImpuesto.Text); 
-            enlFacturaMaster.TotalDescuento = Convert.ToDecimal( txtTotalDescuento.Text);
-            enlFacturaMaster.TotalFactura = Convert.ToDecimal ( txtTotalFactura.Text);
+            enlFacturaMaster.SubTotal = Convert.ToDecimal(txtSubTotal.Text);
+            enlFacturaMaster.TotalImpuesto = Convert.ToDecimal(txtTotalImpuesto.Text);
+            enlFacturaMaster.TotalDescuento = Convert.ToDecimal(txtTotalDescuento.Text);
+            enlFacturaMaster.TotalFactura = Convert.ToDecimal(txtTotalFactura.Text);
 
 
             if (enlFacturaMaster.Tipo == "Contado")
@@ -213,18 +218,18 @@ namespace aPrestentationLayer.CxC_Ventas
             {
                 txtNoFactura.Text = bllFacturaMaster.Insert(enlFacturaMaster);
 
-                     //hago la insercion en los DGV
+                //hago la insercion en los DGV
                 for (int a = 0; a < DGV_DetailFactura.RowCount; a++)
                 {
                     enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
                     enlFacturaDetail.Articulo = DGV_DetailFactura[0, a].Value.ToString();
                     enlFacturaDetail.Descripcion = DGV_DetailFactura[1, a].Value.ToString();
-                    enlFacturaDetail.Precio = Convert.ToDecimal( DGV_DetailFactura[2, a].Value);
-                    enlFacturaDetail.Cantidad =  Convert.ToDecimal( DGV_DetailFactura[3, a].Value);
-                    enlFacturaDetail.Impuesto =  Convert.ToDecimal( DGV_DetailFactura[4, a].Value);
-                    enlFacturaDetail.TotalLinea =  Convert.ToDecimal( DGV_DetailFactura[5, a].Value);
+                    enlFacturaDetail.Precio = Convert.ToDecimal(DGV_DetailFactura[2, a].Value);
+                    enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_DetailFactura[3, a].Value);
+                    enlFacturaDetail.Impuesto = Convert.ToDecimal(DGV_DetailFactura[4, a].Value);
+                    enlFacturaDetail.TotalLinea = Convert.ToDecimal(DGV_DetailFactura[5, a].Value);
                     enlFacturaDetail.Costo = Convert.ToDecimal(DGV_DetailFactura[6, a].Value);
-   
+
                     bllFacturaDetail.Insert(enlFacturaDetail);
 
 
@@ -233,7 +238,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
                     bllArticulos.UpdateExitencia(enlArticulos);
 
-                 }
+                }
 
                 if (bllNumeracion.ObtenerTipo("Facturas") == "Automatico")
                 {
@@ -310,7 +315,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     DGV_DetailFactura.DataSource = list; // bllFacturaDetail.Search(enlFacturaDetail);
 
                 }
-         
+
 
             }
             if (!string.IsNullOrEmpty(txtNoFactura.Text))
@@ -326,10 +331,10 @@ namespace aPrestentationLayer.CxC_Ventas
                     enlArticulos.Existencia = Convert.ToDecimal(DGV_DetailFactura[3, a].Value);
                     bllArticulos.UpdateExitencia(enlArticulos);
                 }
-                  
+
             }
 
-         
+
 
         }
 
@@ -371,7 +376,7 @@ namespace aPrestentationLayer.CxC_Ventas
                 }
             }
 
-            BotonCancelar();           
+            BotonCancelar();
             Estado = CONSULTA;
         }
 
@@ -403,7 +408,7 @@ namespace aPrestentationLayer.CxC_Ventas
                 }
             }
 
-  
+
 
             enlFacturaMaster.Numero = txtNoFactura.Text;
             enlFacturaDetail.NoFactura = txtNoFactura.Text;
@@ -449,7 +454,7 @@ namespace aPrestentationLayer.CxC_Ventas
             }
 
         }
-         
+
         private void Frm_Facturas_Load(object sender, EventArgs e)
         {
 
@@ -466,7 +471,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
             enlFacturaMaster.DesdeFecha = dtpDesde.Value.Date;
             enlFacturaMaster.HastaFecha = dtpHasta.Value.Date;
-            
+
 
             DGV_Facturas.DataSource = bllFacturaMaster.Search(enlFacturaMaster);
 
@@ -483,7 +488,7 @@ namespace aPrestentationLayer.CxC_Ventas
         {
             if (Estado != CONSULTA)
             {
-                if (MessageBox.Show("No ha Guardado el Resigro, Desea Continuar ?","Salir",MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("No ha Guardado el Resigro, Desea Continuar ?", "Salir", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     if (Estado == EDITAR)
                     {
@@ -502,7 +507,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     e.Cancel = true;
                 }
             }
-          
+
 
 
 
@@ -517,7 +522,7 @@ namespace aPrestentationLayer.CxC_Ventas
             //Frm_Buscar_CxC frm = new Frm_Buscar_CxC();
             //frm.Owner = this;
             //frm.LlamadoDesde = "Terminos";
-           
+
             //Enl_Termino enlTermino = new Enl_Termino();
             //Bll_Terminos bllTermino = new Bll_Terminos();
 
@@ -559,13 +564,35 @@ namespace aPrestentationLayer.CxC_Ventas
 
                 }
                 else
-                {                   
-                    this.listArticulos.Add(new Enl_Articulos() {
-                      Codigo = txtArticulo.Text,
-                      Descripcion = txtDescripcion.Text,
-                      Precio = decimal.Parse(txtPrecio.Text),
-                      Cantidad = int.Parse(txtCantidad.Text),
-                      Impuesto = "0"
+                {
+                    //Buscamos el codigo del impuesto filtrando el Articulo
+                    enlArticulos.Codigo = txtArticulo.Text;
+                    enlArticulos.Nombre = string.Empty;
+                    enlArticulos.Descripcion = string.Empty;
+                    enlArticulos.Impuesto = string.Empty;
+                    enlArticulos.Marca = string.Empty;
+                    enlArticulos.Categoria = string.Empty;
+                    enlArticulos.SubCategoria = string.Empty;
+
+                    var ListaArticulos = bllArticulos.Search(enlArticulos);
+
+                    // Llamamos el impuesto que esta asociado al Articulo
+                    enlImpuestos.Codigo = ListaArticulos[0].Impuesto;
+                    enlImpuestos.Nombre = string.Empty;
+                    var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
+
+                    //Calculamos el Impuesto 
+                    var ValorImpuesto = (ListaImpuesto[0].Porcentaje / 100) * decimal.Parse(txtPrecio.Text);
+
+                    this.listArticulos.Add(new Enl_Articulos()
+                    {
+                        Codigo = txtArticulo.Text,
+                        Descripcion = txtDescripcion.Text,
+                        Precio = decimal.Parse(txtPrecio.Text),
+                        Cantidad = int.Parse(txtCantidad.Text),
+                        Impuesto = ValorImpuesto.ToString("C2").Replace("RD$", "")
+
+
                     });
                     DGV_DetailFactura.DataSource = null;
                     DGV_DetailFactura.DataSource = this.listArticulos;
@@ -653,24 +680,24 @@ namespace aPrestentationLayer.CxC_Ventas
         private void btnAnadir_Click(object sender, EventArgs e)
         {
 
-           if (!string.IsNullOrEmpty(txtCliente.Text))
+            if (!string.IsNullOrEmpty(txtCliente.Text))
             {
 
                 Frm_Buscar_Cotizacion frmBuscarCotizaciones = new Frm_Buscar_Cotizacion(txtCliente.Text);
                 frmBuscarCotizaciones.ShowDialog();
-              
-                   listCotiza = frmBuscarCotizaciones.ListaCotizaciones;
 
-                     if (listCotiza.Count != 0)
-                     {
-                        DGV_Cotizaciones.DataSource = listCotiza;
+                listCotiza = frmBuscarCotizaciones.ListaCotizaciones;
 
-                        for (int a = 0; a < DGV_Cotizaciones.RowCount; a++)
-                        {
-                            enlCotizacionDetail.NoCotizacion  = DGV_Cotizaciones[0, a].Value.ToString();
-                            DGV_DetailFactura.DataSource =  bllCotizacionDetail.Search(enlCotizacionDetail);
-                        }
-                     }
+                if (listCotiza.Count != 0)
+                {
+                    DGV_Cotizaciones.DataSource = listCotiza;
+
+                    for (int a = 0; a < DGV_Cotizaciones.RowCount; a++)
+                    {
+                        enlCotizacionDetail.NoCotizacion = DGV_Cotizaciones[0, a].Value.ToString();
+                        DGV_DetailFactura.DataSource = bllCotizacionDetail.Search(enlCotizacionDetail);
+                    }
+                }
 
             }
             else
@@ -682,19 +709,18 @@ namespace aPrestentationLayer.CxC_Ventas
         private void btnBorrarCotizacion_Click(object sender, EventArgs e)
         {
 
-         if (DGV_Cotizaciones.RowCount != 0)
-            
-         {
-              //  DGV_Cotizaciones.Rows.RemoveAt(DGV_Cotizaciones.CurrentRow.Index);
+            if (DGV_Cotizaciones.RowCount != 0)
+            {
+                //  DGV_Cotizaciones.Rows.RemoveAt(DGV_Cotizaciones.CurrentRow.Index);
 
                 listCotiza.RemoveAt(DGV_Cotizaciones.CurrentRow.Index);
 
                 DGV_Cotizaciones.DataSource = null;
                 DGV_Cotizaciones.DataSource = listCotiza;
-         }
-               
+            }
 
-                  
+
+
         }
 
         private void txtArticulo_Validating(object sender, CancelEventArgs e)
@@ -729,8 +755,8 @@ namespace aPrestentationLayer.CxC_Ventas
             {
 
                 MessageBox.Show("Articulo no Existe");
-            }  
-            
+            }
+
         }
 
         private void lblBuscarArticulos_Click(object sender, EventArgs e)
@@ -738,71 +764,67 @@ namespace aPrestentationLayer.CxC_Ventas
 
             if (Estado != CONSULTA)
             {
-
-           
-               Frm_Buscar_Articulos frmBuscarArticulos = new Frm_Buscar_Articulos();
-               if (frmBuscarArticulos.ShowDialog() == DialogResult.OK)
-               {
-                   if (DGV_DetailFactura.RowCount == 0)
-	                {
+                Frm_Buscar_Articulos frmBuscarArticulos = new Frm_Buscar_Articulos();
+                if (frmBuscarArticulos.ShowDialog() == DialogResult.OK)
+                {
+                    if (DGV_DetailFactura.RowCount == 0)
+                    {
                         listArticulos = frmBuscarArticulos.ListaArticulos;
                         DGV_DetailFactura.DataSource = this.listArticulos;
-                        lblCantidaArticulos.Text = string.Format("Cantidad: {0}",DGV_DetailFactura.RowCount);
-	                }
-                   else if (frmBuscarArticulos.ListaArticulos.Count != 0)
-                   {
-                       foreach (Enl_Articulos item in frmBuscarArticulos.ListaArticulos)
-                       {
-                           this.listArticulos.Add(item);
-                       }
-                       DGV_DetailFactura.DataSource = null;
-                       DGV_DetailFactura.DataSource = this.listArticulos;
-                       lblCantidaArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailFactura.RowCount);
-                       //listArticulos = frmBuscarArticulos.ListaArticulos;
-                       //if(DGV_DetailFactura.RowCount != 0)
-                       //{
-                       //    //for (int a = 0; a < DGV_DetailFactura.RowCount; a++)
-                       //    //{
-                       //    //    listArticulos.Add(new Enl_Articulos
-                       //    //    {
-                       //    //        Codigo = DGV_DetailFactura[1, a].Value.ToString(),
-                       //    //        Descripcion = DGV_DetailFactura[2, a].Value.ToString(),
-                       //    //        Precio = Convert.ToDecimal(DGV_DetailFactura[3, a].Value),
-                       //    //        Impuesto = DGV_DetailFactura[5, a].Value.ToString()
+                        lblCantidaArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailFactura.RowCount);
+                    }
+                    else if (frmBuscarArticulos.ListaArticulos.Count != 0)
+                    {
+                        foreach (Enl_Articulos item in frmBuscarArticulos.ListaArticulos)
+                        {
+                            this.listArticulos.Add(item);
+                        }
+                        DGV_DetailFactura.DataSource = null;
+                        DGV_DetailFactura.DataSource = this.listArticulos;
+                        lblCantidaArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailFactura.RowCount);
 
-
-                       //    //    });
+                    }
+                }
 
 
 
-                       //    DGV_DetailFactura.DataSource = listArticulos;
-                       //}
+            }
 
-                       //else
-                       //{
-                       //    DGV_DetailFactura.DataSource = listArticulos;
 
-                       //}
 
-                       //foreach (Enl_Articulos articulos in frmBuscarArticulos.ListaArticulos)
-                       //{
-                       //    DGV_DetailFactura.Rows.Add(new List<>().Add(articulos));
-                       //}
-                   }
-               }
+        }
 
-              
-
-             }
-               
-            
-            
+        private void DGV_DetailFactura_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if ((int)(((System.Windows.Forms.DataGridView)(sender)).CurrentCell.ColumnIndex) == 2 || ((int)(((System.Windows.Forms.DataGridView)(sender)).CurrentCell.ColumnIndex) == 3))
+            {
+                e.Control.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             }
         }
 
- 
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '.')
+                e.Handled = true;
+        }
 
+        private void DGV_DetailFactura_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
 
-       }
- 
+            // Helper.CalcularGrid(DGV_DetailFactura, nudDescuento.Value / 100);
+
+        }
+
+        private void DGV_DetailFactura_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (e.RowIndex != 0)
+            {
+                DGV_DetailFactura.Rows[e.RowIndex].Cells["TotalLineaFacturaGrid"].Value = 10;
+            }
+            //DGV_DetailFactura.Rows[].Cells[].Value = 
+
+        }
+    }
+}
+
 
