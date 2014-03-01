@@ -43,6 +43,7 @@ namespace aPrestentationLayer.CxC_Ventas
         
 
         Bll_Numeracion bllNumeracion = new Bll_Numeracion();
+        IList<Enl_CotizacionesDetail> list;
         IList<Enl_Articulos> listArticulos = new List<Enl_Articulos>();
 
     
@@ -609,7 +610,7 @@ namespace aPrestentationLayer.CxC_Ventas
             #endregion
 
             //Calculamos los valores en el grid y devolvemos los totales
-            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100));
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100, "TotalLineaCotizaciong", "ImpuestoCotizacion"));
 
             txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
             txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());
