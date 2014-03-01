@@ -56,6 +56,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblCantidadArticulos = new System.Windows.Forms.Label();
             this.DGV_DetailCotizaciones = new System.Windows.Forms.DataGridView();
             this.ArticuloCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescripcionCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,7 +97,6 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblCantidadArticulos = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -345,6 +345,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalle";
             // 
+            // lblCantidadArticulos
+            // 
+            this.lblCantidadArticulos.AutoSize = true;
+            this.lblCantidadArticulos.Location = new System.Drawing.Point(17, 194);
+            this.lblCantidadArticulos.Name = "lblCantidadArticulos";
+            this.lblCantidadArticulos.Size = new System.Drawing.Size(58, 13);
+            this.lblCantidadArticulos.TabIndex = 1;
+            this.lblCantidadArticulos.Text = "Cantidad:0";
+            // 
             // DGV_DetailCotizaciones
             // 
             this.DGV_DetailCotizaciones.AllowUserToAddRows = false;
@@ -357,7 +366,6 @@
             this.CantidadCotizacion,
             this.ImpuestoCotizacion,
             this.TotalLineaCotizaciong});
-            this.DGV_DetailCotizaciones.Enabled = false;
             this.DGV_DetailCotizaciones.Location = new System.Drawing.Point(15, 19);
             this.DGV_DetailCotizaciones.Name = "DGV_DetailCotizaciones";
             this.DGV_DetailCotizaciones.Size = new System.Drawing.Size(758, 172);
@@ -367,7 +375,7 @@
             // ArticuloCotizacion
             // 
             this.ArticuloCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ArticuloCotizacion.DataPropertyName = "Articulo";
+            this.ArticuloCotizacion.DataPropertyName = "Codigo";
             this.ArticuloCotizacion.HeaderText = "Articulo";
             this.ArticuloCotizacion.Name = "ArticuloCotizacion";
             this.ArticuloCotizacion.ReadOnly = true;
@@ -593,7 +601,7 @@
             this.tbpDetail.Location = new System.Drawing.Point(4, 22);
             this.tbpDetail.Name = "tbpDetail";
             this.tbpDetail.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpDetail.Size = new System.Drawing.Size(824, 513);
+            this.tbpDetail.Size = new System.Drawing.Size(840, 563);
             this.tbpDetail.TabIndex = 1;
             this.tbpDetail.Text = "Cotizaciones";
             this.tbpDetail.UseVisualStyleBackColor = true;
@@ -719,15 +727,6 @@
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             // 
-            // lblCantidadArticulos
-            // 
-            this.lblCantidadArticulos.AutoSize = true;
-            this.lblCantidadArticulos.Location = new System.Drawing.Point(17, 194);
-            this.lblCantidadArticulos.Name = "lblCantidadArticulos";
-            this.lblCantidadArticulos.Size = new System.Drawing.Size(58, 13);
-            this.lblCantidadArticulos.TabIndex = 1;
-            this.lblCantidadArticulos.Text = "Cantidad:0";
-            // 
             // Frm_Cotizaciones
             // 
             this.AcceptButton = this.btnAgregar;
@@ -819,13 +818,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridView DGV_DetailCotizaciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalLineaCotizacionGrid;
+        private System.Windows.Forms.Label lblCantidadArticulos;
         private System.Windows.Forms.DataGridViewTextBoxColumn ArticuloCotizacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescripcionCotizacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioCotizacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantidadCotizacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn ImpuestoCotizacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalLineaCotizaciong;
-        private System.Windows.Forms.Label lblCantidadArticulos;
 
     }
 }
