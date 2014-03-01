@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Transactions;
 using System.Windows.Forms;
+using aPrestentationLayer.Comunes;
 
 
 
@@ -42,8 +43,7 @@ namespace aPrestentationLayer.CxC_Ventas
         
 
         Bll_Numeracion bllNumeracion = new Bll_Numeracion();
-
-        IList<Enl_CotizacionesDetail> list;
+        IList<Enl_Articulos> listArticulos = new List<Enl_Articulos>();
 
     
 
@@ -500,7 +500,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void ActualizarGrid ()
         {
             //Calculamos los valores en el grid y devolvemos los totales
-            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100));
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100, "TotalLineaCotizaciong", "ImpuestoCotizacion"));
 
             txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
             txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());
@@ -667,5 +667,37 @@ namespace aPrestentationLayer.CxC_Ventas
                 txtPrecio.Text = precio;
             }
         }
-    }
-}
+
+        private void lblBuscarArticulos_Click(object sender, EventArgs e)
+        {
+
+            if (Estado != CONSULTA)
+            {
+
+                Frm_Buscar_Articulos frmBuscarArticulos = new Frm_Buscar_Articulos();
+
+                if (frmBuscarArticulos.ShowDialog() == DialogResult.OK)
+                {
+                    if (DGV_DetailCotizaciones.RowCount == 0)
+                    {
+                        listArticulos = frmBuscarArticulos.ListaArticulos;
+                        DGV_DetailCotizaciones.DataSource = this.listArticulos;
+                        lblCantidadArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailCotizaciones.RowCount);
+                    }
+                    else if (frmBuscarArticulos.ListaArticulos.Count != 0)
+                    {
+                        foreach (Enl_Articulos item in frmBuscarArticulos.ListaArticulos)
+                        {
+                            this.listArticulos.Add(item);
+                        }
+                        DGV_DetailCotizaciones.DataSource = null;
+                        DGV_DetailCotizaciones.DataSource = this.listArticulos;
+                        lblCantidadArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailCotizaciones.RowCount);
+                    }
+                }
+            }
+        }
+
+
+    }//End Class
+}//End namespace

@@ -10,7 +10,7 @@ namespace BusinessLogicLayer.Otros
 {
     public class Helper
     {
-        public static ArrayList CalcularGrid(DataGridView gridView, decimal descuento)
+        public static ArrayList CalcularGrid(DataGridView gridView, decimal descuento, string nombreTotalLinea, string nombreImpuestoLinea)
         {
             decimal subTotal;
             decimal totalDescuento;
@@ -23,8 +23,8 @@ namespace BusinessLogicLayer.Otros
 
             foreach (DataGridViewRow row in gridView.Rows)
             {
-                totalLinea += Convert.ToDecimal(row.Cells["TotalLineaCotizaciong"].Value);
-                totalImpuesto += Convert.ToDecimal(row.Cells["ImpuestoCotizacion"].Value);
+                totalLinea += Convert.ToDecimal(row.Cells[nombreTotalLinea].Value);
+                totalImpuesto += Convert.ToDecimal(row.Cells[nombreImpuestoLinea].Value);
             }
             //Subtotal
             valores.Add(subTotal = totalLinea - totalImpuesto);

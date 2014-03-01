@@ -96,6 +96,7 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblCantidadArticulos = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -116,7 +117,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(832, 539);
+            this.tabControl1.Size = new System.Drawing.Size(848, 589);
             this.tabControl1.TabIndex = 3;
             // 
             // tbpMaster
@@ -135,7 +136,7 @@
             this.tbpMaster.Location = new System.Drawing.Point(4, 22);
             this.tbpMaster.Name = "tbpMaster";
             this.tbpMaster.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpMaster.Size = new System.Drawing.Size(824, 513);
+            this.tbpMaster.Size = new System.Drawing.Size(840, 563);
             this.tbpMaster.TabIndex = 0;
             this.tbpMaster.Text = "Cotizaciones";
             this.tbpMaster.UseVisualStyleBackColor = true;
@@ -166,6 +167,7 @@
             this.lblBuscarArticulos.Name = "lblBuscarArticulos";
             this.lblBuscarArticulos.Size = new System.Drawing.Size(23, 20);
             this.lblBuscarArticulos.TabIndex = 25;
+            this.lblBuscarArticulos.Click += new System.EventHandler(this.lblBuscarArticulos_Click);
             // 
             // label15
             // 
@@ -259,7 +261,7 @@
             // 
             this.txtTotalCotizacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalCotizacion.ForeColor = System.Drawing.Color.Red;
-            this.txtTotalCotizacion.Location = new System.Drawing.Point(626, 479);
+            this.txtTotalCotizacion.Location = new System.Drawing.Point(631, 499);
             this.txtTotalCotizacion.Name = "txtTotalCotizacion";
             this.txtTotalCotizacion.ReadOnly = true;
             this.txtTotalCotizacion.Size = new System.Drawing.Size(144, 26);
@@ -268,7 +270,7 @@
             // txtTotalDescuento
             // 
             this.txtTotalDescuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalDescuento.Location = new System.Drawing.Point(415, 481);
+            this.txtTotalDescuento.Location = new System.Drawing.Point(420, 501);
             this.txtTotalDescuento.Name = "txtTotalDescuento";
             this.txtTotalDescuento.ReadOnly = true;
             this.txtTotalDescuento.Size = new System.Drawing.Size(144, 26);
@@ -277,7 +279,7 @@
             // txtTotalImpuesto
             // 
             this.txtTotalImpuesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalImpuesto.Location = new System.Drawing.Point(214, 481);
+            this.txtTotalImpuesto.Location = new System.Drawing.Point(219, 501);
             this.txtTotalImpuesto.Name = "txtTotalImpuesto";
             this.txtTotalImpuesto.ReadOnly = true;
             this.txtTotalImpuesto.Size = new System.Drawing.Size(144, 26);
@@ -286,7 +288,7 @@
             // txtSubTotal
             // 
             this.txtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubTotal.Location = new System.Drawing.Point(35, 481);
+            this.txtSubTotal.Location = new System.Drawing.Point(40, 501);
             this.txtSubTotal.Name = "txtSubTotal";
             this.txtSubTotal.ReadOnly = true;
             this.txtSubTotal.Size = new System.Drawing.Size(135, 26);
@@ -296,7 +298,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(622, 454);
+            this.label8.Location = new System.Drawing.Point(627, 474);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(159, 24);
             this.label8.TabIndex = 11;
@@ -306,7 +308,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(411, 454);
+            this.label5.Location = new System.Drawing.Point(416, 474);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(162, 24);
             this.label5.TabIndex = 10;
@@ -316,7 +318,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(210, 454);
+            this.label3.Location = new System.Drawing.Point(215, 474);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(147, 24);
             this.label3.TabIndex = 9;
@@ -326,7 +328,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(31, 454);
+            this.label2.Location = new System.Drawing.Point(36, 474);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 24);
             this.label2.TabIndex = 8;
@@ -334,10 +336,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblCantidadArticulos);
             this.groupBox2.Controls.Add(this.DGV_DetailCotizaciones);
             this.groupBox2.Location = new System.Drawing.Point(18, 249);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(786, 197);
+            this.groupBox2.Size = new System.Drawing.Size(800, 222);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalle";
@@ -716,12 +719,21 @@
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             // 
+            // lblCantidadArticulos
+            // 
+            this.lblCantidadArticulos.AutoSize = true;
+            this.lblCantidadArticulos.Location = new System.Drawing.Point(17, 194);
+            this.lblCantidadArticulos.Name = "lblCantidadArticulos";
+            this.lblCantidadArticulos.Size = new System.Drawing.Size(58, 13);
+            this.lblCantidadArticulos.TabIndex = 1;
+            this.lblCantidadArticulos.Text = "Cantidad:0";
+            // 
             // Frm_Cotizaciones
             // 
             this.AcceptButton = this.btnAgregar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 564);
+            this.ClientSize = new System.Drawing.Size(848, 614);
             this.Controls.Add(this.tabControl1);
             this.Name = "Frm_Cotizaciones";
             this.Text = "Cotizaciones";
@@ -733,6 +745,7 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DetailCotizaciones)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -812,6 +825,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CantidadCotizacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn ImpuestoCotizacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalLineaCotizaciong;
+        private System.Windows.Forms.Label lblCantidadArticulos;
 
     }
 }
