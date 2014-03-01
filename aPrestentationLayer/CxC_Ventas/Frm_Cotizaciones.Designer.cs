@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Cotizaciones));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbpMaster = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -380,9 +380,9 @@
             // 
             this.PrecioCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.PrecioCotizacion.DataPropertyName = "Precio";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.PrecioCotizacion.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.PrecioCotizacion.DefaultCellStyle = dataGridViewCellStyle5;
             this.PrecioCotizacion.HeaderText = "Precio";
             this.PrecioCotizacion.Name = "PrecioCotizacion";
             // 
@@ -390,9 +390,9 @@
             // 
             this.CantidadCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.CantidadCotizacion.DataPropertyName = "Cantidad";
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.CantidadCotizacion.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "N0";
+            dataGridViewCellStyle6.NullValue = null;
+            this.CantidadCotizacion.DefaultCellStyle = dataGridViewCellStyle6;
             this.CantidadCotizacion.HeaderText = "Cantidad";
             this.CantidadCotizacion.Name = "CantidadCotizacion";
             // 
@@ -400,9 +400,9 @@
             // 
             this.ImpuestoCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ImpuestoCotizacion.DataPropertyName = "Impuesto";
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.ImpuestoCotizacion.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.ImpuestoCotizacion.DefaultCellStyle = dataGridViewCellStyle7;
             this.ImpuestoCotizacion.HeaderText = "Impuesto";
             this.ImpuestoCotizacion.Name = "ImpuestoCotizacion";
             // 
@@ -410,9 +410,9 @@
             // 
             this.TotalLineaCotizaciong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TotalLineaCotizaciong.DataPropertyName = "TotalLinea";
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.TotalLineaCotizaciong.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.TotalLineaCotizaciong.DefaultCellStyle = dataGridViewCellStyle8;
             this.TotalLineaCotizaciong.HeaderText = "Total Linea";
             this.TotalLineaCotizaciong.Name = "TotalLineaCotizaciong";
             this.TotalLineaCotizaciong.ReadOnly = true;
@@ -494,10 +494,9 @@
             // 
             // dtpFecha
             // 
-            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(74, 114);
             this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(142, 20);
+            this.dtpFecha.Size = new System.Drawing.Size(215, 20);
             this.dtpFecha.TabIndex = 10;
             // 
             // txtNombre
