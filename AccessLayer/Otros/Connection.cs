@@ -18,7 +18,7 @@ namespace DataAccessLayer.Otros
             get
          {
              if (_connection == null)
-                 _connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Data Source=.\SQLEXPRESS;Initial Catalog=SGF;User ID=;Password="].ConnectionString);
+                 _connection = new SqlConnection(ConfigurationManager.ConnectionStrings["aPrestentationLayer.Properties.Settings.SGFConnectionString"].ConnectionString);
              return _connection;
          }
         }
