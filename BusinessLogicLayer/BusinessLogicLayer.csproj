@@ -80,6 +80,7 @@
     <Compile Include="Inventario\Bll_TransfAlmacenesDetail.cs" />
     <Compile Include="Inventario\Bll_TransfAlmacenesMaster.cs" />
     <Compile Include="Otros\AdministrarControles.cs" />
+    <Compile Include="Otros\Helper.cs" />
     <Compile Include="Otros\Icompras.cs" />
     <Compile Include="Otros\Icotizaciones.cs" />
     <Compile Include="Otros\Iinventario.cs" />
