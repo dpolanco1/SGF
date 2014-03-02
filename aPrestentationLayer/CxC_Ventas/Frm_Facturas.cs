@@ -16,6 +16,7 @@ using BusinessLogicLayer.Otros;
 using aPrestentationLayer.CxC_Ventas.Reportes.Formatos;
 using aPrestentationLayer.Comunes;
 using EntityLayer.Administracion;
+using System.Collections;
 
 
 namespace aPrestentationLayer.CxC_Ventas
@@ -823,6 +824,29 @@ namespace aPrestentationLayer.CxC_Ventas
             }
             //DGV_DetailFactura.Rows[].Cells[].Value = 
 
+        }
+
+        private void DGV_DetailFactura_RowsAdded_1(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            decimal totalLineagrid = 0.00m;
+
+            foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
+            {
+                totalLineagrid += Convert.ToDecimal(row.Cells["PrecioFacturaGrid"].Value) * Convert.ToInt32(row.Cells["CantidadFacturaGrid"].Value) + Convert.ToDecimal(row.Cells["ImpuestoFacturaGrid"].Value);
+                row.Cells["TotalLineaFacturaGrid"].Value = totalLineagrid;
+                totalLineagrid = 0.00m;
+            }
+        }
+
+        private void ActualizarGrid()
+        {
+            //Calculamos los valores en el grid y devolvemos los totales
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailFactura, nudDescuento.Value / 100, "TotalLinaFacturaGrid", "ImpuestoFacturaGrid"));
+
+            txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
+            txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());
+            txtTotalDescuento.Text = Helper.ConvertirANumero(valores[2].ToString()).ToString("C2");//Convert.ToString(TotalDescuentoCotizacion.ToString());
+            txtTotalFactura.Text = Helper.ConvertirANumero(valores[3].ToString()).ToString("C2");//Convert.ToString(TotalCotizacion.ToString());
         }
     }
 }

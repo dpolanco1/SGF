@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using EntityLayer.Inventario;
 using BusinessLogicLayer.Inventario;
+using EntityLayer.Administracion;
+using BusinessLogicLayer.Administracion;
+
 namespace aPrestentationLayer.Comunes
 {
     public partial class Frm_Buscar_Articulos : Form
@@ -15,6 +18,10 @@ namespace aPrestentationLayer.Comunes
 
         Enl_Articulos enlArticulos = new Enl_Articulos();
         Bll_Articulos bllArticulos = new Bll_Articulos();
+
+        Enl_Impuestos enlImpuestos = new Enl_Impuestos();
+        Bll_Impuestos bllImpuestos = new Bll_Impuestos();
+
 
         public List<Enl_Articulos> ListaArticulos = new List<Enl_Articulos>();
 
@@ -41,6 +48,24 @@ namespace aPrestentationLayer.Comunes
                     // Verificar si el Check Box esta True
                     if ((bool)(DGV_Articulos[0, a].Value) == true)
                     {
+                        //Buscamos el codigo del impuesto filtrando el Articulo
+                        enlArticulos.Codigo = DGV_Articulos[1, a].Value.ToString();
+                        enlArticulos.Nombre = string.Empty;
+                        enlArticulos.Descripcion = string.Empty;
+                        enlArticulos.Impuesto = string.Empty;
+                        enlArticulos.Marca = string.Empty;
+                        enlArticulos.Categoria = string.Empty;
+                        enlArticulos.SubCategoria = string.Empty;
+
+                        var ListaArticulos2 = bllArticulos.Search(enlArticulos);
+
+                        // Llamamos el impuesto que esta asociado al Articulo
+                        enlImpuestos.Codigo = ListaArticulos2[0].Impuesto;
+                        enlImpuestos.Nombre = string.Empty;
+                        var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
+
+                        //Calculamos el Impuesto 
+                        var ValorImpuesto = (ListaImpuesto[0].Porcentaje / 100) * Convert.ToDecimal(ListaArticulos2[0].Precio.ToString());
 
                         ListaArticulos.Add(new Enl_Articulos()
                         {
@@ -49,7 +74,7 @@ namespace aPrestentationLayer.Comunes
                             Precio = Convert.ToDecimal(DGV_Articulos[3, a].Value),
                             Costo = Convert.ToDecimal(DGV_Articulos[4, a].Value),
                             Cantidad = 1,
-                            Impuesto = "0"
+                            Impuesto = ValorImpuesto.ToString("C2").Replace("RD$", "")
                             
 
                         });

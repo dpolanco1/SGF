@@ -81,6 +81,7 @@
             this.txtArticulo = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblCantidaArticulos = new System.Windows.Forms.Label();
             this.DGV_DetailFactura = new System.Windows.Forms.DataGridView();
             this.ArticuloFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescripcionFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,7 +134,6 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblCantidaArticulos = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -602,6 +602,15 @@
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             // 
+            // lblCantidaArticulos
+            // 
+            this.lblCantidaArticulos.AutoSize = true;
+            this.lblCantidaArticulos.Location = new System.Drawing.Point(15, 174);
+            this.lblCantidaArticulos.Name = "lblCantidaArticulos";
+            this.lblCantidaArticulos.Size = new System.Drawing.Size(64, 13);
+            this.lblCantidaArticulos.TabIndex = 1;
+            this.lblCantidaArticulos.Text = "Cantidad : 0";
+            // 
             // DGV_DetailFactura
             // 
             this.DGV_DetailFactura.AllowUserToAddRows = false;
@@ -619,6 +628,7 @@
             this.DGV_DetailFactura.Name = "DGV_DetailFactura";
             this.DGV_DetailFactura.Size = new System.Drawing.Size(756, 153);
             this.DGV_DetailFactura.TabIndex = 0;
+            this.DGV_DetailFactura.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_DetailFactura_RowsAdded_1);
             // 
             // ArticuloFactura
             // 
@@ -1109,15 +1119,6 @@
             this.Precio.DefaultCellStyle = dataGridViewCellStyle6;
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
-            // 
-            // lblCantidaArticulos
-            // 
-            this.lblCantidaArticulos.AutoSize = true;
-            this.lblCantidaArticulos.Location = new System.Drawing.Point(15, 174);
-            this.lblCantidaArticulos.Name = "lblCantidaArticulos";
-            this.lblCantidaArticulos.Size = new System.Drawing.Size(64, 13);
-            this.lblCantidaArticulos.TabIndex = 1;
-            this.lblCantidaArticulos.Text = "Cantidad : 0";
             // 
             // Frm_Facturas
             // 
