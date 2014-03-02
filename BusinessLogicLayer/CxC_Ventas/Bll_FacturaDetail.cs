@@ -46,7 +46,7 @@ namespace BusinessLogicLayer.CxC_Ventas
 
             if (enlFacturaDetail.Precio <= ListaArticulos[0].Costo)
             {
-                MessageBox.Show("El Articulo {0} ", enlFacturaDetail
+                MessageBox.Show("El Articulo {0} ", enlFacturaDetail.Articulo);
             }
             else
             {
@@ -81,6 +81,5 @@ namespace BusinessLogicLayer.CxC_Ventas
                 return dalFacturaDetail.Search(enlfFacturaDetail);
 
         }
-.
     }
 }
