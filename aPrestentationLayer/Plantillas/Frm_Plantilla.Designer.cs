@@ -41,6 +41,7 @@
             // 
             // toolBarsPrincipal
             // 
+            this.toolBarsPrincipal.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolBarsPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnGuardar,
@@ -51,7 +52,7 @@
             this.btnImprimir});
             this.toolBarsPrincipal.Location = new System.Drawing.Point(0, 0);
             this.toolBarsPrincipal.Name = "toolBarsPrincipal";
-            this.toolBarsPrincipal.Size = new System.Drawing.Size(638, 25);
+            this.toolBarsPrincipal.Size = new System.Drawing.Size(723, 31);
             this.toolBarsPrincipal.TabIndex = 2;
             this.toolBarsPrincipal.Text = "toolStrip1";
             this.toolBarsPrincipal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolBarsPrincipal_KeyDown);
@@ -61,7 +62,7 @@
             this.btnNuevo.Image = global::aPrestentationLayer.Properties.Resources.add;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(58, 22);
+            this.btnNuevo.Size = new System.Drawing.Size(70, 28);
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
@@ -70,7 +71,7 @@
             this.btnGuardar.Image = global::aPrestentationLayer.Properties.Resources.save;
             this.btnGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(66, 22);
+            this.btnGuardar.Size = new System.Drawing.Size(77, 28);
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -79,7 +80,7 @@
             this.btnEditar.Image = global::aPrestentationLayer.Properties.Resources.Edit;
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(55, 22);
+            this.btnEditar.Size = new System.Drawing.Size(65, 28);
             this.btnEditar.Text = "Editar";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
@@ -88,7 +89,7 @@
             this.btnCancelar.Image = global::aPrestentationLayer.Properties.Resources.Cancel;
             this.btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(69, 22);
+            this.btnCancelar.Size = new System.Drawing.Size(81, 28);
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -97,7 +98,7 @@
             this.btnEliminar.Image = global::aPrestentationLayer.Properties.Resources.Delete;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(63, 22);
+            this.btnEliminar.Size = new System.Drawing.Size(78, 28);
             this.btnEliminar.Text = "Eliminar";
             // 
             // btnVista
@@ -105,7 +106,7 @@
             this.btnVista.Image = global::aPrestentationLayer.Properties.Resources.Search2;
             this.btnVista.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnVista.Name = "btnVista";
-            this.btnVista.Size = new System.Drawing.Size(50, 22);
+            this.btnVista.Size = new System.Drawing.Size(60, 28);
             this.btnVista.Text = "Vista";
             this.btnVista.Click += new System.EventHandler(this.btnVista_Click);
             // 
@@ -114,14 +115,14 @@
             this.btnImprimir.Image = global::aPrestentationLayer.Properties.Resources.print;
             this.btnImprimir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(65, 22);
+            this.btnImprimir.Size = new System.Drawing.Size(81, 28);
             this.btnImprimir.Text = "Imprimir";
             // 
             // Frm_Plantilla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 341);
+            this.ClientSize = new System.Drawing.Size(723, 341);
             this.Controls.Add(this.toolBarsPrincipal);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

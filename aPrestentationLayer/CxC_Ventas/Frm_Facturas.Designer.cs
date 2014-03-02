@@ -81,6 +81,7 @@
             this.txtArticulo = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblCantidaArticulos = new System.Windows.Forms.Label();
             this.DGV_DetailFactura = new System.Windows.Forms.DataGridView();
             this.ArticuloFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescripcionFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,7 +134,6 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblCantidaArticulos = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -157,27 +157,19 @@
             this.tabControl1.Controls.Add(this.tbpMaster);
             this.tabControl1.Controls.Add(this.tbpDetail);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Location = new System.Drawing.Point(0, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(878, 610);
+            this.tabControl1.Size = new System.Drawing.Size(820, 591);
             this.tabControl1.TabIndex = 1;
             // 
             // tbpMaster
             // 
             this.tbpMaster.Controls.Add(this.tabControl2);
-            this.tbpMaster.Controls.Add(this.txtTotalFactura);
-            this.tbpMaster.Controls.Add(this.txtTotalDescuento);
-            this.tbpMaster.Controls.Add(this.txtTotalImpuesto);
-            this.tbpMaster.Controls.Add(this.txtSubTotal);
-            this.tbpMaster.Controls.Add(this.label8);
-            this.tbpMaster.Controls.Add(this.label5);
-            this.tbpMaster.Controls.Add(this.label3);
-            this.tbpMaster.Controls.Add(this.label2);
             this.tbpMaster.Location = new System.Drawing.Point(4, 22);
             this.tbpMaster.Name = "tbpMaster";
             this.tbpMaster.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpMaster.Size = new System.Drawing.Size(870, 584);
+            this.tbpMaster.Size = new System.Drawing.Size(812, 565);
             this.tbpMaster.TabIndex = 0;
             this.tbpMaster.Text = "Facturas";
             this.tbpMaster.UseVisualStyleBackColor = true;
@@ -189,18 +181,26 @@
             this.tabControl2.Location = new System.Drawing.Point(0, 3);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(849, 523);
+            this.tabControl2.Size = new System.Drawing.Size(877, 579);
             this.tabControl2.TabIndex = 17;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.txtTotalFactura);
             this.tabPage1.Controls.Add(this.groupBox5);
+            this.tabPage1.Controls.Add(this.txtTotalDescuento);
             this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.txtTotalImpuesto);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.txtSubTotal);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(841, 497);
+            this.tabPage1.Size = new System.Drawing.Size(869, 553);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Datos Generales";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -598,9 +598,18 @@
             this.groupBox2.Controls.Add(this.DGV_DetailFactura);
             this.groupBox2.Location = new System.Drawing.Point(6, 285);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(788, 197);
+            this.groupBox2.Size = new System.Drawing.Size(788, 193);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
+            // 
+            // lblCantidaArticulos
+            // 
+            this.lblCantidaArticulos.AutoSize = true;
+            this.lblCantidaArticulos.Location = new System.Drawing.Point(15, 174);
+            this.lblCantidaArticulos.Name = "lblCantidaArticulos";
+            this.lblCantidaArticulos.Size = new System.Drawing.Size(64, 13);
+            this.lblCantidaArticulos.TabIndex = 1;
+            this.lblCantidaArticulos.Text = "Cantidad : 0";
             // 
             // DGV_DetailFactura
             // 
@@ -619,6 +628,7 @@
             this.DGV_DetailFactura.Name = "DGV_DetailFactura";
             this.DGV_DetailFactura.Size = new System.Drawing.Size(756, 153);
             this.DGV_DetailFactura.TabIndex = 0;
+            this.DGV_DetailFactura.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_DetailFactura_RowsAdded_1);
             // 
             // ArticuloFactura
             // 
@@ -769,7 +779,7 @@
             // txtTotalFactura
             // 
             this.txtTotalFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalFactura.Location = new System.Drawing.Point(642, 554);
+            this.txtTotalFactura.Location = new System.Drawing.Point(632, 508);
             this.txtTotalFactura.Name = "txtTotalFactura";
             this.txtTotalFactura.ReadOnly = true;
             this.txtTotalFactura.Size = new System.Drawing.Size(144, 26);
@@ -778,7 +788,7 @@
             // txtTotalDescuento
             // 
             this.txtTotalDescuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalDescuento.Location = new System.Drawing.Point(439, 554);
+            this.txtTotalDescuento.Location = new System.Drawing.Point(429, 508);
             this.txtTotalDescuento.Name = "txtTotalDescuento";
             this.txtTotalDescuento.ReadOnly = true;
             this.txtTotalDescuento.Size = new System.Drawing.Size(144, 26);
@@ -787,7 +797,7 @@
             // txtTotalImpuesto
             // 
             this.txtTotalImpuesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalImpuesto.Location = new System.Drawing.Point(220, 554);
+            this.txtTotalImpuesto.Location = new System.Drawing.Point(210, 508);
             this.txtTotalImpuesto.Name = "txtTotalImpuesto";
             this.txtTotalImpuesto.ReadOnly = true;
             this.txtTotalImpuesto.Size = new System.Drawing.Size(144, 26);
@@ -796,7 +806,7 @@
             // txtSubTotal
             // 
             this.txtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubTotal.Location = new System.Drawing.Point(20, 554);
+            this.txtSubTotal.Location = new System.Drawing.Point(10, 508);
             this.txtSubTotal.Name = "txtSubTotal";
             this.txtSubTotal.ReadOnly = true;
             this.txtSubTotal.Size = new System.Drawing.Size(144, 26);
@@ -806,7 +816,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(651, 527);
+            this.label8.Location = new System.Drawing.Point(628, 481);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(132, 24);
             this.label8.TabIndex = 11;
@@ -816,7 +826,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(433, 527);
+            this.label5.Location = new System.Drawing.Point(423, 481);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(162, 24);
             this.label5.TabIndex = 10;
@@ -826,7 +836,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(221, 527);
+            this.label3.Location = new System.Drawing.Point(211, 481);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(147, 24);
             this.label3.TabIndex = 9;
@@ -836,7 +846,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 527);
+            this.label2.Location = new System.Drawing.Point(6, 481);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 24);
             this.label2.TabIndex = 8;
@@ -849,7 +859,7 @@
             this.tbpDetail.Location = new System.Drawing.Point(4, 22);
             this.tbpDetail.Name = "tbpDetail";
             this.tbpDetail.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpDetail.Size = new System.Drawing.Size(870, 584);
+            this.tbpDetail.Size = new System.Drawing.Size(870, 570);
             this.tbpDetail.TabIndex = 1;
             this.tbpDetail.Text = "Facturas";
             this.tbpDetail.UseVisualStyleBackColor = true;
@@ -1110,21 +1120,12 @@
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             // 
-            // lblCantidaArticulos
-            // 
-            this.lblCantidaArticulos.AutoSize = true;
-            this.lblCantidaArticulos.Location = new System.Drawing.Point(15, 174);
-            this.lblCantidaArticulos.Name = "lblCantidaArticulos";
-            this.lblCantidaArticulos.Size = new System.Drawing.Size(64, 13);
-            this.lblCantidaArticulos.TabIndex = 1;
-            this.lblCantidaArticulos.Text = "Cantidad : 0";
-            // 
             // Frm_Facturas
             // 
             this.AcceptButton = this.btnAgregar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(878, 635);
+            this.ClientSize = new System.Drawing.Size(820, 622);
             this.Controls.Add(this.tabControl1);
             this.Name = "Frm_Facturas";
             this.Text = "Facturas";
@@ -1133,9 +1134,9 @@
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.tabControl1.ResumeLayout(false);
             this.tbpMaster.ResumeLayout(false);
-            this.tbpMaster.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDescuento)).EndInit();
