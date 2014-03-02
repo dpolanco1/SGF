@@ -49,7 +49,7 @@ namespace aPrestentationLayer.Comunes
                             Precio = Convert.ToDecimal(DGV_Articulos[3, a].Value),
                             Costo = Convert.ToDecimal(DGV_Articulos[4, a].Value),
                             Cantidad = 1,
-                            Impuesto = "0"
+                            Impuesto = DGV_Articulos[6, a].Value.ToString()
                             
 
                         });
