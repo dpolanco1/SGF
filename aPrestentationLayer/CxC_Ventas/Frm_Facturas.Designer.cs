@@ -157,10 +157,10 @@
             this.tabControl1.Controls.Add(this.tbpMaster);
             this.tabControl1.Controls.Add(this.tbpDetail);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Location = new System.Drawing.Point(0, 39);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(878, 610);
+            this.tabControl1.Size = new System.Drawing.Size(878, 596);
             this.tabControl1.TabIndex = 1;
             // 
             // tbpMaster
@@ -177,7 +177,7 @@
             this.tbpMaster.Location = new System.Drawing.Point(4, 22);
             this.tbpMaster.Name = "tbpMaster";
             this.tbpMaster.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpMaster.Size = new System.Drawing.Size(870, 584);
+            this.tbpMaster.Size = new System.Drawing.Size(870, 570);
             this.tbpMaster.TabIndex = 0;
             this.tbpMaster.Text = "Facturas";
             this.tbpMaster.UseVisualStyleBackColor = true;
@@ -598,7 +598,7 @@
             this.groupBox2.Controls.Add(this.DGV_DetailFactura);
             this.groupBox2.Location = new System.Drawing.Point(6, 285);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(788, 197);
+            this.groupBox2.Size = new System.Drawing.Size(788, 193);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             // 

@@ -577,14 +577,22 @@ namespace aPrestentationLayer.CxC_Ventas
 
                     var ListaArticulos = bllArticulos.Search(enlArticulos);
 
+                    decimal ValorImpuesto = 0;
+
                     // Llamamos el impuesto que esta asociado al Articulo
-                    enlImpuestos.Codigo = ListaArticulos[0].Impuesto;
-                    enlImpuestos.Nombre = string.Empty;
-                    var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
+                    if (!String.IsNullOrEmpty(ListaArticulos[0].Impuesto))
+                    {
+                        enlImpuestos.Codigo = ListaArticulos[0].Impuesto;
+                        enlImpuestos.Nombre = string.Empty;
+                        var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
 
-                    //Calculamos el Impuesto 
-                    var ValorImpuesto = (ListaImpuesto[0].Porcentaje / 100) * decimal.Parse(txtPrecio.Text);
-
+                        //Calculamos el Impuesto 
+                         ValorImpuesto = (ListaImpuesto[0].Porcentaje / 100) * decimal.Parse(txtPrecio.Text);
+                    }
+                    else
+                    {
+                        ValorImpuesto = 0;
+                    }
                     this.listArticulos.Add(new Enl_Articulos()
                     {
                         Codigo = txtArticulo.Text,
@@ -601,24 +609,26 @@ namespace aPrestentationLayer.CxC_Ventas
                 }
                 ////Método con el que recorreremos todas las filas de nuestro Datagridview
 
-                TotalLineaCompra = 0;
-                TotalImpuestoCompra = 0;
+                ActualizarGrid();
 
-                foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
-                {
-                    TotalLineaCompra += Convert.ToDecimal(row.Cells["TotalLineaFacturaGrid"].Value);
-                    TotalImpuestoCompra += Convert.ToDecimal(row.Cells["ImpuestoFacturaGrid"].Value);
-                }
+                //TotalLineaCompra = 0;
+                //TotalImpuestoCompra = 0;
 
-                Porcentaje = nudDescuento.Value / 100;
-                SubTotalCompra = TotalLineaCompra - TotalImpuestoCompra;
-                TotalDescuentoCompra = SubTotalCompra * Porcentaje;
-                TotalCompraCompra = SubTotalCompra + TotalImpuestoCompra - TotalDescuentoCompra;
+                //foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
+                //{
+                //    TotalLineaCompra += Convert.ToDecimal(row.Cells["TotalLineaFacturaGrid"].Value);
+                //    TotalImpuestoCompra += Convert.ToDecimal(row.Cells["ImpuestoFacturaGrid"].Value);
+                //}
 
-                txtSubTotal.Text = Convert.ToString(SubTotalCompra.ToString());
-                txtTotalImpuesto.Text = Convert.ToString(TotalImpuestoCompra.ToString());
-                txtTotalDescuento.Text = Convert.ToString(TotalDescuentoCompra.ToString());
-                txtTotalFactura.Text = Convert.ToString(TotalCompraCompra.ToString());
+                //Porcentaje = nudDescuento.Value / 100;
+                //SubTotalCompra = TotalLineaCompra - TotalImpuestoCompra;
+                //TotalDescuentoCompra = SubTotalCompra * Porcentaje;
+                //TotalCompraCompra = SubTotalCompra + TotalImpuestoCompra - TotalDescuentoCompra;
+
+                //txtSubTotal.Text = Convert.ToString(SubTotalCompra.ToString());
+                //txtTotalImpuesto.Text = Convert.ToString(TotalImpuestoCompra.ToString());
+                //txtTotalDescuento.Text = Convert.ToString(TotalDescuentoCompra.ToString());
+                //txtTotalFactura.Text = Convert.ToString(TotalCompraCompra.ToString());
 
 
                 txtArticulo.Text = String.Empty;
@@ -841,7 +851,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void ActualizarGrid()
         {
             //Calculamos los valores en el grid y devolvemos los totales
-            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailFactura, nudDescuento.Value / 100, "TotalLinaFacturaGrid", "ImpuestoFacturaGrid"));
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailFactura, nudDescuento.Value / 100, "TotalLineaFacturaGrid", "ImpuestoFacturaGrid"));
 
             txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
             txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());

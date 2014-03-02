@@ -58,15 +58,22 @@ namespace aPrestentationLayer.Comunes
                         enlArticulos.SubCategoria = string.Empty;
 
                         var ListaArticulos2 = bllArticulos.Search(enlArticulos);
+                        decimal ValorImpuesto = 0;
 
                         // Llamamos el impuesto que esta asociado al Articulo
-                        enlImpuestos.Codigo = ListaArticulos2[0].Impuesto;
-                        enlImpuestos.Nombre = string.Empty;
-                        var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
+                        if (!String.IsNullOrEmpty(ListaArticulos2[0].Impuesto))
+                        {
+                            enlImpuestos.Codigo = ListaArticulos2[0].Impuesto;
+                            enlImpuestos.Nombre = string.Empty;
+                            var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
 
-                        //Calculamos el Impuesto 
-                        var ValorImpuesto = (ListaImpuesto[0].Porcentaje / 100) * Convert.ToDecimal(ListaArticulos2[0].Precio.ToString());
-
+                            //Calculamos el Impuesto 
+                            ValorImpuesto = (ListaImpuesto[0].Porcentaje / 100) * ListaArticulos2[0].Precio;
+                        }
+                        else
+                        {
+                            ValorImpuesto = 0;
+                        }
                         ListaArticulos.Add(new Enl_Articulos()
                         {
                             Codigo = DGV_Articulos[1, a].Value.ToString(),
