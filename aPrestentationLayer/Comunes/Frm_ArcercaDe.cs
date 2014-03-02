@@ -15,5 +15,10 @@ namespace aPrestentationLayer.Comunes
         {
             InitializeComponent();
         }
+
+        private void Frm_ArcercaDe_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
