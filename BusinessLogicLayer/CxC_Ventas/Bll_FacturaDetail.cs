@@ -22,7 +22,7 @@ namespace BusinessLogicLayer.CxC_Ventas
         Enl_Articulos enlArticulos = new Enl_Articulos();
         Dal_Articulos dalArticulos = new Dal_Articulos();
 
-        public void Insert(Enl_FacturaDetail enlFacturaDetail)
+        public bool Insert(Enl_FacturaDetail enlFacturaDetail)
         {
 
               //Validaciones De Lugar
@@ -40,17 +40,19 @@ namespace BusinessLogicLayer.CxC_Ventas
             enlArticulos.Categoria = string.Empty;
             enlArticulos.SubCategoria = string.Empty;
 
-
-
             var ListaArticulos = dalArticulos.Search(enlArticulos);
 
+            // preguntamos si el precio es menor o igual al costo si es asi devolvemos falso lo cual no se guardara
+            // la factura, de lo contrario devolvemos true
             if (enlFacturaDetail.Precio <= ListaArticulos[0].Costo)
             {
-                MessageBox.Show("El Articulo {0} ", enlFacturaDetail
+                MessageBox.Show("El Articulo " + enlFacturaDetail.Articulo + " tiene un precio menor que el costo");
+                return false;
             }
             else
             {
                 dalFacturaDetail.Insert(enlFacturaDetail);
+                return true;
             }
        
         }
@@ -81,6 +83,6 @@ namespace BusinessLogicLayer.CxC_Ventas
                 return dalFacturaDetail.Search(enlfFacturaDetail);
 
         }
-.
+
     }
 }
