@@ -417,6 +417,8 @@ namespace aPrestentationLayer.CxC_Ventas
 
                     if (Estado == "Editando")
                     {
+
+
                         list.Add(new Enl_CotizacionesDetail
                         {
                             Articulo = txtArticulo.Text,
@@ -428,13 +430,15 @@ namespace aPrestentationLayer.CxC_Ventas
                         });
 
                         list.Add(enlCotizacionDetail);
+
+
+
                         DGV_DetailCotizaciones.DataSource = null;
                         DGV_DetailCotizaciones.DataSource = list;
 
                     }
                     else
                     {
-
                         if (DGV_DetailCotizaciones.Rows.Count > 0)
                         {
                             int cantidadgridLinea;
@@ -710,21 +714,32 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void DGV_DetailCotizaciones_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+            //Obtener los valores de impuesto y el total de linea antes de agregarlos al grid 
+           
+
             decimal totalLineagrid = 0.00m;
             decimal impuestoLineagrid = 0.00m;
 
             foreach (DataGridViewRow row in DGV_DetailCotizaciones.Rows)
             {
-                totalLineagrid += Convert.ToDecimal(row.Cells["PrecioCotizacion"].Value) * Convert.ToInt32(row.Cells["CantidadCotizacion"].Value) + Convert.ToDecimal(row.Cells["ImpuestoCotizacion"].Value);
-                row.Cells["TotalLineaCotizaciong"].Value = totalLineagrid;
-                totalLineagrid = 0.00m;
+                try
+                {
+                    //ocurre un error cuando algun dato del grid es nullo y no se puede controlar
 
-                impuestoLineagrid += (Convert.ToDecimal(row.Cells["PrecioCotizacion"].Value) * Convert.ToDecimal(row.Cells["ImpuestoCotizacion"].Value) / 100);
-                row.Cells["ImpuestoCotizacion"].Value = impuestoLineagrid;
-                impuestoLineagrid = 0.00m;
+                    totalLineagrid += Convert.ToDecimal(row.Cells["PrecioCotizacion"].Value) * Convert.ToInt32(row.Cells["CantidadCotizacion"].Value);
+                    row.Cells["TotalLineaCotizaciong"].Value = totalLineagrid;
+                    totalLineagrid = 0.00m;
+
+                    impuestoLineagrid += Convert.ToDecimal(row.Cells["PrecioCotizacion"].Value) * (Convert.ToDecimal(row.Cells["ImpuestoCotizacion"].Value) / 100);
+                    row.Cells["ImpuestoCotizacion"].Value = impuestoLineagrid.ToString();
+                    impuestoLineagrid = 0.00m;
+                }
+                catch (Exception)
+                {
+       
+                }
+              
             }
-
-            
 
             
         }

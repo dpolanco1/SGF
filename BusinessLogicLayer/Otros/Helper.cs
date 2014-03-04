@@ -17,14 +17,23 @@ namespace BusinessLogicLayer.Otros
             decimal total;
             ArrayList valores = new ArrayList();
 
+            // Estos valores nunca pueden venir nulos desde la BD, deben de hacerse las validaciones de lugar
             decimal totalLinea = 0;
             decimal totalImpuesto = 0;
-
-
+            
             foreach (DataGridViewRow row in gridView.Rows)
             {
-                totalLinea += Convert.ToDecimal(row.Cells[nombreTotalLinea].Value);
-                totalImpuesto += Convert.ToDecimal(row.Cells[nombreImpuestoLinea].Value);
+                try
+                {
+                    totalLinea += Convert.ToDecimal(row.Cells[nombreTotalLinea].Value);
+                    totalImpuesto += Convert.ToDecimal(row.Cells[nombreImpuestoLinea].Value);
+                }
+                catch (Exception)
+                {
+
+                }
+                    
+            
             }
             //Subtotal
             valores.Add(subTotal = totalLinea - totalImpuesto);
