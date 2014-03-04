@@ -24,7 +24,7 @@ namespace DataAccessLayer.CxC_Ventas
                 Connection.Get.Open();
 
                 command.Parameters.Add(new SqlParameter("@NoCotizacion", enlCotizacionDetail.NoCotizacion) { SqlDbType = SqlDbType.NVarChar });
-                command.Parameters.Add(new SqlParameter("@Articulo", enlCotizacionDetail.Articulo) { SqlDbType = SqlDbType.NVarChar });
+                command.Parameters.Add(new SqlParameter("@Articulo", enlCotizacionDetail.Codigo) { SqlDbType = SqlDbType.NVarChar });
                 command.Parameters.Add(new SqlParameter("@Descripcion", enlCotizacionDetail.Descripcion) { SqlDbType = SqlDbType.NVarChar });
                 command.Parameters.Add(new SqlParameter("@Precio", enlCotizacionDetail.Precio) { SqlDbType = SqlDbType.Decimal });
                 command.Parameters.Add(new SqlParameter("@Cantidad", enlCotizacionDetail.Cantidad) { SqlDbType = SqlDbType.Decimal });
@@ -61,7 +61,7 @@ namespace DataAccessLayer.CxC_Ventas
                 Connection.Get.Open();
 
                 command.Parameters.Add(new SqlParameter("@NoCotizacion", enlCotizacionDetail.NoCotizacion) { SqlDbType = SqlDbType.NVarChar });
-                command.Parameters.Add(new SqlParameter("@Articulo", enlCotizacionDetail.Articulo) { SqlDbType = SqlDbType.NVarChar });
+                command.Parameters.Add(new SqlParameter("@Articulo", enlCotizacionDetail.Codigo) { SqlDbType = SqlDbType.NVarChar });
                 command.Parameters.Add(new SqlParameter("@Descripcion", enlCotizacionDetail.Descripcion) { SqlDbType = SqlDbType.NVarChar });
                 command.Parameters.Add(new SqlParameter("@Precio", enlCotizacionDetail.Precio) { SqlDbType = SqlDbType.Decimal });
                 command.Parameters.Add(new SqlParameter("@Cantidad", enlCotizacionDetail.Cantidad) { SqlDbType = SqlDbType.Decimal });
@@ -145,7 +145,7 @@ namespace DataAccessLayer.CxC_Ventas
                 {
                     list.Add(new Enl_CotizacionesDetail
                     {
-                        Articulo = dr.GetString(dr.GetOrdinal("Articulo")),
+                        Codigo = dr.GetString(dr.GetOrdinal("Articulo")),
                         Descripcion = dr.GetString(dr.GetOrdinal("Descripcion")),
                         Precio = dr.GetDecimal(dr.GetOrdinal("Precio")),
                         Cantidad = dr.GetDecimal(dr.GetOrdinal("Cantidad")),

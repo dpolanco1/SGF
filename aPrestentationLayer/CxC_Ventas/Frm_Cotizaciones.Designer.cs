@@ -58,6 +58,12 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblCantidadArticulos = new System.Windows.Forms.Label();
             this.DGV_DetailCotizaciones = new System.Windows.Forms.DataGridView();
+            this.ArticuloCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescripcionCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ImpuestoCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalLineaCotizaciong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.LblBuscarTerminos = new System.Windows.Forms.Label();
             this.LblBuscarVendedor = new System.Windows.Forms.Label();
@@ -91,12 +97,6 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ArticuloCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescripcionCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ImpuestoCotizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalLineaCotizaciong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -114,10 +114,10 @@
             this.tabControl1.Controls.Add(this.tbpMaster);
             this.tabControl1.Controls.Add(this.tbpDetail);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Location = new System.Drawing.Point(0, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(848, 589);
+            this.tabControl1.Size = new System.Drawing.Size(848, 583);
             this.tabControl1.TabIndex = 3;
             // 
             // tbpMaster
@@ -136,7 +136,7 @@
             this.tbpMaster.Location = new System.Drawing.Point(4, 22);
             this.tbpMaster.Name = "tbpMaster";
             this.tbpMaster.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpMaster.Size = new System.Drawing.Size(840, 563);
+            this.tbpMaster.Size = new System.Drawing.Size(840, 557);
             this.tbpMaster.TabIndex = 0;
             this.tbpMaster.Text = "Cotizaciones";
             this.tbpMaster.UseVisualStyleBackColor = true;
@@ -357,7 +357,6 @@
             // DGV_DetailCotizaciones
             // 
             this.DGV_DetailCotizaciones.AllowUserToAddRows = false;
-            this.DGV_DetailCotizaciones.AllowUserToDeleteRows = false;
             this.DGV_DetailCotizaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_DetailCotizaciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ArticuloCotizacion,
@@ -373,6 +372,62 @@
             this.DGV_DetailCotizaciones.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_DetailCotizaciones_CellEndEdit);
             this.DGV_DetailCotizaciones.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DGV_DetailCotizaciones_EditingControlShowing);
             this.DGV_DetailCotizaciones.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_DetailCotizaciones_RowsAdded);
+            // 
+            // ArticuloCotizacion
+            // 
+            this.ArticuloCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ArticuloCotizacion.DataPropertyName = "Codigo";
+            this.ArticuloCotizacion.HeaderText = "Articulo";
+            this.ArticuloCotizacion.Name = "ArticuloCotizacion";
+            this.ArticuloCotizacion.ReadOnly = true;
+            // 
+            // DescripcionCotizacion
+            // 
+            this.DescripcionCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DescripcionCotizacion.DataPropertyName = "Descripcion";
+            this.DescripcionCotizacion.HeaderText = "Descripcion";
+            this.DescripcionCotizacion.Name = "DescripcionCotizacion";
+            // 
+            // PrecioCotizacion
+            // 
+            this.PrecioCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PrecioCotizacion.DataPropertyName = "Precio";
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.PrecioCotizacion.DefaultCellStyle = dataGridViewCellStyle1;
+            this.PrecioCotizacion.HeaderText = "Precio";
+            this.PrecioCotizacion.Name = "PrecioCotizacion";
+            // 
+            // CantidadCotizacion
+            // 
+            this.CantidadCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CantidadCotizacion.DataPropertyName = "Cantidad";
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.CantidadCotizacion.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CantidadCotizacion.HeaderText = "Cantidad";
+            this.CantidadCotizacion.Name = "CantidadCotizacion";
+            // 
+            // ImpuestoCotizacion
+            // 
+            this.ImpuestoCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ImpuestoCotizacion.DataPropertyName = "Impuesto";
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.ImpuestoCotizacion.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ImpuestoCotizacion.HeaderText = "Impuesto";
+            this.ImpuestoCotizacion.Name = "ImpuestoCotizacion";
+            // 
+            // TotalLineaCotizaciong
+            // 
+            this.TotalLineaCotizaciong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TotalLineaCotizaciong.DataPropertyName = "TotalLinea";
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.TotalLineaCotizaciong.DefaultCellStyle = dataGridViewCellStyle4;
+            this.TotalLineaCotizaciong.HeaderText = "Total Linea";
+            this.TotalLineaCotizaciong.Name = "TotalLineaCotizaciong";
+            this.TotalLineaCotizaciong.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -547,7 +602,7 @@
             this.tbpDetail.Location = new System.Drawing.Point(4, 22);
             this.tbpDetail.Name = "tbpDetail";
             this.tbpDetail.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpDetail.Size = new System.Drawing.Size(840, 563);
+            this.tbpDetail.Size = new System.Drawing.Size(840, 557);
             this.tbpDetail.TabIndex = 1;
             this.tbpDetail.Text = "Cotizaciones";
             this.tbpDetail.UseVisualStyleBackColor = true;
@@ -672,62 +727,6 @@
             this.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
-            // 
-            // ArticuloCotizacion
-            // 
-            this.ArticuloCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ArticuloCotizacion.DataPropertyName = "Codigo";
-            this.ArticuloCotizacion.HeaderText = "Articulo";
-            this.ArticuloCotizacion.Name = "ArticuloCotizacion";
-            this.ArticuloCotizacion.ReadOnly = true;
-            // 
-            // DescripcionCotizacion
-            // 
-            this.DescripcionCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DescripcionCotizacion.DataPropertyName = "Descripcion";
-            this.DescripcionCotizacion.HeaderText = "Descripcion";
-            this.DescripcionCotizacion.Name = "DescripcionCotizacion";
-            // 
-            // PrecioCotizacion
-            // 
-            this.PrecioCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PrecioCotizacion.DataPropertyName = "Precio";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.PrecioCotizacion.DefaultCellStyle = dataGridViewCellStyle1;
-            this.PrecioCotizacion.HeaderText = "Precio";
-            this.PrecioCotizacion.Name = "PrecioCotizacion";
-            // 
-            // CantidadCotizacion
-            // 
-            this.CantidadCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CantidadCotizacion.DataPropertyName = "Cantidad";
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.CantidadCotizacion.DefaultCellStyle = dataGridViewCellStyle2;
-            this.CantidadCotizacion.HeaderText = "Cantidad";
-            this.CantidadCotizacion.Name = "CantidadCotizacion";
-            // 
-            // ImpuestoCotizacion
-            // 
-            this.ImpuestoCotizacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ImpuestoCotizacion.DataPropertyName = "Impuesto";
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.ImpuestoCotizacion.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ImpuestoCotizacion.HeaderText = "Impuesto";
-            this.ImpuestoCotizacion.Name = "ImpuestoCotizacion";
-            // 
-            // TotalLineaCotizaciong
-            // 
-            this.TotalLineaCotizaciong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TotalLineaCotizaciong.DataPropertyName = "TotalLinea";
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.TotalLineaCotizaciong.DefaultCellStyle = dataGridViewCellStyle4;
-            this.TotalLineaCotizaciong.HeaderText = "Total Linea";
-            this.TotalLineaCotizaciong.Name = "TotalLineaCotizaciong";
-            this.TotalLineaCotizaciong.ReadOnly = true;
             // 
             // Frm_Cotizaciones
             // 
