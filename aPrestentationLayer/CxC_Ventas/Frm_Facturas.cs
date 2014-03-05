@@ -62,10 +62,12 @@ namespace aPrestentationLayer.CxC_Ventas
         IList<Enl_Articulos> listArticulos = new List<Enl_Articulos>();
 
 
-        decimal TotalLineaCompra, linea, cantidad, costo,
-        impuesto, TotalImpuestoCompra, SubTotalCompra,
-        Porcentaje, TotalDescuentoCompra, TotalCompraCompra;
+        //decimal TotalLineaCompra, linea, cantidad, costo,
+        //impuesto, TotalImpuestoCompra, SubTotalCompra,
+        //Porcentaje, TotalDescuentoCompra, TotalCompraCompra;
 
+        decimal linea, cantidad, costo, impuesto;
+                          
 
 
         // IList<Enl_CotizacionesMaster> listCotizacionMaster;
@@ -185,97 +187,53 @@ namespace aPrestentationLayer.CxC_Ventas
             
             using (TransactionScope ts = new TransactionScope())
             {
-
                 try
                 {
-                    // Defino esta variable para controlar si se puede o no guardar la factura
-                    bool IsGuardarFactura = true;
-                    string NoFactura = string.Empty;
-
-                    enlFacturaMaster.Numero = txtNoFactura.Text;
-                    enlFacturaMaster.Cliente = txtCliente.Text;
-                    enlFacturaMaster.Fecha = dtpFecha.Value; ;
-                    enlFacturaMaster.Almacen = txtAlmacen.Text;
-                    enlFacturaMaster.Terminos = txtTerminos.Text;
-                    enlFacturaMaster.Tipo = cmbTipo.Text;
-                    enlFacturaMaster.Descuento = nudDescuento.Value;
-                    enlFacturaMaster.Vendedor = txtVendedor.Text;
-                    enlFacturaMaster.Caja = txtCaja.Text;
-                    enlFacturaMaster.Status = "Prueba";
-
-                    enlFacturaMaster.SubTotal = Convert.ToDecimal(txtSubTotal.Text.ToString().Replace("RD$", ""));
-                    enlFacturaMaster.TotalImpuesto = Convert.ToDecimal(txtTotalImpuesto.Text.ToString().Replace("RD$", ""));
-                    enlFacturaMaster.TotalDescuento = Convert.ToDecimal(txtTotalDescuento.Text.ToString().Replace("RD$", ""));
-                    enlFacturaMaster.TotalFactura = Convert.ToDecimal(txtTotalFactura.Text.ToString().Replace("RD$", ""));
-
-
-                    if (enlFacturaMaster.Tipo == "Contado")
+                    if (DGV_DetailFactura.RowCount > 0)
                     {
-                        enlFacturaMaster.TotalPagado = enlFacturaMaster.TotalFactura;
-                        enlFacturaMaster.BalancePendiente = 0;
 
-                    }
+                        // Defino esta variable para controlar si se puede o no guardar la factura
+                        bool IsGuardarFactura = true;
+                        string NoFactura = string.Empty;
 
-                    if (enlFacturaMaster.Tipo == "Credito")
-                    {
-                        enlFacturaMaster.TotalPagado = 0;
-                        enlFacturaMaster.BalancePendiente = enlFacturaMaster.TotalFactura;
+                        enlFacturaMaster.Numero = txtNoFactura.Text;
+                        enlFacturaMaster.Cliente = txtCliente.Text;
+                        enlFacturaMaster.Fecha = dtpFecha.Value; ;
+                        enlFacturaMaster.Almacen = txtAlmacen.Text;
+                        enlFacturaMaster.Terminos = txtTerminos.Text;
+                        enlFacturaMaster.Tipo = cmbTipo.Text;
+                        enlFacturaMaster.Descuento = nudDescuento.Value;
+                        enlFacturaMaster.Vendedor = txtVendedor.Text;
+                        enlFacturaMaster.Caja = txtCaja.Text;
+                        enlFacturaMaster.Status = "Prueba";
 
-                    }
+                        enlFacturaMaster.SubTotal = Convert.ToDecimal(txtSubTotal.Text.ToString().Replace("RD$", ""));
+                        enlFacturaMaster.TotalImpuesto = Convert.ToDecimal(txtTotalImpuesto.Text.ToString().Replace("RD$", ""));
+                        enlFacturaMaster.TotalDescuento = Convert.ToDecimal(txtTotalDescuento.Text.ToString().Replace("RD$", ""));
+                        enlFacturaMaster.TotalFactura = Convert.ToDecimal(txtTotalFactura.Text.ToString().Replace("RD$", ""));
 
 
-                    if (Estado == "Creando")
-                    {
-                        NoFactura = bllFacturaMaster.Insert(enlFacturaMaster);
-
-                        //hago la insercion en los DGV
-                        for (int a = 0; a < DGV_DetailFactura.RowCount; a++)
+                        if (enlFacturaMaster.Tipo == "Contado")
                         {
-                            enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
-                            enlFacturaDetail.Articulo = DGV_DetailFactura[0, a].Value.ToString();
-                            enlFacturaDetail.Descripcion = DGV_DetailFactura[1, a].Value.ToString();
-                            enlFacturaDetail.Precio = Convert.ToDecimal(DGV_DetailFactura[2, a].Value);
-                            enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_DetailFactura[3, a].Value);
-                            enlFacturaDetail.Impuesto = Convert.ToDecimal(DGV_DetailFactura[4, a].Value);
-                            enlFacturaDetail.TotalLinea = Convert.ToDecimal(DGV_DetailFactura[5, a].Value);
-                            enlFacturaDetail.Costo = Convert.ToDecimal(DGV_DetailFactura[6, a].Value);
-
-                            // El Metodo Insert del BllFacturaDetail devuelve falso si hay algun articulos
-                            // que se esta vendiendo por debajo del costo, por lo cual no se puede 
-                            // guardar la factura
-                            IsGuardarFactura = bllFacturaDetail.Insert(enlFacturaDetail);
-
-                            if (IsGuardarFactura)
-                            {
-                                // Actualizo la existencia del Articulo
-                                enlArticulos.Codigo = enlFacturaDetail.Articulo;
-                                enlArticulos.Existencia = (enlFacturaDetail.Cantidad) * -1;
-                                bllArticulos.UpdateExitencia(enlArticulos);
-                            }
+                            enlFacturaMaster.TotalPagado = enlFacturaMaster.TotalFactura;
+                            enlFacturaMaster.BalancePendiente = 0;
 
                         }
 
-                        if (IsGuardarFactura)
+                        if (enlFacturaMaster.Tipo == "Credito")
                         {
-                            if (bllNumeracion.ObtenerTipo("Facturas") == "Automatico")
-                            {
-                                bllNumeracion.ActualizarNumero(bllNumeracion.ObtenerNumero("Facturas"), "Facturas");
-                            }
+                            enlFacturaMaster.TotalPagado = 0;
+                            enlFacturaMaster.BalancePendiente = enlFacturaMaster.TotalFactura;
+
                         }
-                    }
-                    else
-                    {
-                        if (Estado == "Editando")
+
+
+                        if (Estado == "Creando")
                         {
-                            bllFacturaMaster.Update(enlFacturaMaster);
+                            NoFactura = bllFacturaMaster.Insert(enlFacturaMaster);
 
-                            //Eliminados El Detalle de la Factura
-                            enlFacturaDetail.NoFactura = txtNoFactura.Text;
-                            bllFacturaDetail.Delete(enlFacturaDetail);
-
-                            //Insertamos el Detalle de la Factura
-
-                            for (int a = 0; a < DGV_DetailFactura.RowCount - 1; a++)
+                            //hago la insercion en los DGV
+                            for (int a = 0; a < DGV_DetailFactura.RowCount; a++)
                             {
                                 enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
                                 enlFacturaDetail.Articulo = DGV_DetailFactura[0, a].Value.ToString();
@@ -284,27 +242,80 @@ namespace aPrestentationLayer.CxC_Ventas
                                 enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_DetailFactura[3, a].Value);
                                 enlFacturaDetail.Impuesto = Convert.ToDecimal(DGV_DetailFactura[4, a].Value);
                                 enlFacturaDetail.TotalLinea = Convert.ToDecimal(DGV_DetailFactura[5, a].Value);
+                                enlFacturaDetail.Costo = Convert.ToDecimal(DGV_DetailFactura[6, a].Value);
 
+                                // El Metodo Insert del BllFacturaDetail devuelve falso si hay algun articulos
+                                // que se esta vendiendo por debajo del costo, por lo cual no se puede 
+                                // guardar la factura
                                 IsGuardarFactura = bllFacturaDetail.Insert(enlFacturaDetail);
-                            }
-                          
-                        }
-                    }
 
-                    if (IsGuardarFactura)      
-                    {
-                        txtNoFactura.Text = NoFactura;
-                        MessageBox.Show("Registro Guardado Correctamente", "SGF");
-                        BotonGuardar();
-                        ActualizarDGV = true;
-                        Estado = CONSULTA;
-                        ts.Complete();
+                                if (IsGuardarFactura)
+                                {
+                                    // Actualizo la existencia del Articulo
+                                    enlArticulos.Codigo = enlFacturaDetail.Articulo;
+                                    enlArticulos.Existencia = (enlFacturaDetail.Cantidad) * -1;
+                                    bllArticulos.UpdateExitencia(enlArticulos);
+                                }
+
+                            }
+
+                            if (IsGuardarFactura)
+                            {
+                                if (bllNumeracion.ObtenerTipo("Facturas") == "Automatico")
+                                {
+                                    bllNumeracion.ActualizarNumero(bllNumeracion.ObtenerNumero("Facturas"), "Facturas");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (Estado == "Editando")
+                            {
+                                bllFacturaMaster.Update(enlFacturaMaster);
+
+                                //Eliminados El Detalle de la Factura
+                                enlFacturaDetail.NoFactura = txtNoFactura.Text;
+                                bllFacturaDetail.Delete(enlFacturaDetail);
+
+                                //Insertamos el Detalle de la Factura
+
+                                for (int a = 0; a < DGV_DetailFactura.RowCount - 1; a++)
+                                {
+                                    enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
+                                    enlFacturaDetail.Articulo = DGV_DetailFactura[0, a].Value.ToString();
+                                    enlFacturaDetail.Descripcion = DGV_DetailFactura[1, a].Value.ToString();
+                                    enlFacturaDetail.Precio = Convert.ToDecimal(DGV_DetailFactura[2, a].Value);
+                                    enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_DetailFactura[3, a].Value);
+                                    enlFacturaDetail.Impuesto = Convert.ToDecimal(DGV_DetailFactura[4, a].Value);
+                                    enlFacturaDetail.TotalLinea = Convert.ToDecimal(DGV_DetailFactura[5, a].Value);
+
+                                    IsGuardarFactura = bllFacturaDetail.Insert(enlFacturaDetail);
+                                }
+
+                            }
+                        }
+
+                        if (IsGuardarFactura)
+                        {
+                            txtNoFactura.Text = NoFactura;
+                            MessageBox.Show("Registro Guardado Correctamente", "SGF");
+                            BotonGuardar();
+                            ActualizarDGV = true;
+                            Estado = CONSULTA;
+                            ts.Complete();
+                        }
+                        else
+                        {
+                            ts.Dispose();
+                        }
+
                     }
                     else
                     {
-                        ts.Dispose();
+                        // si el DGV_DetailFactura no tiene Filas no podemos agregar la factura
+                        MessageBox.Show("Es necesario agregar un articulo a la factura", "Intente de Nuevo");
+                    
                     }
-
                 }
                 catch (Exception x)
                 {
@@ -626,6 +637,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     {
                         ValorImpuesto = 0;
                     }
+
                     this.listArticulos.Add(new Enl_Articulos()
                     {
                         Codigo = txtArticulo.Text,
@@ -644,26 +656,6 @@ namespace aPrestentationLayer.CxC_Ventas
 
                 ActualizarGrid();
 
-                //TotalLineaCompra = 0;
-                //TotalImpuestoCompra = 0;
-
-                //foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
-                //{
-                //    TotalLineaCompra += Convert.ToDecimal(row.Cells["TotalLineaFacturaGrid"].Value);
-                //    TotalImpuestoCompra += Convert.ToDecimal(row.Cells["ImpuestoFacturaGrid"].Value);
-                //}
-
-                //Porcentaje = nudDescuento.Value / 100;
-                //SubTotalCompra = TotalLineaCompra - TotalImpuestoCompra;
-                //TotalDescuentoCompra = SubTotalCompra * Porcentaje;
-                //TotalCompraCompra = SubTotalCompra + TotalImpuestoCompra - TotalDescuentoCompra;
-
-                //txtSubTotal.Text = Convert.ToString(SubTotalCompra.ToString());
-                //txtTotalImpuesto.Text = Convert.ToString(TotalImpuestoCompra.ToString());
-                //txtTotalDescuento.Text = Convert.ToString(TotalDescuentoCompra.ToString());
-                //txtTotalFactura.Text = Convert.ToString(TotalCompraCompra.ToString());
-
-
                 txtArticulo.Text = String.Empty;
                 txtDescripcion.Text = String.Empty;
                 txtPrecio.Text = String.Empty;
@@ -675,35 +667,25 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            if (DGV_DetailFactura.RowCount != 0)
+
+            if (Estado != CONSULTA)
             {
 
-
-                if (Estado == "Editando")
+                if (DGV_DetailFactura.RowCount != 0)
                 {
-                    list.RemoveAt(DGV_DetailFactura.CurrentRow.Index);
+                                 
+                    listArticulos.RemoveAt(DGV_DetailFactura.CurrentRow.Index);
 
                     DGV_DetailFactura.DataSource = null;
-                    DGV_DetailFactura.DataSource = list;
+                    DGV_DetailFactura.DataSource = listArticulos;
 
-                }
-                else
-                {
-
-                    DGV_DetailFactura.Rows.RemoveAt(DGV_DetailFactura.CurrentRow.Index);
                     lblCantidaArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailFactura.RowCount);
 
+                    ActualizarGrid();
                 }
-                decimal sumatoria = 0;
-
-                foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
-                {
-                    sumatoria += Convert.ToDecimal(row.Cells["TotalLineaFacturagrid"].Value);
                 }
-                txtSubTotal.Text = Convert.ToString(sumatoria.ToString());
-
             }
-        }
+        
 
         private void btnBuscarDetail_Click(object sender, EventArgs e)
         {
