@@ -357,6 +357,7 @@
             // DGV_DetailCotizaciones
             // 
             this.DGV_DetailCotizaciones.AllowUserToAddRows = false;
+            this.DGV_DetailCotizaciones.AllowUserToDeleteRows = false;
             this.DGV_DetailCotizaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_DetailCotizaciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ArticuloCotizacion,

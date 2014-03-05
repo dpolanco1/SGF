@@ -68,8 +68,6 @@ namespace aPrestentationLayer.CxC_Ventas
 
         decimal linea, cantidad, costo, impuesto;
                           
-
-
         // IList<Enl_CotizacionesMaster> listCotizacionMaster;
 
         public Frm_Facturas()//IList<Enl_CotizacionesMaster> enlCotizacionMasterIlist)
@@ -790,6 +788,7 @@ namespace aPrestentationLayer.CxC_Ventas
             if (Estado != CONSULTA)
             {
                 Frm_Buscar_Articulos frmBuscarArticulos = new Frm_Buscar_Articulos();
+               
                 if (frmBuscarArticulos.ShowDialog() == DialogResult.OK)
                 {
                     if (DGV_DetailFactura.RowCount == 0)
@@ -813,11 +812,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     ActualizarGrid();
                 }
 
-
-
             }
-
-
 
         }
 

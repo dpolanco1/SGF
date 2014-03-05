@@ -125,55 +125,26 @@ namespace aPrestentationLayer.CxC_Ventas
 
                 try
                 {
-
-                    enlCotizacionMaster.Numero = txtNoCotizacion.Text;
-                    enlCotizacionMaster.Cliente = txtCliente.Text;
-                    enlCotizacionMaster.Fecha = dtpFecha.Value; ;
-                    enlCotizacionMaster.Terminos = txtTerminos.Text;
-                    enlCotizacionMaster.Descuento = nudDescuento.Value;
-                    enlCotizacionMaster.Vendedor = txtVendedor.Text;
-                    enlCotizacionMaster.SubTotal = Convert.ToDecimal(string.Format(txtSubTotal.Text.ToString().Replace("RD$", "")));
-                    enlCotizacionMaster.TotalImpuesto = Convert.ToDecimal(txtTotalImpuesto.Text.ToString().Replace("RD$", ""));
-                    enlCotizacionMaster.TotalDescuento = Convert.ToDecimal(txtTotalDescuento.Text.ToString().Replace("RD$", ""));
-                    enlCotizacionMaster.TotalCotizacion = Convert.ToDecimal(txtTotalCotizacion.Text.ToString().Replace("RD$", ""));
-
-                    if (Estado == "Creando")
+                    if (DGV_DetailCotizaciones.RowCount > 0)
                     {
-                        txtNoCotizacion.Text = bllCotizacionMaster.Insert(enlCotizacionMaster);
 
-                        //hago la insercion en los DGV
-                       for (int a = 0; a < DGV_DetailCotizaciones.RowCount; a++)
-                       {
-                            enlCotizacionDetail.NoCotizacion = txtNoCotizacion.Text;//No Factura
-                            enlCotizacionDetail.Codigo = DGV_DetailCotizaciones[0, a].Value.ToString();
-                            enlCotizacionDetail.Descripcion = DGV_DetailCotizaciones[1, a].Value.ToString();
-                            enlCotizacionDetail.Precio = Convert.ToDecimal(DGV_DetailCotizaciones[2, a].Value);
-                            enlCotizacionDetail.Cantidad = Convert.ToDecimal(DGV_DetailCotizaciones[3, a].Value);
-                            enlCotizacionDetail.Impuesto = Convert.ToDecimal(DGV_DetailCotizaciones[4, a].Value);
-                            enlCotizacionDetail.TotalLinea = Convert.ToDecimal(DGV_DetailCotizaciones[5, a].Value);
+                        enlCotizacionMaster.Numero = txtNoCotizacion.Text;
+                        enlCotizacionMaster.Cliente = txtCliente.Text;
+                        enlCotizacionMaster.Fecha = dtpFecha.Value; ;
+                        enlCotizacionMaster.Terminos = txtTerminos.Text;
+                        enlCotizacionMaster.Descuento = nudDescuento.Value;
+                        enlCotizacionMaster.Vendedor = txtVendedor.Text;
+                        enlCotizacionMaster.SubTotal = Convert.ToDecimal(string.Format(txtSubTotal.Text.ToString().Replace("RD$", "")));
+                        enlCotizacionMaster.TotalImpuesto = Convert.ToDecimal(txtTotalImpuesto.Text.ToString().Replace("RD$", ""));
+                        enlCotizacionMaster.TotalDescuento = Convert.ToDecimal(txtTotalDescuento.Text.ToString().Replace("RD$", ""));
+                        enlCotizacionMaster.TotalCotizacion = Convert.ToDecimal(txtTotalCotizacion.Text.ToString().Replace("RD$", ""));
 
-                            bllCotizacionDetail.Insert(enlCotizacionDetail);
-                        }
-
-                        if (bllNumeracion.ObtenerTipo("Cotizaciones") == "Automatico")
+                        if (Estado == "Creando")
                         {
-                            bllNumeracion.ActualizarNumero(bllNumeracion.ObtenerNumero("Cotizaciones"), "Cotizaciones");
-                        }
+                            txtNoCotizacion.Text = bllCotizacionMaster.Insert(enlCotizacionMaster);
 
-                    }
-                    else
-                    {
-                        if (Estado == "Editando")
-                        {
-                            bllCotizacionMaster.Update(enlCotizacionMaster);
-
-                            //Eliminados El Detalle de la Factura
-                            enlCotizacionMaster.Numero = txtNoCotizacion.Text;
-                            bllCotizacionMaster.Delete(enlCotizacionMaster);
-
-                            //Insertamos el Detalle de la Factura
-
-                            for (int a = 0; a < DGV_DetailCotizaciones.RowCount - 1; a++)
+                            //hago la insercion en los DGV
+                            for (int a = 0; a < DGV_DetailCotizaciones.RowCount; a++)
                             {
                                 enlCotizacionDetail.NoCotizacion = txtNoCotizacion.Text;//No Factura
                                 enlCotizacionDetail.Codigo = DGV_DetailCotizaciones[0, a].Value.ToString();
@@ -186,15 +157,53 @@ namespace aPrestentationLayer.CxC_Ventas
                                 bllCotizacionDetail.Insert(enlCotizacionDetail);
                             }
 
-                        }
-                    }
+                            if (bllNumeracion.ObtenerTipo("Cotizaciones") == "Automatico")
+                            {
+                                bllNumeracion.ActualizarNumero(bllNumeracion.ObtenerNumero("Cotizaciones"), "Cotizaciones");
+                            }
 
-                    BotonGuardar();
-                    ActualizarDGV = true;
-                    Estado = CONSULTA;
-                    DGV_DetailCotizaciones.ReadOnly = true;
-                    ts.Complete();
-                    MessageBox.Show("Registro Guardado Correctamente", "SGF");
+                        }
+                        else
+                        {
+                            if (Estado == "Editando")
+                            {
+                                bllCotizacionMaster.Update(enlCotizacionMaster);
+
+                                //Eliminados El Detalle de la Factura
+                                enlCotizacionMaster.Numero = txtNoCotizacion.Text;
+                                bllCotizacionMaster.Delete(enlCotizacionMaster);
+
+                                //Insertamos el Detalle de la Factura
+
+                                for (int a = 0; a < DGV_DetailCotizaciones.RowCount - 1; a++)
+                                {
+                                    enlCotizacionDetail.NoCotizacion = txtNoCotizacion.Text;//No Factura
+                                    enlCotizacionDetail.Codigo = DGV_DetailCotizaciones[0, a].Value.ToString();
+                                    enlCotizacionDetail.Descripcion = DGV_DetailCotizaciones[1, a].Value.ToString();
+                                    enlCotizacionDetail.Precio = Convert.ToDecimal(DGV_DetailCotizaciones[2, a].Value);
+                                    enlCotizacionDetail.Cantidad = Convert.ToDecimal(DGV_DetailCotizaciones[3, a].Value);
+                                    enlCotizacionDetail.Impuesto = Convert.ToDecimal(DGV_DetailCotizaciones[4, a].Value);
+                                    enlCotizacionDetail.TotalLinea = Convert.ToDecimal(DGV_DetailCotizaciones[5, a].Value);
+
+                                    bllCotizacionDetail.Insert(enlCotizacionDetail);
+                                }
+
+                            }
+                        }
+
+                        BotonGuardar();
+                        ActualizarDGV = true;
+                        Estado = CONSULTA;
+                        DGV_DetailCotizaciones.ReadOnly = true;
+                        ts.Complete();
+                        MessageBox.Show("Registro Guardado Correctamente", "SGF");
+                    }
+                    else
+                    {
+                        // si el DGV_DetailCotizacion no tiene Filas no podemos agregar la factura
+                        MessageBox.Show("Es necesario agregar un articulo a la Cotizacion", "Intente de Nuevo");
+                    
+                    }
                 }
                 catch (Exception x)
                 {
@@ -558,32 +567,22 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            if (DGV_DetailCotizaciones.RowCount != 0)
+
+            if (Estado != CONSULTA)
             {
 
-
-                if (Estado == "Editando")
+                if (DGV_DetailCotizaciones.RowCount != 0)
                 {
-                    list.RemoveAt(DGV_DetailCotizaciones.CurrentRow.Index);
+
+                    listArticulos.RemoveAt(DGV_DetailCotizaciones.CurrentRow.Index);
 
                     DGV_DetailCotizaciones.DataSource = null;
-                    DGV_DetailCotizaciones.DataSource = list;
+                    DGV_DetailCotizaciones.DataSource = listArticulos;
 
+                    lblCantidadArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailCotizaciones.RowCount);
+
+                    ActualizarGrid();
                 }
-                else
-                {
-
-                    DGV_DetailCotizaciones.Rows.RemoveAt(DGV_DetailCotizaciones.CurrentRow.Index);
-
-                }
-                decimal sumatoria = 0;
-
-                foreach (DataGridViewRow row in DGV_DetailCotizaciones.Rows)
-                {
-                    sumatoria += Convert.ToDecimal(row.Cells["TotalLineaCotizaciong"].Value);
-                }
-                txtSubTotal.Text = Convert.ToString(sumatoria.ToString("C2"));
-
             }
         }
 
@@ -685,7 +684,6 @@ namespace aPrestentationLayer.CxC_Ventas
 
             if (Estado != CONSULTA)
             {
-
                 Frm_Buscar_Articulos frmBuscarArticulos = new Frm_Buscar_Articulos();
 
                 if (frmBuscarArticulos.ShowDialog() == DialogResult.OK)
@@ -696,7 +694,6 @@ namespace aPrestentationLayer.CxC_Ventas
                         DGV_DetailCotizaciones.DataSource = this.listArticulos;
                         lblCantidadArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailCotizaciones.RowCount);
                     }
-                        //Formulario que trae la lista de articulos
                     else if (frmBuscarArticulos.ListaArticulos.Count != 0)
                     {
                         foreach (Enl_Articulos item in frmBuscarArticulos.ListaArticulos)
@@ -706,10 +703,14 @@ namespace aPrestentationLayer.CxC_Ventas
                         DGV_DetailCotizaciones.DataSource = null;
                         DGV_DetailCotizaciones.DataSource = this.listArticulos;
                         lblCantidadArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailCotizaciones.RowCount);
+
                     }
+
+                    MessageBox.Show(listArticulos[0].Impuesto);
 
                     ActualizarGrid();
                 }
+
             }
         }
 
