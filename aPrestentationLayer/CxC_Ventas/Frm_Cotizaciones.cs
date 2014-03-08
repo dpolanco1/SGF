@@ -22,11 +22,13 @@ namespace aPrestentationLayer.CxC_Ventas
 {
     public partial class Frm_Cotizaciones : Frm_Plantilla, Icotizaciones
     {
-        
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
         //CultureInfo ci = new CultureInfo("es-DO");
 
         bool ActualizarDGV = false;
@@ -91,7 +93,9 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
+
             if (tabControl1.SelectedTab == tbpDetail)
             {
                 tabControl1.TabPages.Remove(tbpDetail);
@@ -139,7 +143,7 @@ namespace aPrestentationLayer.CxC_Ventas
                         enlCotizacionMaster.TotalDescuento = Convert.ToDecimal(txtTotalDescuento.Text.ToString().Replace("RD$", ""));
                         enlCotizacionMaster.TotalCotizacion = Convert.ToDecimal(txtTotalCotizacion.Text.ToString().Replace("RD$", ""));
 
-                        if (Estado == "Creando")
+                        if (Estado == Helper.EstadoSystema.Creando)
                         {
                             txtNoCotizacion.Text = bllCotizacionMaster.Insert(enlCotizacionMaster);
 
@@ -165,7 +169,7 @@ namespace aPrestentationLayer.CxC_Ventas
                         }
                         else
                         {
-                            if (Estado == "Editando")
+                            if (Estado == Helper.EstadoSystema.Editando)
                             {
                                 bllCotizacionMaster.Update(enlCotizacionMaster);
 
@@ -217,7 +221,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnEditar_Click(object sender, EventArgs e)
         {
-            Estado = "Editando";
+            Estado = Helper.EstadoSystema.Editando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -265,13 +269,13 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 //enlCategoriaClientes.Codigo = txtCodigo.Text;
                 //enlCategoriaClientes.Nombre = string.Empty;
@@ -300,7 +304,7 @@ namespace aPrestentationLayer.CxC_Ventas
             }
 
             BotonCancelar();
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
         }
 
         void btnEliminar_Click(object sender, EventArgs e)
@@ -324,8 +328,9 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void Frm_Cotizaciones_Load(object sender, EventArgs e)
         {
-            
-            Estado = CONSULTA;
+
+            Estado = Helper.EstadoSystema.Consultando;
+
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlCotizacionMaster.Numero = string.Empty;
@@ -419,7 +424,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (Estado != CONSULTA)
+            if (Estado != Helper.EstadoSystema.Consultando)
             {
 
                 if (txtArticulo.Text != String.Empty && txtPrecio.Text != String.Empty && txtCantidad.Text != String.Empty)
@@ -433,7 +438,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     totalLinea = precio * cantidad;
                     //   costo = Convert.ToDecimal(txtCosto.Text);
 
-                    if (Estado == "Editando")
+                    if (Estado == Helper.EstadoSystema.Editando)
                     {
 
 
@@ -568,7 +573,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void btnBorrar_Click(object sender, EventArgs e)
         {
 
-            if (Estado != CONSULTA)
+            if (Estado != Helper.EstadoSystema.Consultando)
             {
 
                 if (DGV_DetailCotizaciones.RowCount != 0)
@@ -682,7 +687,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void lblBuscarArticulos_Click(object sender, EventArgs e)
         {
 
-            if (Estado != CONSULTA)
+            if (Estado != Helper.EstadoSystema.Consultando)
             {
                 Frm_Buscar_Articulos frmBuscarArticulos = new Frm_Buscar_Articulos();
 
