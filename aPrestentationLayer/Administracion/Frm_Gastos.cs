@@ -15,11 +15,12 @@ namespace aPrestentationLayer.Administracion
 {
     public partial class Frm_Gastos : Frm_Plantilla
     {
+        //estados del sistema predefinidos
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
 
         bool ActualizarDGV = false;
 
@@ -47,7 +48,8 @@ namespace aPrestentationLayer.Administracion
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -80,7 +82,7 @@ namespace aPrestentationLayer.Administracion
             enlGastos.Tipo = txtTipo.Text;
             enlGastos.Nota = txtDescripcion.Text;
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 txtNumero.Text = bllGastos.Insert(enlGastos);
 
@@ -92,7 +94,7 @@ namespace aPrestentationLayer.Administracion
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllGastos.Update(enlGastos);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -127,7 +129,7 @@ namespace aPrestentationLayer.Administracion
             {
 
                 BotonEditar();
-                Estado = EDITAR;
+                Estado = Helper.EstadoSystema.Editando;
                 dtpFecha.Focus();
                 txtNumero.Enabled = false;
 
@@ -136,13 +138,13 @@ namespace aPrestentationLayer.Administracion
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 enlGastos.Numero = txtNumero.Text;
                 enlGastos.Tipo = string.Empty;
@@ -235,7 +237,7 @@ namespace aPrestentationLayer.Administracion
 
         private void Frm_Gastos_Load(object sender, EventArgs e)
         {
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlGastos.Numero = string.Empty;
