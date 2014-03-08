@@ -905,6 +905,28 @@ namespace aPrestentationLayer.CxC_Ventas
             txtTerminos.Text = frmBuscarTermino.nombreTermino;
         }
 
+        private void LblbuscarCaja_Click(object sender, EventArgs e)
+        {
+            Frm_Buscar_Caja frmBuscarCajas = new Frm_Buscar_Caja();
+            frmBuscarCajas.ShowDialog();
+            frmBuscarCajas.Owner = this;
+
+            //obtenemos los valores
+            txtCodigoCaja.Text = frmBuscarCajas.codigoCaja;
+            txtCaja.Text = frmBuscarCajas.nombreCaja;
+        }
+
+        private void LblBuscarVendedor_Click(object sender, EventArgs e)
+        {
+            Frm_Buscar_Empleados frmBuscarEmpleados = new Frm_Buscar_Empleados();
+            frmBuscarEmpleados.ShowDialog();
+            frmBuscarEmpleados.Owner = this;
+
+            //obtenemos los valores
+            txtCodigoVendedor.Text = frmBuscarEmpleados.codigoVendedor;
+            txtVendedor.Text = frmBuscarEmpleados.nombreVendedor;
+        }
+
       
     }
 }

@@ -137,6 +137,7 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtCodigoVendedor = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -210,6 +211,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtCodigoVendedor);
             this.groupBox1.Controls.Add(this.txtCodigoCaja);
             this.groupBox1.Controls.Add(this.txtCodigoTermino);
             this.groupBox1.Controls.Add(this.txtCodigoALmacen);
@@ -299,6 +301,7 @@
             this.LblbuscarCaja.Name = "LblbuscarCaja";
             this.LblbuscarCaja.Size = new System.Drawing.Size(23, 20);
             this.LblbuscarCaja.TabIndex = 26;
+            this.LblbuscarCaja.Click += new System.EventHandler(this.LblbuscarCaja_Click);
             // 
             // lblBuscarTerminos
             // 
@@ -325,6 +328,7 @@
             this.LblBuscarVendedor.Name = "LblBuscarVendedor";
             this.LblBuscarVendedor.Size = new System.Drawing.Size(23, 20);
             this.LblBuscarVendedor.TabIndex = 23;
+            this.LblBuscarVendedor.Click += new System.EventHandler(this.LblBuscarVendedor_Click);
             // 
             // txtCaja
             // 
@@ -1163,6 +1167,15 @@
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             // 
+            // txtCodigoVendedor
+            // 
+            this.txtCodigoVendedor.Location = new System.Drawing.Point(606, 142);
+            this.txtCodigoVendedor.Name = "txtCodigoVendedor";
+            this.txtCodigoVendedor.ReadOnly = true;
+            this.txtCodigoVendedor.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoVendedor.TabIndex = 32;
+            this.txtCodigoVendedor.Visible = false;
+            // 
             // Frm_Facturas
             // 
             this.AcceptButton = this.btnAgregar;
@@ -1305,5 +1318,6 @@
         private System.Windows.Forms.TextBox txtCodigoCaja;
         private System.Windows.Forms.TextBox txtCodigoTermino;
         private System.Windows.Forms.TextBox txtCodigoALmacen;
+        private System.Windows.Forms.TextBox txtCodigoVendedor;
     }
 }
