@@ -17,10 +17,12 @@ namespace aPrestentationLayer.CxP_Compras
     public partial class Frm_CategoriaSuplidores : Frm_Plantilla
     {
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
         bool ActualizarDGV = false;
 
         AdministrarControles AC = new AdministrarControles();
@@ -46,7 +48,8 @@ namespace aPrestentationLayer.CxP_Compras
         void btnNuevo_Click(object sender, EventArgs e)
         {
 
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -78,7 +81,7 @@ namespace aPrestentationLayer.CxP_Compras
             enlCategoriaSuplidores.Nombre = txtNombre.Text;
             enlCategoriaSuplidores.Nota = txtNota.Text;
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 txtCodigo.Text =  bllCategoriaSuplidores.Insert(enlCategoriaSuplidores);
              
@@ -91,7 +94,7 @@ namespace aPrestentationLayer.CxP_Compras
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllCategoriaSuplidores.Update(enlCategoriaSuplidores);
                     MessageBox.Show("Registro Actualizado Correctamente","SGF");
@@ -124,7 +127,7 @@ namespace aPrestentationLayer.CxP_Compras
             {
 
                 BotonEditar();
-                Estado = EDITAR;
+                Estado = Helper.EstadoSystema.Editando;
                 txtNombre.Focus();
                 txtCodigo.Enabled = false;
 
@@ -134,13 +137,13 @@ namespace aPrestentationLayer.CxP_Compras
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 enlCategoriaSuplidores.Codigo = txtCodigo.Text;
                 enlCategoriaSuplidores.Nombre = string.Empty;
@@ -187,7 +190,7 @@ namespace aPrestentationLayer.CxP_Compras
         private void Frm_CategoriaSuplidores_Load(object sender, EventArgs e)
         {
 
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlCategoriaSuplidores.Codigo = string.Empty;
