@@ -197,7 +197,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
                         BotonGuardar();
                         ActualizarDGV = true;
-                        Estado = CONSULTA;
+                        Estado = Helper.EstadoSystema.Consultando;
                         DGV_DetailCotizaciones.ReadOnly = true;
                         ts.Complete();
                         MessageBox.Show("Registro Guardado Correctamente", "SGF");
