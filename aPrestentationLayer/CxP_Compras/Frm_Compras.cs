@@ -21,10 +21,12 @@ namespace aPrestentationLayer.CxP_Compras
     public partial class Frm_Compras : Frm_Plantilla, Icompras
     {
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
 
         bool ActualizarDGV = false;
 
@@ -64,7 +66,8 @@ namespace aPrestentationLayer.CxP_Compras
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -126,7 +129,7 @@ namespace aPrestentationLayer.CxP_Compras
             enlCompraMaster.TotalDescuento = TotalDescuentoCompra;
             enlCompraMaster.TotalCompra = TotalCompraCompra;
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 txtNoCompra.Text = bllCompraMaster.Insert(enlCompraMaster);
 
@@ -163,7 +166,7 @@ namespace aPrestentationLayer.CxP_Compras
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllCompraMaster.Update(enlCompraMaster);
 
@@ -235,7 +238,7 @@ namespace aPrestentationLayer.CxP_Compras
             {
 
                 BotonEditar();
-                Estado = EDITAR;
+                Estado = Helper.EstadoSystema.Editando;
                 txtNombre.Focus();
                 txtNoCompra.Enabled = false;
 
@@ -249,13 +252,13 @@ namespace aPrestentationLayer.CxP_Compras
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 enlCompraMaster.Numero = txtNoCompra.Text;
                 enlCompraMaster.Suplidor = string.Empty;
@@ -364,7 +367,7 @@ namespace aPrestentationLayer.CxP_Compras
 
         private void Frm_Compras_Load(object sender, EventArgs e)
         {
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
             enlCompraMaster.Numero = txtNoCompra.Text;
 
@@ -441,7 +444,7 @@ namespace aPrestentationLayer.CxP_Compras
                 impuesto = 0;
                 linea = costo * cantidad + impuesto;
 
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
 
 
@@ -537,7 +540,7 @@ namespace aPrestentationLayer.CxP_Compras
             if (DGV_DetailCompra.RowCount != 0)
             {
 
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     list.RemoveAt(DGV_DetailCompra.CurrentRow.Index);
 
