@@ -40,6 +40,9 @@
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtCodigoCaja = new System.Windows.Forms.TextBox();
+            this.txtCodigoTermino = new System.Windows.Forms.TextBox();
+            this.txtCodigoALmacen = new System.Windows.Forms.TextBox();
             this.txtCosto = new System.Windows.Forms.TextBox();
             this.btnBuscarClientes = new System.Windows.Forms.Label();
             this.LblbuscarCaja = new System.Windows.Forms.Label();
@@ -134,9 +137,6 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtCodigoALmacen = new System.Windows.Forms.TextBox();
-            this.txtCodigoTermino = new System.Windows.Forms.TextBox();
-            this.txtCodigoCaja = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -248,6 +248,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Generales";
             // 
+            // txtCodigoCaja
+            // 
+            this.txtCodigoCaja.Location = new System.Drawing.Point(606, 84);
+            this.txtCodigoCaja.Name = "txtCodigoCaja";
+            this.txtCodigoCaja.ReadOnly = true;
+            this.txtCodigoCaja.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoCaja.TabIndex = 31;
+            this.txtCodigoCaja.Visible = false;
+            // 
+            // txtCodigoTermino
+            // 
+            this.txtCodigoTermino.Location = new System.Drawing.Point(606, 48);
+            this.txtCodigoTermino.Name = "txtCodigoTermino";
+            this.txtCodigoTermino.ReadOnly = true;
+            this.txtCodigoTermino.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoTermino.TabIndex = 30;
+            this.txtCodigoTermino.Visible = false;
+            // 
+            // txtCodigoALmacen
+            // 
+            this.txtCodigoALmacen.Location = new System.Drawing.Point(225, 143);
+            this.txtCodigoALmacen.Name = "txtCodigoALmacen";
+            this.txtCodigoALmacen.ReadOnly = true;
+            this.txtCodigoALmacen.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoALmacen.TabIndex = 29;
+            this.txtCodigoALmacen.Visible = false;
+            // 
             // txtCosto
             // 
             this.txtCosto.Location = new System.Drawing.Point(724, 189);
@@ -280,6 +307,7 @@
             this.lblBuscarTerminos.Name = "lblBuscarTerminos";
             this.lblBuscarTerminos.Size = new System.Drawing.Size(23, 20);
             this.lblBuscarTerminos.TabIndex = 25;
+            this.lblBuscarTerminos.Click += new System.EventHandler(this.lblBuscarTerminos_Click);
             // 
             // LblBuscarAlmacen
             // 
@@ -288,6 +316,7 @@
             this.LblBuscarAlmacen.Name = "LblBuscarAlmacen";
             this.LblBuscarAlmacen.Size = new System.Drawing.Size(23, 20);
             this.LblBuscarAlmacen.TabIndex = 24;
+            this.LblBuscarAlmacen.Click += new System.EventHandler(this.LblBuscarAlmacen_Click);
             // 
             // LblBuscarVendedor
             // 
@@ -1133,33 +1162,6 @@
             this.Precio.DefaultCellStyle = dataGridViewCellStyle6;
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
-            // 
-            // txtCodigoALmacen
-            // 
-            this.txtCodigoALmacen.Location = new System.Drawing.Point(225, 143);
-            this.txtCodigoALmacen.Name = "txtCodigoALmacen";
-            this.txtCodigoALmacen.ReadOnly = true;
-            this.txtCodigoALmacen.Size = new System.Drawing.Size(57, 20);
-            this.txtCodigoALmacen.TabIndex = 29;
-            this.txtCodigoALmacen.Visible = false;
-            // 
-            // txtCodigoTermino
-            // 
-            this.txtCodigoTermino.Location = new System.Drawing.Point(606, 48);
-            this.txtCodigoTermino.Name = "txtCodigoTermino";
-            this.txtCodigoTermino.ReadOnly = true;
-            this.txtCodigoTermino.Size = new System.Drawing.Size(57, 20);
-            this.txtCodigoTermino.TabIndex = 30;
-            this.txtCodigoTermino.Visible = false;
-            // 
-            // txtCodigoCaja
-            // 
-            this.txtCodigoCaja.Location = new System.Drawing.Point(606, 84);
-            this.txtCodigoCaja.Name = "txtCodigoCaja";
-            this.txtCodigoCaja.ReadOnly = true;
-            this.txtCodigoCaja.Size = new System.Drawing.Size(57, 20);
-            this.txtCodigoCaja.TabIndex = 31;
-            this.txtCodigoCaja.Visible = false;
             // 
             // Frm_Facturas
             // 

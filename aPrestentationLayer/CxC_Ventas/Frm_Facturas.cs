@@ -203,12 +203,12 @@ namespace aPrestentationLayer.CxC_Ventas
                         enlFacturaMaster.Numero = txtNoFactura.Text;
                         enlFacturaMaster.Cliente = txtCliente.Text;
                         enlFacturaMaster.Fecha = dtpFecha.Value; ;
-                        enlFacturaMaster.Almacen = txtAlmacen.Text;
+                        enlFacturaMaster.Almacen = txtCodigoALmacen.Text;
                         enlFacturaMaster.Terminos = txtTerminos.Text;
                         enlFacturaMaster.Tipo = cmbTipo.Text;
                         enlFacturaMaster.Descuento = nudDescuento.Value;
                         enlFacturaMaster.Vendedor = txtVendedor.Text;
-                        enlFacturaMaster.Caja = txtCaja.Text;
+                        enlFacturaMaster.Caja = txtCodigoCaja.Text;
                         enlFacturaMaster.Status = "Prueba";
 
                         enlFacturaMaster.SubTotal = Convert.ToDecimal(txtSubTotal.Text.ToString().Replace("RD$", ""));
@@ -881,6 +881,28 @@ namespace aPrestentationLayer.CxC_Ventas
             txtNombre.Text = frmuscarClientes.mombreCliente;
               
           
+        }
+
+        private void LblBuscarAlmacen_Click(object sender, EventArgs e)
+        {
+            Frm_Buscar_Almacen frmbuscarAlmacen = new Frm_Buscar_Almacen();
+            frmbuscarAlmacen.ShowDialog();
+            frmbuscarAlmacen.Owner = this;
+
+            //obtenemos los valores
+            txtCodigoALmacen.Text = frmbuscarAlmacen.codigoAlmacen;
+            txtAlmacen.Text = frmbuscarAlmacen.nombreAlmacen;
+        }
+
+        private void lblBuscarTerminos_Click(object sender, EventArgs e)
+        {
+            Frm_Buscar_Terminos frmBuscarTermino = new Frm_Buscar_Terminos();
+            frmBuscarTermino.ShowDialog();
+            frmBuscarTermino.Owner = this;
+
+            //obtenemos los valores
+            txtCodigoTermino.Text = frmBuscarTermino.codigoTermino;
+            txtTerminos.Text = frmBuscarTermino.nombreTermino;
         }
 
       
