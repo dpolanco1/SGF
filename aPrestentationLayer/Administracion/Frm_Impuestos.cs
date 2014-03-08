@@ -90,28 +90,33 @@ namespace aPrestentationLayer.Administracion
             enlImpuestos.Porcentaje = nudPorcentaje.Value;
             enlImpuestos.Nota = txtNota.Text;
 
-            if (Estado == sys_Estado.Creando)
+            //solo si los campos fueron completados dejara guardar.
+            if (!string.IsNullOrEmpty(enlImpuestos.Codigo) && !string.IsNullOrEmpty(enlImpuestos.Nombre) && !string.IsNullOrEmpty(enlImpuestos.Porcentaje.ToString()))
             {
-                txtCodigo.Text = bllImpuestos.Insert(enlImpuestos);
-               
-
-                if (bllNumeracion.ObtenerTipo("Impuestos") == "Automatico")
+                if (Estado == sys_Estado.Creando)
                 {
-                    bllNumeracion.ActualizarNumero(bllNumeracion.ObtenerNumero("Impuestos"), "Impuestos");
+                    txtCodigo.Text = bllImpuestos.Insert(enlImpuestos);
+
+
+                    if (bllNumeracion.ObtenerTipo("Impuestos") == "Automatico")
+                    {
+                        bllNumeracion.ActualizarNumero(bllNumeracion.ObtenerNumero("Impuestos"), "Impuestos");
+                    }
                 }
-            }
-            else
-            {
-                if (Estado == sys_Estado.Editando)
+                else
                 {
-                    bllImpuestos.Update(enlImpuestos);
-                    MessageBox.Show("Registro Actualizado Correctamente", "SGF");
+                    if (Estado == sys_Estado.Editando)
+                    {
+                        bllImpuestos.Update(enlImpuestos);
+                        MessageBox.Show("Registro Actualizado Correctamente", "SGF");
+                    }
                 }
-            }
 
-            BotonGuardar();
-            ActualizarDGV = true;
+                BotonGuardar();
+                ActualizarDGV = true;
+            }else
 
+                MessageBox.Show("Debe de completar todos los campos antes de continuar", "SGF");
 
         }
 
