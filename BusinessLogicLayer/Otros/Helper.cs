@@ -69,5 +69,13 @@ namespace BusinessLogicLayer.Otros
                 return _valorNew;
             }
         }
+
+        //estado del sistema definidos
+        public enum EstadoSystema
+        {
+            Consultando,
+            Editando,
+            Creando
+        }
     }
 }
