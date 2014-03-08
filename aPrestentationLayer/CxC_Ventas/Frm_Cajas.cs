@@ -16,11 +16,12 @@ namespace aPrestentationLayer.CxC_Ventas
 {
     public partial class Frm_Cajas : Frm_Plantilla
     {
+        //utilizando los estados predefinidos del sistema en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
 
         bool ActualizarDGV = false;
 
@@ -48,7 +49,8 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -82,7 +84,7 @@ namespace aPrestentationLayer.CxC_Ventas
             enlCaja.Saldo = 0;
             enlCaja.Nota = txtNota.Text;
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 txtCodigo.Text = bllCaja.Insert(enlCaja);
 
@@ -95,7 +97,7 @@ namespace aPrestentationLayer.CxC_Ventas
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllCaja.Update(enlCaja);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -137,13 +139,13 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-             if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-             if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
              {
 
                  enlCaja.Codigo = txtCodigo.Text;
@@ -256,7 +258,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void Frm_Cajas_Load(object sender, EventArgs e)
         {
 
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlCaja.Codigo = string.Empty;
