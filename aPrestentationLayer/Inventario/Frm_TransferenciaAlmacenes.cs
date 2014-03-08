@@ -10,6 +10,7 @@ using aPrestentationLayer.Plantillas;
 using BusinessLogicLayer.Inventario;
 using EntityLayer.Inventario;
 using BusinessLogicLayer.Administracion;
+using BusinessLogicLayer.Otros;
 
 
 namespace aPrestentationLayer.Inventario
@@ -17,10 +18,12 @@ namespace aPrestentationLayer.Inventario
     public partial class Frm_TransferenciaAlmacenes : Frm_Plantilla
     {
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+       /* const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
 
         Enl_TransfAlmacenesMaster enlTransfAlmacenesMaster = new Enl_TransfAlmacenesMaster();
         Bll_TransfAlmacenesMaster bllTransfAlmacenesMaster = new Bll_TransfAlmacenesMaster();
@@ -45,7 +48,9 @@ namespace aPrestentationLayer.Inventario
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
+
             if (bllNumeracion.ObtenerTipo("Tranferencia de Almacenes") == "Automatico")
             {
                 txtNumero.Enabled = false;
@@ -68,7 +73,7 @@ namespace aPrestentationLayer.Inventario
             enlTransfAlmacenesMaster.AlmacenEntrada = txtAlmacenEntrada.Text;
 
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 txtNumero.Text = bllTransfAlmacenesMaster.Insert(enlTransfAlmacenesMaster);
 
@@ -83,7 +88,7 @@ namespace aPrestentationLayer.Inventario
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllTransfAlmacenesMaster.Update(enlTransfAlmacenesMaster);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -98,7 +103,7 @@ namespace aPrestentationLayer.Inventario
         {
             if (!string.IsNullOrEmpty(txtNumero.Text))
             {
-                Estado = EDITAR;
+                Estado = Helper.EstadoSystema.Editando;
                 txtNumero.Focus();
             }
         }
