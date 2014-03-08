@@ -18,10 +18,12 @@ namespace aPrestentationLayer.Inventario
     public partial class Frm_Almacen : Frm_Plantilla
     {
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
         bool ActualizarDGV = false;
 
         AdministrarControles AC = new AdministrarControles();
@@ -55,7 +57,8 @@ namespace aPrestentationLayer.Inventario
         void btnNuevo_Click(object sender, EventArgs e)
         {
 
-            Estado = NUEVO;
+          //  Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -91,7 +94,7 @@ namespace aPrestentationLayer.Inventario
             enlAlmacen.Telefono = txtTelefono.Text;
             enlAlmacen.Nota = txtNota.Text;
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                  txtCodigo.Text =  bllAlmacen.Insert(enlAlmacen);
    
@@ -103,7 +106,7 @@ namespace aPrestentationLayer.Inventario
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllAlmacen.Update(enlAlmacen);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -115,7 +118,7 @@ namespace aPrestentationLayer.Inventario
 
         void btnEditar_Click(object sender, EventArgs e)
         {
-            Estado = EDITAR;
+            Estado = Helper.EstadoSystema.Editando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -150,13 +153,13 @@ namespace aPrestentationLayer.Inventario
             enlAlmacen.Nombre = string.Empty;
             enlAlmacen.Encargado = string.Empty;
 
-             if (Estado == "Creando")
+             if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-             if (Estado == "Editando")
+             if (Estado == Helper.EstadoSystema.Editando)
              {
 
                  var list = bllAlmacen.Search(enlAlmacen);
@@ -207,7 +210,7 @@ namespace aPrestentationLayer.Inventario
 
         private void Frm_Almacen_Load(object sender, EventArgs e)
         {
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlAlmacen.Codigo = string.Empty;
