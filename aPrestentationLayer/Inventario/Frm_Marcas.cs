@@ -18,10 +18,13 @@ namespace aPrestentationLayer.Inventario
     public partial class Frm_Marcas : Frm_Plantilla
     {
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+       /* const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
         bool ActualizarDGV = false;
 
         AdministrarControles AC = new AdministrarControles();
@@ -53,7 +56,8 @@ namespace aPrestentationLayer.Inventario
   
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -84,7 +88,7 @@ namespace aPrestentationLayer.Inventario
             enlMarcas.Nota = txtNota.Text;
 
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 txtCodigo.Text = bllMarcas.Insert(enlMarcas);
  
@@ -97,7 +101,7 @@ namespace aPrestentationLayer.Inventario
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllMarcas.Update(enlMarcas);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -111,7 +115,7 @@ namespace aPrestentationLayer.Inventario
         void btnEditar_Click(object sender, EventArgs e)
         {
 
-            Estado = EDITAR;
+            Estado = Helper.EstadoSystema.Editando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -139,13 +143,13 @@ namespace aPrestentationLayer.Inventario
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 enlMarcas.Codigo = txtCodigo.Text;
                 enlMarcas.Nombre = string.Empty;
@@ -229,7 +233,7 @@ namespace aPrestentationLayer.Inventario
 
         private void Frm_Marcas_Load(object sender, EventArgs e)
         {
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlMarcas.Codigo = string.Empty;
