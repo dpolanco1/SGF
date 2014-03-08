@@ -207,7 +207,7 @@ namespace aPrestentationLayer.CxC_Ventas
                         enlFacturaMaster.Terminos = txtTerminos.Text;
                         enlFacturaMaster.Tipo = cmbTipo.Text;
                         enlFacturaMaster.Descuento = nudDescuento.Value;
-                        enlFacturaMaster.Vendedor = txtVendedor.Text;
+                        enlFacturaMaster.Vendedor = txtCodigoVendedor.Text;
                         enlFacturaMaster.Caja = txtCodigoCaja.Text;
                         enlFacturaMaster.Status = "Prueba";
 
