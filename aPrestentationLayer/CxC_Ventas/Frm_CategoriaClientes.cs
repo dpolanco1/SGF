@@ -17,11 +17,12 @@ namespace aPrestentationLayer.CxC_Ventas
 {
     public partial class Frm_CategoriaClientes : Frm_Plantilla
     {
+        //utilizando los estados predefinidos de la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
 
         bool ActualizarDGV = false;
 
@@ -46,7 +47,8 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
           
 
             if (tabControl1.SelectedTab == tbpDetail)
@@ -82,7 +84,7 @@ namespace aPrestentationLayer.CxC_Ventas
             enlCategoriaClientes.Nombre = txtNombre.Text;
             enlCategoriaClientes.Nota = txtNota.Text;
 
-         if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
           {
              txtCodigo.Text = bllCategoriaClientes.Insert(enlCategoriaClientes);
               
@@ -94,7 +96,7 @@ namespace aPrestentationLayer.CxC_Ventas
           }
           else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllCategoriaClientes.Update(enlCategoriaClientes);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -109,7 +111,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnEditar_Click(object sender, EventArgs e)
         {
-            Estado = EDITAR;
+            Estado = Helper.EstadoSystema.Editando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -138,13 +140,13 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 enlCategoriaClientes.Codigo = txtCodigo.Text;
                 enlCategoriaClientes.Nombre = string.Empty;
@@ -252,7 +254,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void Frm_CategoriaClientes_Load(object sender, EventArgs e)
         {
 
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
             DGV_CategoriaClientes.Focus();
 
