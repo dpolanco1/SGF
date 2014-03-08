@@ -15,11 +15,12 @@ namespace aPrestentationLayer.Administracion
 {
     public partial class Frm_Usuarios : Frm_Plantilla
     {
+        //utilizando los estados del sistema predefinidos en la clase
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+       /* const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
         bool ActualizarDGV = false;
 
         AdministrarControles AC = new AdministrarControles();
@@ -46,7 +47,8 @@ namespace aPrestentationLayer.Administracion
         void btnNuevo_Click(object sender, EventArgs e)
         {
 
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -85,7 +87,7 @@ namespace aPrestentationLayer.Administracion
             {
 
 
-                if (Estado == "Creando")
+                if (Estado == Helper.EstadoSystema.Creando)
                 {
                     txtNombreUsuario.Text = bllUsuarios.Insert(enlUsuarios);
 
@@ -98,7 +100,7 @@ namespace aPrestentationLayer.Administracion
                 }
                 else
                 {
-                    if (Estado == "Editando")
+                    if (Estado == Helper.EstadoSystema.Editando)
                     {
                         bllUsuarios.Update(enlUsuarios);
                         MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -140,7 +142,7 @@ namespace aPrestentationLayer.Administracion
             if (!string.IsNullOrEmpty(txtNombreUsuario.Text))
             {
                 BotonEditar();
-                Estado = EDITAR;
+                Estado = Helper.EstadoSystema.Editando;
                 txtNombreUsuario.Enabled = false;
                 txtNombre.Focus();
             }
@@ -149,13 +151,13 @@ namespace aPrestentationLayer.Administracion
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 enlUsuarios.NombreUsuario = txtNombreUsuario.Text;
                 enlUsuarios.Nombre = string.Empty;
@@ -209,7 +211,7 @@ namespace aPrestentationLayer.Administracion
 
         private void Frm_Usuarios_Load(object sender, EventArgs e)
         {
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlUsuarios.NombreUsuario = string.Empty;
