@@ -20,10 +20,12 @@ namespace aPrestentationLayer.Inventario
     public partial class Frm_Articulos : Frm_Plantilla, Iinventario
     {
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
         bool ActualizarDGV = false;
 
         AdministrarControles AC = new AdministrarControles ();
@@ -70,7 +72,8 @@ namespace aPrestentationLayer.Inventario
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -113,7 +116,7 @@ namespace aPrestentationLayer.Inventario
             enlArticulos.CodigoBarra = txtCodigoBarra.Text;
          
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 txtCodigo.Text = bllArticulos.Insert(enlArticulos);
 
@@ -125,7 +128,7 @@ namespace aPrestentationLayer.Inventario
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllArticulos.Update(enlArticulos);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -135,13 +138,13 @@ namespace aPrestentationLayer.Inventario
             BotonGuardar();
             ActualizarDGV = true;
 
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
 
         }
 
         void btnEditar_Click(object sender, EventArgs e)
         {
-            Estado = EDITAR;
+            Estado = Helper.EstadoSystema.Editando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -178,19 +181,19 @@ namespace aPrestentationLayer.Inventario
             }
             else
                 {
-                    Estado = CONSULTA;
+                    Estado = Helper.EstadoSystema.Consultando;
                  }
         }
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-             if (Estado == "Creando")
+             if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-             if (Estado == "Editando")
+             if (Estado == Helper.EstadoSystema.Editando)
              {
                  enlArticulos.Codigo = txtCodigo.Text;
                  enlArticulos.Nombre = string.Empty;
@@ -219,7 +222,7 @@ namespace aPrestentationLayer.Inventario
              }
 
             BotonCancelar();
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
         }
 
         void btnEliminar_Click(object sender, EventArgs e)
@@ -317,7 +320,7 @@ namespace aPrestentationLayer.Inventario
         private void Frm_Articulos_Load(object sender, EventArgs e)
 
         {
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlArticulos.Codigo = string.Empty;
@@ -341,7 +344,7 @@ namespace aPrestentationLayer.Inventario
         private void lblBuscarMarca_Click(object sender, EventArgs e)
         {
 
-            if (Estado != CONSULTA)
+            if (Estado != Helper.EstadoSystema.Consultando)
             {
                 Frm_Marcas frmMarcas = new Frm_Marcas();
                 frmMarcas.Owner = this;
@@ -352,7 +355,7 @@ namespace aPrestentationLayer.Inventario
 
         private void LblBuscarCategoria_Click(object sender, EventArgs e)
         {
-            if (Estado != CONSULTA)
+            if (Estado != Helper.EstadoSystema.Consultando)
             {
 
                 Frm_CategoriaArticulos frmCategoria = new Frm_CategoriaArticulos();
@@ -364,7 +367,7 @@ namespace aPrestentationLayer.Inventario
 
         private void LblBuscarSubCategoria_Click(object sender, EventArgs e)
         {
-            if (Estado != CONSULTA)
+            if (Estado != Helper.EstadoSystema.Consultando)
             {
                 Frm_SubCategoriaArticulos frmSubCategoria = new Frm_SubCategoriaArticulos();
                 frmSubCategoria.Owner = this;
@@ -375,7 +378,7 @@ namespace aPrestentationLayer.Inventario
 
         private void LblBuscarImpuesto_Click(object sender, EventArgs e)
         {
-            if (Estado != CONSULTA)
+            if (Estado != Helper.EstadoSystema.Consultando)
             {
                 Frm_Impuestos frmImpuesto = new Frm_Impuestos();
                 frmImpuesto.Owner = this;
