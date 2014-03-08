@@ -18,10 +18,13 @@ namespace aPrestentationLayer.CxC_Ventas
     public partial class Frm_Terminos : Frm_Plantilla
     {
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
 
         bool ActualizarDGV = false;
 
@@ -46,7 +49,8 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -80,7 +84,7 @@ namespace aPrestentationLayer.CxC_Ventas
             enlTermino.Dias = nudDias.Value;
             enlTermino.Nota = txtNota.Text;
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 txtCodigo.Text = bllTerminos.Insert(enlTermino);
 
@@ -92,7 +96,7 @@ namespace aPrestentationLayer.CxC_Ventas
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllTerminos.Update(enlTermino);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -107,7 +111,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnEditar_Click(object sender, EventArgs e)
         {
-            Estado = EDITAR;
+            Estado = Helper.EstadoSystema.Editando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -134,13 +138,13 @@ namespace aPrestentationLayer.CxC_Ventas
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-               if (Estado == "Creando")
+               if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-               if (Estado == "Editando")
+               if (Estado == Helper.EstadoSystema.Editando)
                {
                    enlTermino.Codigo = txtCodigo.Text;
                    enlTermino.Nombre = string.Empty;
@@ -250,7 +254,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void Frm_Terminos_Load(object sender, EventArgs e)
         {
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlTermino.Codigo = string.Empty;
