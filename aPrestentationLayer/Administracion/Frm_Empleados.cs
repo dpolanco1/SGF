@@ -15,10 +15,12 @@ namespace aPrestentationLayer.Administracion
 {
     public partial class Frm_Empleados : Frm_Plantilla
     {
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        //Estados del sistema predefinido
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
         bool ActualizarDGV = false;
 
         AdministrarControles AC = new AdministrarControles();
@@ -42,7 +44,9 @@ namespace aPrestentationLayer.Administracion
         void btnNuevo_Click(object sender, EventArgs e)
         {
 
-            Estado = NUEVO;
+           // Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
+
             if (tabControl1.SelectedTab == tbpDetail)
             {
                 tabControl1.TabPages.Remove(tbpDetail);
@@ -87,7 +91,7 @@ namespace aPrestentationLayer.Administracion
             enlEmpleados.Celular = txtCelular.Text;
          
 
-            if (Estado == "Creando")
+            if (Estado ==  Helper.EstadoSystema.Creando)
             {
                 txtCodigo.Text = bllEmpleados.Insert(enlEmpleados);
 
@@ -98,7 +102,7 @@ namespace aPrestentationLayer.Administracion
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllEmpleados.Update(enlEmpleados);
 
@@ -141,7 +145,7 @@ namespace aPrestentationLayer.Administracion
             if (!string.IsNullOrEmpty(txtCodigo.Text))
             {
                 BotonEditar();
-                Estado = EDITAR;
+                Estado = Helper.EstadoSystema.Editando;
                 txtNombre.Focus();
                 txtCodigo.Enabled = false;
             }
@@ -151,13 +155,13 @@ namespace aPrestentationLayer.Administracion
         void btnCancelar_Click(object sender, EventArgs e)
         {
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 enlEmpleados.Codigo = txtCodigo.Text;
                 enlEmpleados.Nombre = string.Empty;
@@ -241,7 +245,7 @@ namespace aPrestentationLayer.Administracion
         private void Frm_Empleados_Load(object sender, EventArgs e)
         {
 
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlEmpleados.Codigo = string.Empty;
