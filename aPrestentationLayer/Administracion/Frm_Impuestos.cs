@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,10 +17,18 @@ namespace aPrestentationLayer.Administracion
     public partial class Frm_Impuestos : Frm_Plantilla
     {
 
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        enum sys_Estado 
+        {
+            Consultando,
+            Editando,
+            Creando
+        }
+
+        sys_Estado Estado = new sys_Estado();
+       
+        /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
 
         bool ActualizarDGV = false;
 
@@ -46,7 +55,8 @@ namespace aPrestentationLayer.Administracion
    
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+           // Estado = NUEVO;
+            Estado = sys_Estado.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -80,7 +90,7 @@ namespace aPrestentationLayer.Administracion
             enlImpuestos.Porcentaje = nudPorcentaje.Value;
             enlImpuestos.Nota = txtNota.Text;
 
-            if (Estado == "Creando")
+            if (Estado == sys_Estado.Creando)
             {
                 txtCodigo.Text = bllImpuestos.Insert(enlImpuestos);
                
@@ -92,7 +102,7 @@ namespace aPrestentationLayer.Administracion
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == sys_Estado.Editando)
                 {
                     bllImpuestos.Update(enlImpuestos);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -126,7 +136,7 @@ namespace aPrestentationLayer.Administracion
             {
 
                 BotonEditar();
-                Estado = EDITAR;
+                Estado = sys_Estado.Editando;
                 txtNombre.Focus();
                 txtCodigo.Enabled = false;
 
@@ -135,13 +145,13 @@ namespace aPrestentationLayer.Administracion
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == sys_Estado.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == sys_Estado.Editando)
             {
                 enlImpuestos.Codigo = txtCodigo.Text;
                 enlImpuestos.Nombre = string.Empty;
@@ -232,7 +242,7 @@ namespace aPrestentationLayer.Administracion
 
         private void Frm_Impuestos_Load(object sender, EventArgs e)
         {
-            Estado = CONSULTA;
+            Estado = sys_Estado.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlImpuestos.Codigo = string.Empty;
