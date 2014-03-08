@@ -17,14 +17,7 @@ namespace aPrestentationLayer.Administracion
     public partial class Frm_Impuestos : Frm_Plantilla
     {
 
-        enum sys_Estado 
-        {
-            Consultando,
-            Editando,
-            Creando
-        }
-
-        sys_Estado Estado = new sys_Estado();
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
        
         /*const string NUEVO = "Creando";
         const string EDITAR = "Editando";
@@ -56,7 +49,7 @@ namespace aPrestentationLayer.Administracion
         void btnNuevo_Click(object sender, EventArgs e)
         {
            // Estado = NUEVO;
-            Estado = sys_Estado.Creando;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -93,7 +86,7 @@ namespace aPrestentationLayer.Administracion
             //solo si los campos fueron completados dejara guardar.
             if (!string.IsNullOrEmpty(enlImpuestos.Codigo) && !string.IsNullOrEmpty(enlImpuestos.Nombre) && !string.IsNullOrEmpty(enlImpuestos.Porcentaje.ToString()))
             {
-                if (Estado == sys_Estado.Creando)
+                if (Estado == Helper.EstadoSystema.Creando)
                 {
                     txtCodigo.Text = bllImpuestos.Insert(enlImpuestos);
 
@@ -105,7 +98,7 @@ namespace aPrestentationLayer.Administracion
                 }
                 else
                 {
-                    if (Estado == sys_Estado.Editando)
+                    if (Estado == Helper.EstadoSystema.Editando)
                     {
                         bllImpuestos.Update(enlImpuestos);
                         MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -141,7 +134,7 @@ namespace aPrestentationLayer.Administracion
             {
 
                 BotonEditar();
-                Estado = sys_Estado.Editando;
+                Estado = Helper.EstadoSystema.Editando;
                 txtNombre.Focus();
                 txtCodigo.Enabled = false;
 
@@ -150,13 +143,13 @@ namespace aPrestentationLayer.Administracion
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == sys_Estado.Creando)
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == sys_Estado.Editando)
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 enlImpuestos.Codigo = txtCodigo.Text;
                 enlImpuestos.Nombre = string.Empty;
@@ -247,7 +240,7 @@ namespace aPrestentationLayer.Administracion
 
         private void Frm_Impuestos_Load(object sender, EventArgs e)
         {
-            Estado = sys_Estado.Consultando;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlImpuestos.Codigo = string.Empty;
