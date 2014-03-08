@@ -40,6 +40,8 @@
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtDescuento = new System.Windows.Forms.TextBox();
+            this.txtCodigoVendedor = new System.Windows.Forms.TextBox();
             this.txtCodigoCaja = new System.Windows.Forms.TextBox();
             this.txtCodigoTermino = new System.Windows.Forms.TextBox();
             this.txtCodigoALmacen = new System.Windows.Forms.TextBox();
@@ -55,7 +57,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtVendedor = new System.Windows.Forms.TextBox();
             this.txtAlmacen = new System.Windows.Forms.TextBox();
-            this.nudDescuento = new System.Windows.Forms.NumericUpDown();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
             this.txtTerminos = new System.Windows.Forms.TextBox();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
@@ -137,13 +138,11 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtCodigoVendedor = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDescuento)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DetailFactura)).BeginInit();
@@ -211,6 +210,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtDescuento);
             this.groupBox1.Controls.Add(this.txtCodigoVendedor);
             this.groupBox1.Controls.Add(this.txtCodigoCaja);
             this.groupBox1.Controls.Add(this.txtCodigoTermino);
@@ -227,7 +227,6 @@
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtVendedor);
             this.groupBox1.Controls.Add(this.txtAlmacen);
-            this.groupBox1.Controls.Add(this.nudDescuento);
             this.groupBox1.Controls.Add(this.cmbTipo);
             this.groupBox1.Controls.Add(this.txtTerminos);
             this.groupBox1.Controls.Add(this.dtpFecha);
@@ -249,6 +248,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Generales";
+            // 
+            // txtDescuento
+            // 
+            this.txtDescuento.Location = new System.Drawing.Point(424, 112);
+            this.txtDescuento.Name = "txtDescuento";
+            this.txtDescuento.Size = new System.Drawing.Size(146, 20);
+            this.txtDescuento.TabIndex = 33;
+            this.txtDescuento.Text = "0.00%";
+            this.txtDescuento.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDescuento_KeyDown);
+            this.txtDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescuento_KeyPress);
+            this.txtDescuento.Leave += new System.EventHandler(this.txtDescuento_Leave);
+            // 
+            // txtCodigoVendedor
+            // 
+            this.txtCodigoVendedor.Location = new System.Drawing.Point(606, 142);
+            this.txtCodigoVendedor.Name = "txtCodigoVendedor";
+            this.txtCodigoVendedor.ReadOnly = true;
+            this.txtCodigoVendedor.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoVendedor.TabIndex = 32;
+            this.txtCodigoVendedor.Visible = false;
             // 
             // txtCodigoCaja
             // 
@@ -379,13 +398,6 @@
             this.txtAlmacen.ReadOnly = true;
             this.txtAlmacen.Size = new System.Drawing.Size(120, 20);
             this.txtAlmacen.TabIndex = 14;
-            // 
-            // nudDescuento
-            // 
-            this.nudDescuento.Location = new System.Drawing.Point(424, 113);
-            this.nudDescuento.Name = "nudDescuento";
-            this.nudDescuento.Size = new System.Drawing.Size(176, 20);
-            this.nudDescuento.TabIndex = 13;
             // 
             // cmbTipo
             // 
@@ -693,7 +705,7 @@
             this.DGV_DetailFactura.Name = "DGV_DetailFactura";
             this.DGV_DetailFactura.Size = new System.Drawing.Size(762, 153);
             this.DGV_DetailFactura.TabIndex = 0;
-            this.DGV_DetailFactura.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_DetailFactura_RowsAdded_1);
+            this.DGV_DetailFactura.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_DetailFactura_RowsAdded);
             // 
             // ArticuloFactura
             // 
@@ -739,6 +751,7 @@
             this.ImpuestoFacturaGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.ImpuestoFacturaGrid.HeaderText = "Impuesto";
             this.ImpuestoFacturaGrid.Name = "ImpuestoFacturaGrid";
+            this.ImpuestoFacturaGrid.Visible = false;
             // 
             // TotalLineaFacturaGrid
             // 
@@ -746,7 +759,7 @@
             this.TotalLineaFacturaGrid.DataPropertyName = "TotalLinea";
             dataGridViewCellStyle4.Format = "N2";
             this.TotalLineaFacturaGrid.DefaultCellStyle = dataGridViewCellStyle4;
-            this.TotalLineaFacturaGrid.HeaderText = "Total Linea";
+            this.TotalLineaFacturaGrid.HeaderText = "Subtotal";
             this.TotalLineaFacturaGrid.Name = "TotalLineaFacturaGrid";
             this.TotalLineaFacturaGrid.ReadOnly = true;
             // 
@@ -1167,15 +1180,6 @@
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             // 
-            // txtCodigoVendedor
-            // 
-            this.txtCodigoVendedor.Location = new System.Drawing.Point(606, 142);
-            this.txtCodigoVendedor.Name = "txtCodigoVendedor";
-            this.txtCodigoVendedor.ReadOnly = true;
-            this.txtCodigoVendedor.Size = new System.Drawing.Size(57, 20);
-            this.txtCodigoVendedor.TabIndex = 32;
-            this.txtCodigoVendedor.Visible = false;
-            // 
             // Frm_Facturas
             // 
             this.AcceptButton = this.btnAgregar;
@@ -1195,7 +1199,6 @@
             this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDescuento)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1237,7 +1240,6 @@
         private System.Windows.Forms.DataGridView DGV_DetailFactura;
         private System.Windows.Forms.TextBox txtVendedor;
         private System.Windows.Forms.TextBox txtAlmacen;
-        private System.Windows.Forms.NumericUpDown nudDescuento;
         private System.Windows.Forms.ComboBox cmbTipo;
         private System.Windows.Forms.TextBox txtTotalFactura;
         private System.Windows.Forms.TextBox txtTotalDescuento;
@@ -1307,6 +1309,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Articulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.Label lblCantidaArticulos;
+        private System.Windows.Forms.TextBox txtCodigoCaja;
+        private System.Windows.Forms.TextBox txtCodigoTermino;
+        private System.Windows.Forms.TextBox txtCodigoALmacen;
+        private System.Windows.Forms.TextBox txtCodigoVendedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn ArticuloFactura;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescripcionFacturaGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioFacturaGrid;
@@ -1314,10 +1321,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ImpuestoFacturaGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalLineaFacturaGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoFacturaGrid;
-        private System.Windows.Forms.Label lblCantidaArticulos;
-        private System.Windows.Forms.TextBox txtCodigoCaja;
-        private System.Windows.Forms.TextBox txtCodigoTermino;
-        private System.Windows.Forms.TextBox txtCodigoALmacen;
-        private System.Windows.Forms.TextBox txtCodigoVendedor;
+        private System.Windows.Forms.TextBox txtDescuento;
     }
 }

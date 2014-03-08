@@ -139,7 +139,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     txtAlmacen.Text = DGV_Facturas[3, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtTerminos.Text = DGV_Facturas[4, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     cmbTipo.Text = DGV_Facturas[5, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
-                    nudDescuento.Value = Convert.ToDecimal(DGV_Facturas[6, DGV_Facturas.CurrentCell.RowIndex].Value);
+                    txtDescuento.Text = Convert.ToDecimal(DGV_Facturas[6, DGV_Facturas.CurrentCell.RowIndex].Value).ToString();
                     txtVendedor.Text = DGV_Facturas[7, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtCaja.Text = DGV_Facturas[8, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtSubTotal.Text = DGV_Facturas[9, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
@@ -206,7 +206,7 @@ namespace aPrestentationLayer.CxC_Ventas
                         enlFacturaMaster.Almacen = txtCodigoALmacen.Text;
                         enlFacturaMaster.Terminos = txtTerminos.Text;
                         enlFacturaMaster.Tipo = cmbTipo.Text;
-                        enlFacturaMaster.Descuento = nudDescuento.Value;
+                        enlFacturaMaster.Descuento = Convert.ToDecimal(txtDescuento.Text);
                         enlFacturaMaster.Vendedor = txtCodigoVendedor.Text;
                         enlFacturaMaster.Caja = txtCodigoCaja.Text;
                         enlFacturaMaster.Status = "Prueba";
@@ -350,7 +350,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     txtAlmacen.Text = DGV_Facturas[3, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtTerminos.Text = DGV_Facturas[4, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     cmbTipo.Text = DGV_Facturas[5, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
-                    nudDescuento.Value = Convert.ToDecimal(DGV_Facturas[6, DGV_Facturas.CurrentCell.RowIndex].Value);
+                    txtDescuento.Text = DGV_Facturas[6, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtVendedor.Text = DGV_Facturas[7, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtCaja.Text = DGV_Facturas[8, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtSubTotal.Text = DGV_Facturas[9, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
@@ -447,7 +447,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     txtAlmacen.Text = DGV_Facturas[3, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtTerminos.Text = DGV_Facturas[4, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     cmbTipo.Text = DGV_Facturas[5, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
-                    nudDescuento.Value = Convert.ToDecimal(DGV_Facturas[6, DGV_Facturas.CurrentCell.RowIndex].Value);
+                    txtDescuento.Text = DGV_Facturas[6, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtVendedor.Text = DGV_Facturas[7, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtCaja.Text = DGV_Facturas[8, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                     txtSubTotal.Text = DGV_Facturas[9, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
@@ -624,12 +624,12 @@ namespace aPrestentationLayer.CxC_Ventas
                     // Llamamos el impuesto que esta asociado al Articulo
                     if (!String.IsNullOrEmpty(ListaArticulos[0].Impuesto))
                     {
-                        enlImpuestos.Codigo = ListaArticulos[0].Impuesto;
-                        enlImpuestos.Nombre = string.Empty;
-                        var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
+                        //enlImpuestos.Codigo = ListaArticulos[0].Impuesto;
+                        //enlImpuestos.Nombre = string.Empty;
+                        //var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
 
                         //Calculamos el Impuesto 
-                         ValorImpuesto = (ListaImpuesto[0].Porcentaje / 100) * decimal.Parse(txtPrecio.Text);
+                        ValorImpuesto = (Convert.ToDecimal(ListaArticulos[0].Impuesto) / 100) * decimal.Parse(txtPrecio.Text);
                     }
                     else
                     {
@@ -660,6 +660,19 @@ namespace aPrestentationLayer.CxC_Ventas
                 txtCantidad.Text = String.Empty;
 
                 txtArticulo.Focus();
+            }
+        }
+
+        private void DGV_DetailFactura_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            decimal totalLineagrid = 0.00m;
+
+            foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
+            {
+                //esta linea multiplica el precio por la cantidad del item seleccionado y lo agrega al grid
+                totalLineagrid += Convert.ToDecimal(row.Cells["PrecioFacturaGrid"].Value) * Convert.ToInt32(row.Cells["CantidadFacturaGrid"].Value);
+                row.Cells["TotalLineaFacturaGrid"].Value = totalLineagrid;
+                totalLineagrid = 0.00m;
             }
         }
 
@@ -837,32 +850,12 @@ namespace aPrestentationLayer.CxC_Ventas
 
         }
 
-        private void DGV_DetailFactura_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            if (e.RowIndex != 0)
-            {
-                DGV_DetailFactura.Rows[e.RowIndex].Cells["TotalLineaFacturaGrid"].Value = 10;
-            }
-            //DGV_DetailFactura.Rows[].Cells[].Value = 
-
-        }
-
-        private void DGV_DetailFactura_RowsAdded_1(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            decimal totalLineagrid = 0.00m;
-
-            foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
-            {
-                totalLineagrid += Convert.ToDecimal(row.Cells["PrecioFacturaGrid"].Value) * Convert.ToInt32(row.Cells["CantidadFacturaGrid"].Value) + Convert.ToDecimal(row.Cells["ImpuestoFacturaGrid"].Value);
-                row.Cells["TotalLineaFacturaGrid"].Value = totalLineagrid;
-                totalLineagrid = 0.00m;
-            }
-        }
+   
 
         private void ActualizarGrid()
         {
             //Calculamos los valores en el grid y devolvemos los totales
-            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailFactura, nudDescuento.Value / 100, "TotalLineaFacturaGrid", "ImpuestoFacturaGrid"));
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailFactura, Helper.ConvertirANumero(txtDescuento.Text) / 100, "TotalLineaFacturaGrid", "ImpuestoFacturaGrid"));
 
             txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
             txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());
@@ -927,7 +920,39 @@ namespace aPrestentationLayer.CxC_Ventas
             txtVendedor.Text = frmBuscarEmpleados.nombreVendedor;
         }
 
-      
+        private void txtDescuento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //solo numeros
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != 8)
+                e.Handled = true;
+         
+        }
+
+        private void txtDescuento_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtDescuento.Text)) 
+            {
+                txtDescuento.Text = "0.00%";
+            }
+            Helper.ConvertiraPorcentaje(txtDescuento);
+            ActualizarGrid();
+        }
+
+        private void txtDescuento_KeyDown(object sender, KeyEventArgs e)
+        {
+            //esto no quiere funcionar
+            /*if (e.KeyCode == Keys.Enter)//si presiona enter luego de editar entonces actualizame
+            {
+                if (!string.IsNullOrEmpty(txtDescuento.Text))
+                {
+                    Helper.ConvertiraPorcentaje(txtDescuento);
+
+                }
+                ActualizarGrid();
+                txtVendedor.Focus();
+            }*/
+        }
+
     }
 }
 
