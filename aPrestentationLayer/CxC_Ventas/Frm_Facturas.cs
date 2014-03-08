@@ -60,8 +60,11 @@ namespace aPrestentationLayer.CxC_Ventas
         IList<Enl_FacturaDetail> list;
         IList<Enl_CotizacionesMaster> listCotiza;
 
-
+        //esto se utiliza para pasar la lista a los formularios
         IList<Enl_Articulos> listArticulos = new List<Enl_Articulos>();
+        
+        Bll_Clientes bllClientes = new Bll_Clientes();
+        Enl_Clientes enlClientes = new Enl_Clientes();
 
 
         //decimal TotalLineaCompra, linea, cantidad, costo,
@@ -555,12 +558,6 @@ namespace aPrestentationLayer.CxC_Ventas
             }
 
 
-
-
-
-
-
-
         }
 
         private void btnBuscarTerminos_Click(object sender, EventArgs e)
@@ -872,6 +869,21 @@ namespace aPrestentationLayer.CxC_Ventas
             txtTotalDescuento.Text = Helper.ConvertirANumero(valores[2].ToString()).ToString("C2");//Convert.ToString(TotalDescuentoCotizacion.ToString());
             txtTotalFactura.Text = Helper.ConvertirANumero(valores[3].ToString()).ToString("C2");//Convert.ToString(TotalCotizacion.ToString());
         }
+
+        private void btnBuscarClientes_Click(object sender, EventArgs e)
+        {
+            Frm_Buscar_Clientes frmuscarClientes = new Frm_Buscar_Clientes();
+            frmuscarClientes.ShowDialog();
+            frmuscarClientes.Owner = this;
+
+            //obtenemos los valores
+            txtCliente.Text = frmuscarClientes.codigoCliente;
+            txtNombre.Text = frmuscarClientes.mombreCliente;
+              
+          
+        }
+
+      
     }
 }
 

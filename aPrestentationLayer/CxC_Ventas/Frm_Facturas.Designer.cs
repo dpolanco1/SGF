@@ -41,7 +41,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCosto = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.btnBuscarClientes = new System.Windows.Forms.Label();
             this.LblbuscarCaja = new System.Windows.Forms.Label();
             this.lblBuscarTerminos = new System.Windows.Forms.Label();
             this.LblBuscarAlmacen = new System.Windows.Forms.Label();
@@ -134,6 +134,9 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtCodigoALmacen = new System.Windows.Forms.TextBox();
+            this.txtCodigoTermino = new System.Windows.Forms.TextBox();
+            this.txtCodigoCaja = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -207,8 +210,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtCodigoCaja);
+            this.groupBox1.Controls.Add(this.txtCodigoTermino);
+            this.groupBox1.Controls.Add(this.txtCodigoALmacen);
             this.groupBox1.Controls.Add(this.txtCosto);
-            this.groupBox1.Controls.Add(this.label19);
+            this.groupBox1.Controls.Add(this.btnBuscarClientes);
             this.groupBox1.Controls.Add(this.LblbuscarCaja);
             this.groupBox1.Controls.Add(this.lblBuscarTerminos);
             this.groupBox1.Controls.Add(this.LblBuscarAlmacen);
@@ -250,13 +256,14 @@
             this.txtCosto.TabIndex = 28;
             this.txtCosto.Visible = false;
             // 
-            // label19
+            // btnBuscarClientes
             // 
-            this.label19.Image = global::aPrestentationLayer.Properties.Resources.search;
-            this.label19.Location = new System.Drawing.Point(209, 48);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(28, 20);
-            this.label19.TabIndex = 27;
+            this.btnBuscarClientes.Image = global::aPrestentationLayer.Properties.Resources.search;
+            this.btnBuscarClientes.Location = new System.Drawing.Point(209, 48);
+            this.btnBuscarClientes.Name = "btnBuscarClientes";
+            this.btnBuscarClientes.Size = new System.Drawing.Size(28, 20);
+            this.btnBuscarClientes.TabIndex = 27;
+            this.btnBuscarClientes.Click += new System.EventHandler(this.btnBuscarClientes_Click);
             // 
             // LblbuscarCaja
             // 
@@ -294,6 +301,7 @@
             // 
             this.txtCaja.Location = new System.Drawing.Point(424, 84);
             this.txtCaja.Name = "txtCaja";
+            this.txtCaja.ReadOnly = true;
             this.txtCaja.Size = new System.Drawing.Size(146, 20);
             this.txtCaja.TabIndex = 19;
             // 
@@ -327,6 +335,7 @@
             // 
             this.txtVendedor.Location = new System.Drawing.Point(424, 143);
             this.txtVendedor.Name = "txtVendedor";
+            this.txtVendedor.ReadOnly = true;
             this.txtVendedor.Size = new System.Drawing.Size(146, 20);
             this.txtVendedor.TabIndex = 15;
             // 
@@ -334,6 +343,7 @@
             // 
             this.txtAlmacen.Location = new System.Drawing.Point(83, 142);
             this.txtAlmacen.Name = "txtAlmacen";
+            this.txtAlmacen.ReadOnly = true;
             this.txtAlmacen.Size = new System.Drawing.Size(120, 20);
             this.txtAlmacen.TabIndex = 14;
             // 
@@ -361,6 +371,7 @@
             // 
             this.txtTerminos.Location = new System.Drawing.Point(424, 48);
             this.txtTerminos.Name = "txtTerminos";
+            this.txtTerminos.ReadOnly = true;
             this.txtTerminos.Size = new System.Drawing.Size(146, 20);
             this.txtTerminos.TabIndex = 11;
             // 
@@ -386,6 +397,7 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(83, 77);
             this.txtNombre.Name = "txtNombre";
+            this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(217, 20);
             this.txtNombre.TabIndex = 9;
             // 
@@ -402,6 +414,7 @@
             // 
             this.txtCliente.Location = new System.Drawing.Point(83, 48);
             this.txtCliente.Name = "txtCliente";
+            this.txtCliente.ReadOnly = true;
             this.txtCliente.Size = new System.Drawing.Size(120, 20);
             this.txtCliente.TabIndex = 8;
             // 
@@ -1121,6 +1134,33 @@
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             // 
+            // txtCodigoALmacen
+            // 
+            this.txtCodigoALmacen.Location = new System.Drawing.Point(225, 143);
+            this.txtCodigoALmacen.Name = "txtCodigoALmacen";
+            this.txtCodigoALmacen.ReadOnly = true;
+            this.txtCodigoALmacen.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoALmacen.TabIndex = 29;
+            this.txtCodigoALmacen.Visible = false;
+            // 
+            // txtCodigoTermino
+            // 
+            this.txtCodigoTermino.Location = new System.Drawing.Point(606, 48);
+            this.txtCodigoTermino.Name = "txtCodigoTermino";
+            this.txtCodigoTermino.ReadOnly = true;
+            this.txtCodigoTermino.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoTermino.TabIndex = 30;
+            this.txtCodigoTermino.Visible = false;
+            // 
+            // txtCodigoCaja
+            // 
+            this.txtCodigoCaja.Location = new System.Drawing.Point(606, 84);
+            this.txtCodigoCaja.Name = "txtCodigoCaja";
+            this.txtCodigoCaja.ReadOnly = true;
+            this.txtCodigoCaja.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoCaja.TabIndex = 31;
+            this.txtCodigoCaja.Visible = false;
+            // 
             // Frm_Facturas
             // 
             this.AcceptButton = this.btnAgregar;
@@ -1229,7 +1269,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.Label LblBuscarAlmacen;
         private System.Windows.Forms.Label LblBuscarVendedor;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label btnBuscarClientes;
         private System.Windows.Forms.Label LblbuscarCaja;
         private System.Windows.Forms.Label lblBuscarTerminos;
         private System.Windows.Forms.Label label20;
@@ -1260,5 +1300,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalLineaFacturaGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoFacturaGrid;
         private System.Windows.Forms.Label lblCantidaArticulos;
+        private System.Windows.Forms.TextBox txtCodigoCaja;
+        private System.Windows.Forms.TextBox txtCodigoTermino;
+        private System.Windows.Forms.TextBox txtCodigoALmacen;
     }
 }

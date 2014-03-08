@@ -22,7 +22,7 @@ namespace aPrestentationLayer.Comunes
         Enl_Impuestos enlImpuestos = new Enl_Impuestos();
         Bll_Impuestos bllImpuestos = new Bll_Impuestos();
 
-
+        //esto se utiliza para traer la lista desde el formulario padre al hijo y pasarla como variable publica
         public List<Enl_Articulos> ListaArticulos = new List<Enl_Articulos>();
 
         public Frm_Buscar_Articulos()
