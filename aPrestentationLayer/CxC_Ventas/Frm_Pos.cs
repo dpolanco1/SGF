@@ -22,14 +22,17 @@ namespace aPrestentationLayer.CxC_Ventas
     public partial class Frm_Pos : Form
     {
 
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+       /* const string NUEVO = "Creando";
+        const string EDITAR = "Editando";
+        const string CONSULTA = "Consultando";*/
+
         AdministrarControles AC = new AdministrarControles();
 
         bool ActualizarDGV = false;
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
-        const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
-
+        
         IList<Enl_FacturaDetail> list ;
 
         decimal TotalFactura = 0;
@@ -135,7 +138,7 @@ namespace aPrestentationLayer.CxC_Ventas
                 totalLinea = precio * cantidad;
                 costo = Convert.ToDecimal(txtCosto.Text);
 
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
 
 
@@ -185,7 +188,7 @@ namespace aPrestentationLayer.CxC_Ventas
             if (DGV_Factura_Pos.RowCount != 0)
             {
 
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     list.RemoveAt(DGV_Factura_Pos.CurrentRow.Index);
 
@@ -244,7 +247,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
 
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 // Inserto el Header de la Factura
                 txtNoFactura.Text = bllFacturaMaster.Insert(enlFacturaMaster);
@@ -277,7 +280,7 @@ namespace aPrestentationLayer.CxC_Ventas
             }
             else {
 
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllFacturaMaster.Update(enlFacturaMaster);
 
@@ -316,7 +319,7 @@ namespace aPrestentationLayer.CxC_Ventas
             ActualizarDGV = true;
             lblMensaje.Text = "Guardado Correctamente";
             ts.Complete();
-            Estado = "Consultando";
+            Estado = Helper.EstadoSystema.Consultando;
 
                 }
                 catch (Exception x)
@@ -364,7 +367,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
 
 
-                    if (Estado == "Creando")
+                    if (Estado == Helper.EstadoSystema.Creando)
                     {
 
                         txtNoFactura.Text = bllFacturaMaster.Insert(enlFacturaMaster);
@@ -397,7 +400,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     else
                     {
 
-                        if (Estado == "Editando")
+                        if (Estado == Helper.EstadoSystema.Editando)
                         {
                             bllFacturaMaster.Update(enlFacturaMaster);
 
@@ -499,7 +502,7 @@ namespace aPrestentationLayer.CxC_Ventas
             txtBuscarCliente.Enabled = true;
             txtBuscarNoFactura.Enabled = true;
 
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             btnGuardar.Enabled = false;
@@ -526,7 +529,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Estado = EDITAR;
+            Estado = Helper.EstadoSystema.Editando;
   
 
             if (tabControl1.SelectedTab == tbpDetail)
@@ -586,7 +589,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
@@ -600,7 +603,7 @@ namespace aPrestentationLayer.CxC_Ventas
             
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 //enlCategoriaClientes.Codigo = txtCodigo.Text;
                 //enlCategoriaClientes.Nombre = string.Empty;
@@ -647,13 +650,13 @@ namespace aPrestentationLayer.CxC_Ventas
         
 
             AC.DeshabilitarText(this);
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
 
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
 
             if (tabControl1.SelectedTab == tbpDetail)
@@ -878,7 +881,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void Frm_Pos_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 
                 enlFacturaDetail.NoFactura = txtNoFactura.Text;
@@ -897,7 +900,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void lblBuscarArticulo_Click(object sender, EventArgs e)
         {
 
-            if (Estado != "Consultando")
+            if (Estado != Helper.EstadoSystema.Consultando)
             {
                 enlArticulos.Codigo = string.Empty;
                 enlArticulos.Nombre = string.Empty;
