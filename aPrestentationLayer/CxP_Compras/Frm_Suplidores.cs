@@ -16,10 +16,12 @@ namespace aPrestentationLayer.CxP_Compras
 {
     public partial class Frm_Suplidores : Frm_Plantilla, Isuplidores
     {
-        string Estado = string.Empty;
-        const string NUEVO = "Creando";
+        //utilizando los estados predefinidos en la clase Helper
+        Helper.EstadoSystema Estado = new Helper.EstadoSystema();
+
+       /* const string NUEVO = "Creando";
         const string EDITAR = "Editando";
-        const string CONSULTA = "Consultando";
+        const string CONSULTA = "Consultando";*/
         bool ActualizarDGV = false;
 
         AdministrarControles AC = new AdministrarControles();
@@ -45,7 +47,8 @@ namespace aPrestentationLayer.CxP_Compras
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
-            Estado = NUEVO;
+            //Estado = NUEVO;
+            Estado = Helper.EstadoSystema.Creando;
 
             if (tabControl1.SelectedTab == tbpDetail)
             {
@@ -90,7 +93,7 @@ namespace aPrestentationLayer.CxP_Compras
 
 
 
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 txtCodigo.Text = bllSuplidores.Insert(enlSuplidores);
 
@@ -101,7 +104,7 @@ namespace aPrestentationLayer.CxP_Compras
             }
             else
             {
-                if (Estado == "Editando")
+                if (Estado == Helper.EstadoSystema.Editando)
                 {
                     bllSuplidores.Update(enlSuplidores);
                     MessageBox.Show("Registro Actualizado Correctamente", "SGF");
@@ -146,7 +149,7 @@ namespace aPrestentationLayer.CxP_Compras
             {
 
                 BotonEditar();
-                Estado = EDITAR;
+                Estado = Helper.EstadoSystema.Editando;
                 txtRazonSocial.Focus();
                 txtCodigo.Enabled = false;
 
@@ -156,13 +159,13 @@ namespace aPrestentationLayer.CxP_Compras
 
         void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Estado == "Creando")
+            if (Estado == Helper.EstadoSystema.Creando)
             {
                 AC.DeshabilitarText(this);
                 AC.VaciarText(this);
             }
 
-            if (Estado == "Editando")
+            if (Estado == Helper.EstadoSystema.Editando)
             {
                 enlSuplidores.Codigo = txtCodigo.Text;
                 enlSuplidores.RazonSocial = string.Empty;
@@ -235,7 +238,7 @@ namespace aPrestentationLayer.CxP_Compras
 
         private void Frm_Suplidores_Load(object sender, EventArgs e)
         {
-            Estado = CONSULTA;
+            Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 
             enlSuplidores.Codigo = string.Empty;
