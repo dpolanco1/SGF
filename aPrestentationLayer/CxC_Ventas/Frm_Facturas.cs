@@ -171,6 +171,7 @@ namespace aPrestentationLayer.CxC_Ventas
             BotonNuevo();
             // DGV_DetailFactura.Rows.Clear();
             DGV_DetailFactura.DataSource = null;
+            lblCantidaArticulos.Text = "Cantidad : 0";
 
             if (bllNumeracion.ObtenerTipo("Facturas") == "Automatico")
             {
@@ -206,7 +207,7 @@ namespace aPrestentationLayer.CxC_Ventas
                         enlFacturaMaster.Almacen = txtCodigoALmacen.Text;
                         enlFacturaMaster.Terminos = txtTerminos.Text;
                         enlFacturaMaster.Tipo = cmbTipo.Text;
-                        enlFacturaMaster.Descuento = Convert.ToDecimal(txtDescuento.Text);
+                        enlFacturaMaster.Descuento = Convert.ToDecimal(Helper.ConvertirANumero(txtDescuento.Text));
                         enlFacturaMaster.Vendedor = txtCodigoVendedor.Text;
                         enlFacturaMaster.Caja = txtCodigoCaja.Text;
                         enlFacturaMaster.Status = "Prueba";
@@ -814,10 +815,22 @@ namespace aPrestentationLayer.CxC_Ventas
                     {
                         foreach (Enl_Articulos item in frmBuscarArticulos.ListaArticulos)
                         {
-                            this.listArticulos.Add(item);
+                            foreach (DataGridViewRow fila in DGV_DetailFactura.Rows)
+                            {
+                                //si el articulo que selecciono es igual al que esta en el grid sumar la cantidad , actualizar grid y actualizar el totallinea
+                                if (item.Codigo == fila.Cells["ArticuloFactura"].Value.ToString())
+                                {
+                                    fila.Cells["CantidadFacturaGrid"].Value = Convert.ToInt32(fila.Cells["CantidadFacturaGrid"].Value) + 1;
+                                    fila.Cells["TotalLineaFacturaGrid"].Value = Convert.ToInt32(fila.Cells["PrecioFacturaGrid"].Value) * Convert.ToInt32(fila.Cells["CantidadFacturaGrid"].Value);
+                                    ActualizarGrid();
+                                }
+                                else//de lo contrario agregarlo a la lista de articulos
+                                    this.listArticulos.Add(item);
+                            }
+                            
                         }
-                        DGV_DetailFactura.DataSource = null;
-                        DGV_DetailFactura.DataSource = this.listArticulos;
+                        //DGV_DetailFactura.DataSource = null;
+                        //DGV_DetailFactura.DataSource = this.listArticulos;
                         lblCantidaArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailFactura.RowCount);
 
                     }
@@ -855,7 +868,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void ActualizarGrid()
         {
             //Calculamos los valores en el grid y devolvemos los totales
-            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailFactura, Helper.ConvertirANumero(txtDescuento.Text) / 100, "TotalLineaFacturaGrid", "ImpuestoFacturaGrid"));
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailFactura, Helper.ConvertirANumero(txtDescuento.Text) / 100, "TotalLineaFacturaGrid", "ImpuestoFacturaGrid", "CantidadFacturaGrid"));
 
             txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
             txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());

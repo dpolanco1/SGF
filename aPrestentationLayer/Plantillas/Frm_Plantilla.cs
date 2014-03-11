@@ -110,6 +110,7 @@ namespace aPrestentationLayer.Plantillas
             this.btnGuardar.Enabled = false;
 
             AC.DeshabilitarText(this);
+            AC.DeshabilitarDGV(this);
         }
 
         public void BotonEditar()
