@@ -933,14 +933,14 @@
             this.groupBox4.Controls.Add(this.dtpDesde);
             this.groupBox4.Location = new System.Drawing.Point(8, 24);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(867, 60);
+            this.groupBox4.Size = new System.Drawing.Size(792, 60);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Buscar";
             // 
             // btnBuscarDetail
             // 
-            this.btnBuscarDetail.Location = new System.Drawing.Point(723, 32);
+            this.btnBuscarDetail.Location = new System.Drawing.Point(666, 32);
             this.btnBuscarDetail.Name = "btnBuscarDetail";
             this.btnBuscarDetail.Size = new System.Drawing.Size(123, 24);
             this.btnBuscarDetail.TabIndex = 8;
