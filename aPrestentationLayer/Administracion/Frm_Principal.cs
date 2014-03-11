@@ -63,6 +63,7 @@ namespace aPrestentationLayer.Administracion
         Frm_MododePago frmModoPago;
         Frm_Numeracion frmNumeracion;
         Frm_Gastos frmGastos;
+        Frm_Articulos frmArticulos;
 
         public Frm_Principal()
         {
@@ -468,17 +469,17 @@ namespace aPrestentationLayer.Administracion
                     {
 
                         //verificar si fue llamado anteriormente
-                        if (frmCompras == null)
+                        if (frmArticulos == null)
                         {
-                            frmCompras = new Frm_Compras();
-                            frmCompras.MdiParent = this;
-                            frmCompras.FormClosed += new FormClosedEventHandler(frmCompras_FormClosed);
+                            frmArticulos = new Frm_Articulos();
+                            frmArticulos.MdiParent = this;
+                            frmArticulos.FormClosed += new FormClosedEventHandler(frmArticulos_FormClosed);
 
                         }
-                        frmCompras.WindowState = FormWindowState.Normal;
-                        frmCompras.StartPosition = FormStartPosition.CenterScreen;
-                        frmCompras.BringToFront();
-                        frmCompras.Show();
+                        frmArticulos.WindowState = FormWindowState.Normal;
+                        frmArticulos.StartPosition = FormStartPosition.CenterScreen;
+                        frmArticulos.BringToFront();
+                        frmArticulos.Show();
                     }
 
                     if (e.Node.Text == "Tranferencia de Almacenes")
@@ -951,6 +952,11 @@ namespace aPrestentationLayer.Administracion
          {
              frmCategoriaArticulos = null;
          }
+
+          void frmArticulos_FormClosed(object sender, FormClosedEventArgs e)
+          {
+              frmArticulos = null;
+          }
 
           void frmSubCateArtic_FormClosed(object sender, FormClosedEventArgs e)
          {
