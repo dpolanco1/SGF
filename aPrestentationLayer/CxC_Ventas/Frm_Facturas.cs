@@ -698,7 +698,6 @@ namespace aPrestentationLayer.CxC_Ventas
                 }
             }
         
-
         private void btnBuscarDetail_Click(object sender, EventArgs e)
         {
             enlFacturaMaster.Numero = string.Empty;
@@ -726,17 +725,36 @@ namespace aPrestentationLayer.CxC_Ventas
 
                 listCotiza = frmBuscarCotizaciones.ListaCotizaciones;
 
-                if (listCotiza.Count != 0)
+                if (frmBuscarCotizaciones.ShowDialog() == DialogResult.OK)
                 {
-                    DGV_Cotizaciones.DataSource = listCotiza;
-
-                    for (int a = 0; a < DGV_Cotizaciones.RowCount; a++)
+                    if (listCotiza.Count != 0)
                     {
-                        enlCotizacionDetail.NoCotizacion = DGV_Cotizaciones[0, a].Value.ToString();
-                        DGV_DetailFactura.DataSource = bllCotizacionDetail.Search(enlCotizacionDetail);
+                       if (DGV_Cotizaciones.RowCount == 0)
+                        {
+                            DGV_Cotizaciones.DataSource = frmBuscarCotizaciones.ListaCotizaciones;
+                        }
+                        else if (frmBuscarCotizaciones.ListaCotizaciones.Count != 0)
+                        {
+                            foreach (Enl_CotizacionesMaster item in frmBuscarCotizaciones.ListaCotizaciones)
+                            {
+
+                               // this.listCotiza.Add(item);
+                            }
+
+                            DGV_Cotizaciones.DataSource = null;
+                            DGV_Cotizaciones.DataSource = this.listCotiza;
+
+                        }
+
+
+                        //for (int a = 0; a < DGV_Cotizaciones.RowCount; a++)
+                        //    {
+                        //        enlCotizacionDetail.NoCotizacion = DGV_Cotizaciones[0, a].Value.ToString();
+                        //        DGV_DetailFactura.DataSource = bllCotizacionDetail.Search(enlCotizacionDetail);
+                        //    }
+
                     }
                 }
-
             }
             else
             {
@@ -862,8 +880,6 @@ namespace aPrestentationLayer.CxC_Ventas
             // Helper.CalcularGrid(DGV_DetailFactura, nudDescuento.Value / 100);
 
         }
-
-   
 
         private void ActualizarGrid()
         {
