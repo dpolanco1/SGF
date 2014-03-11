@@ -71,10 +71,7 @@ namespace aPrestentationLayer.Administracion
             Enl_DatosDeSession.Pais = enlCompania.Pais;
             Enl_DatosDeSession.Contacto = enlCompania.Contacto;
            
-
-
             Close();
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
