@@ -23,12 +23,10 @@ namespace aPrestentationLayer.Administracion
             InitializeComponent();
         }
 
-
         private void Frm_Compania_Load(object sender, EventArgs e)
         {
             var list = bllCompania.Search(enlCompania);
-
-
+            
             if (list.Count != 0)
             {
 
