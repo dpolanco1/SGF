@@ -197,7 +197,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
                         BotonGuardar();
                         ActualizarDGV = true;
-                        Estado = CONSULTA;
+                        Estado = Helper.EstadoSystema.Consultando;
                         DGV_DetailCotizaciones.ReadOnly = true;
                         ts.Complete();
                         MessageBox.Show("Registro Guardado Correctamente", "SGF");
@@ -526,7 +526,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void ActualizarGrid ()
         {
             //Calculamos los valores en el grid y devolvemos los totales
-            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100, "TotalLineaCotizaciong", "ImpuestoCotizacion"));
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100, "TotalLineaCotizaciong", "ImpuestoCotizacion", "CantidadCotizacion"));
 
             txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
             txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());
@@ -625,7 +625,7 @@ namespace aPrestentationLayer.CxC_Ventas
             #endregion
 
             //Calculamos los valores en el grid y devolvemos los totales
-            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100, "TotalLineaCotizaciong", "ImpuestoCotizacion"));
+            ArrayList valores = new ArrayList(Helper.CalcularGrid(DGV_DetailCotizaciones, nudDescuento.Value / 100, "TotalLineaCotizaciong", "ImpuestoCotizacion", "CantidadCotizacion"));
 
             txtSubTotal.Text = Helper.ConvertirANumero(valores[0].ToString()).ToString("C2");//Convert.ToString(SubTotalCotizacion.ToString());
             txtTotalImpuesto.Text = Helper.ConvertirANumero(valores[1].ToString()).ToString("C2");// Convert.ToString(TotalImpuestoCotizacion.ToString());

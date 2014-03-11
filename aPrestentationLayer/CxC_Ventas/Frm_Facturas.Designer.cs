@@ -40,8 +40,13 @@
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtDescuento = new System.Windows.Forms.TextBox();
+            this.txtCodigoVendedor = new System.Windows.Forms.TextBox();
+            this.txtCodigoCaja = new System.Windows.Forms.TextBox();
+            this.txtCodigoTermino = new System.Windows.Forms.TextBox();
+            this.txtCodigoALmacen = new System.Windows.Forms.TextBox();
             this.txtCosto = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.btnBuscarClientes = new System.Windows.Forms.Label();
             this.LblbuscarCaja = new System.Windows.Forms.Label();
             this.lblBuscarTerminos = new System.Windows.Forms.Label();
             this.LblBuscarAlmacen = new System.Windows.Forms.Label();
@@ -52,7 +57,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtVendedor = new System.Windows.Forms.TextBox();
             this.txtAlmacen = new System.Windows.Forms.TextBox();
-            this.nudDescuento = new System.Windows.Forms.NumericUpDown();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
             this.txtTerminos = new System.Windows.Forms.TextBox();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
@@ -139,7 +143,6 @@
             this.tabControl2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDescuento)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DetailFactura)).BeginInit();
@@ -207,8 +210,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtDescuento);
+            this.groupBox1.Controls.Add(this.txtCodigoVendedor);
+            this.groupBox1.Controls.Add(this.txtCodigoCaja);
+            this.groupBox1.Controls.Add(this.txtCodigoTermino);
+            this.groupBox1.Controls.Add(this.txtCodigoALmacen);
             this.groupBox1.Controls.Add(this.txtCosto);
-            this.groupBox1.Controls.Add(this.label19);
+            this.groupBox1.Controls.Add(this.btnBuscarClientes);
             this.groupBox1.Controls.Add(this.LblbuscarCaja);
             this.groupBox1.Controls.Add(this.lblBuscarTerminos);
             this.groupBox1.Controls.Add(this.LblBuscarAlmacen);
@@ -219,7 +227,6 @@
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtVendedor);
             this.groupBox1.Controls.Add(this.txtAlmacen);
-            this.groupBox1.Controls.Add(this.nudDescuento);
             this.groupBox1.Controls.Add(this.cmbTipo);
             this.groupBox1.Controls.Add(this.txtTerminos);
             this.groupBox1.Controls.Add(this.dtpFecha);
@@ -242,6 +249,53 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Generales";
             // 
+            // txtDescuento
+            // 
+            this.txtDescuento.Location = new System.Drawing.Point(424, 112);
+            this.txtDescuento.Name = "txtDescuento";
+            this.txtDescuento.Size = new System.Drawing.Size(146, 20);
+            this.txtDescuento.TabIndex = 33;
+            this.txtDescuento.Text = "0.00%";
+            this.txtDescuento.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDescuento_KeyDown);
+            this.txtDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescuento_KeyPress);
+            this.txtDescuento.Leave += new System.EventHandler(this.txtDescuento_Leave);
+            // 
+            // txtCodigoVendedor
+            // 
+            this.txtCodigoVendedor.Location = new System.Drawing.Point(606, 142);
+            this.txtCodigoVendedor.Name = "txtCodigoVendedor";
+            this.txtCodigoVendedor.ReadOnly = true;
+            this.txtCodigoVendedor.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoVendedor.TabIndex = 32;
+            this.txtCodigoVendedor.Visible = false;
+            // 
+            // txtCodigoCaja
+            // 
+            this.txtCodigoCaja.Location = new System.Drawing.Point(606, 84);
+            this.txtCodigoCaja.Name = "txtCodigoCaja";
+            this.txtCodigoCaja.ReadOnly = true;
+            this.txtCodigoCaja.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoCaja.TabIndex = 31;
+            this.txtCodigoCaja.Visible = false;
+            // 
+            // txtCodigoTermino
+            // 
+            this.txtCodigoTermino.Location = new System.Drawing.Point(606, 48);
+            this.txtCodigoTermino.Name = "txtCodigoTermino";
+            this.txtCodigoTermino.ReadOnly = true;
+            this.txtCodigoTermino.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoTermino.TabIndex = 30;
+            this.txtCodigoTermino.Visible = false;
+            // 
+            // txtCodigoALmacen
+            // 
+            this.txtCodigoALmacen.Location = new System.Drawing.Point(225, 143);
+            this.txtCodigoALmacen.Name = "txtCodigoALmacen";
+            this.txtCodigoALmacen.ReadOnly = true;
+            this.txtCodigoALmacen.Size = new System.Drawing.Size(57, 20);
+            this.txtCodigoALmacen.TabIndex = 29;
+            this.txtCodigoALmacen.Visible = false;
+            // 
             // txtCosto
             // 
             this.txtCosto.Location = new System.Drawing.Point(724, 189);
@@ -250,13 +304,14 @@
             this.txtCosto.TabIndex = 28;
             this.txtCosto.Visible = false;
             // 
-            // label19
+            // btnBuscarClientes
             // 
-            this.label19.Image = global::aPrestentationLayer.Properties.Resources.search;
-            this.label19.Location = new System.Drawing.Point(209, 48);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(28, 20);
-            this.label19.TabIndex = 27;
+            this.btnBuscarClientes.Image = global::aPrestentationLayer.Properties.Resources.search;
+            this.btnBuscarClientes.Location = new System.Drawing.Point(209, 48);
+            this.btnBuscarClientes.Name = "btnBuscarClientes";
+            this.btnBuscarClientes.Size = new System.Drawing.Size(28, 20);
+            this.btnBuscarClientes.TabIndex = 27;
+            this.btnBuscarClientes.Click += new System.EventHandler(this.btnBuscarClientes_Click);
             // 
             // LblbuscarCaja
             // 
@@ -265,6 +320,7 @@
             this.LblbuscarCaja.Name = "LblbuscarCaja";
             this.LblbuscarCaja.Size = new System.Drawing.Size(23, 20);
             this.LblbuscarCaja.TabIndex = 26;
+            this.LblbuscarCaja.Click += new System.EventHandler(this.LblbuscarCaja_Click);
             // 
             // lblBuscarTerminos
             // 
@@ -273,6 +329,7 @@
             this.lblBuscarTerminos.Name = "lblBuscarTerminos";
             this.lblBuscarTerminos.Size = new System.Drawing.Size(23, 20);
             this.lblBuscarTerminos.TabIndex = 25;
+            this.lblBuscarTerminos.Click += new System.EventHandler(this.lblBuscarTerminos_Click);
             // 
             // LblBuscarAlmacen
             // 
@@ -281,6 +338,7 @@
             this.LblBuscarAlmacen.Name = "LblBuscarAlmacen";
             this.LblBuscarAlmacen.Size = new System.Drawing.Size(23, 20);
             this.LblBuscarAlmacen.TabIndex = 24;
+            this.LblBuscarAlmacen.Click += new System.EventHandler(this.LblBuscarAlmacen_Click);
             // 
             // LblBuscarVendedor
             // 
@@ -289,11 +347,13 @@
             this.LblBuscarVendedor.Name = "LblBuscarVendedor";
             this.LblBuscarVendedor.Size = new System.Drawing.Size(23, 20);
             this.LblBuscarVendedor.TabIndex = 23;
+            this.LblBuscarVendedor.Click += new System.EventHandler(this.LblBuscarVendedor_Click);
             // 
             // txtCaja
             // 
             this.txtCaja.Location = new System.Drawing.Point(424, 84);
             this.txtCaja.Name = "txtCaja";
+            this.txtCaja.ReadOnly = true;
             this.txtCaja.Size = new System.Drawing.Size(146, 20);
             this.txtCaja.TabIndex = 19;
             // 
@@ -327,6 +387,7 @@
             // 
             this.txtVendedor.Location = new System.Drawing.Point(424, 143);
             this.txtVendedor.Name = "txtVendedor";
+            this.txtVendedor.ReadOnly = true;
             this.txtVendedor.Size = new System.Drawing.Size(146, 20);
             this.txtVendedor.TabIndex = 15;
             // 
@@ -334,15 +395,9 @@
             // 
             this.txtAlmacen.Location = new System.Drawing.Point(83, 142);
             this.txtAlmacen.Name = "txtAlmacen";
+            this.txtAlmacen.ReadOnly = true;
             this.txtAlmacen.Size = new System.Drawing.Size(120, 20);
             this.txtAlmacen.TabIndex = 14;
-            // 
-            // nudDescuento
-            // 
-            this.nudDescuento.Location = new System.Drawing.Point(424, 113);
-            this.nudDescuento.Name = "nudDescuento";
-            this.nudDescuento.Size = new System.Drawing.Size(176, 20);
-            this.nudDescuento.TabIndex = 13;
             // 
             // cmbTipo
             // 
@@ -361,6 +416,7 @@
             // 
             this.txtTerminos.Location = new System.Drawing.Point(424, 48);
             this.txtTerminos.Name = "txtTerminos";
+            this.txtTerminos.ReadOnly = true;
             this.txtTerminos.Size = new System.Drawing.Size(146, 20);
             this.txtTerminos.TabIndex = 11;
             // 
@@ -386,6 +442,7 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(83, 77);
             this.txtNombre.Name = "txtNombre";
+            this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(217, 20);
             this.txtNombre.TabIndex = 9;
             // 
@@ -402,6 +459,7 @@
             // 
             this.txtCliente.Location = new System.Drawing.Point(83, 48);
             this.txtCliente.Name = "txtCliente";
+            this.txtCliente.ReadOnly = true;
             this.txtCliente.Size = new System.Drawing.Size(120, 20);
             this.txtCliente.TabIndex = 8;
             // 
@@ -647,7 +705,7 @@
             this.DGV_DetailFactura.Name = "DGV_DetailFactura";
             this.DGV_DetailFactura.Size = new System.Drawing.Size(762, 153);
             this.DGV_DetailFactura.TabIndex = 0;
-            this.DGV_DetailFactura.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_DetailFactura_RowsAdded_1);
+            this.DGV_DetailFactura.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_DetailFactura_RowsAdded);
             // 
             // ArticuloFactura
             // 
@@ -693,6 +751,7 @@
             this.ImpuestoFacturaGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.ImpuestoFacturaGrid.HeaderText = "Impuesto";
             this.ImpuestoFacturaGrid.Name = "ImpuestoFacturaGrid";
+            this.ImpuestoFacturaGrid.Visible = false;
             // 
             // TotalLineaFacturaGrid
             // 
@@ -700,7 +759,7 @@
             this.TotalLineaFacturaGrid.DataPropertyName = "TotalLinea";
             dataGridViewCellStyle4.Format = "N2";
             this.TotalLineaFacturaGrid.DefaultCellStyle = dataGridViewCellStyle4;
-            this.TotalLineaFacturaGrid.HeaderText = "Total Linea";
+            this.TotalLineaFacturaGrid.HeaderText = "Subtotal";
             this.TotalLineaFacturaGrid.Name = "TotalLineaFacturaGrid";
             this.TotalLineaFacturaGrid.ReadOnly = true;
             // 
@@ -874,14 +933,14 @@
             this.groupBox4.Controls.Add(this.dtpDesde);
             this.groupBox4.Location = new System.Drawing.Point(8, 24);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(867, 60);
+            this.groupBox4.Size = new System.Drawing.Size(792, 60);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Buscar";
             // 
             // btnBuscarDetail
             // 
-            this.btnBuscarDetail.Location = new System.Drawing.Point(723, 32);
+            this.btnBuscarDetail.Location = new System.Drawing.Point(666, 32);
             this.btnBuscarDetail.Name = "btnBuscarDetail";
             this.btnBuscarDetail.Size = new System.Drawing.Size(123, 24);
             this.btnBuscarDetail.TabIndex = 8;
@@ -1140,7 +1199,6 @@
             this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDescuento)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1182,7 +1240,6 @@
         private System.Windows.Forms.DataGridView DGV_DetailFactura;
         private System.Windows.Forms.TextBox txtVendedor;
         private System.Windows.Forms.TextBox txtAlmacen;
-        private System.Windows.Forms.NumericUpDown nudDescuento;
         private System.Windows.Forms.ComboBox cmbTipo;
         private System.Windows.Forms.TextBox txtTotalFactura;
         private System.Windows.Forms.TextBox txtTotalDescuento;
@@ -1229,7 +1286,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.Label LblBuscarAlmacen;
         private System.Windows.Forms.Label LblBuscarVendedor;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label btnBuscarClientes;
         private System.Windows.Forms.Label LblbuscarCaja;
         private System.Windows.Forms.Label lblBuscarTerminos;
         private System.Windows.Forms.Label label20;
@@ -1252,6 +1309,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Articulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.Label lblCantidaArticulos;
+        private System.Windows.Forms.TextBox txtCodigoCaja;
+        private System.Windows.Forms.TextBox txtCodigoTermino;
+        private System.Windows.Forms.TextBox txtCodigoALmacen;
+        private System.Windows.Forms.TextBox txtCodigoVendedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn ArticuloFactura;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescripcionFacturaGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioFacturaGrid;
@@ -1259,6 +1321,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ImpuestoFacturaGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalLineaFacturaGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoFacturaGrid;
-        private System.Windows.Forms.Label lblCantidaArticulos;
+        private System.Windows.Forms.TextBox txtDescuento;
     }
 }

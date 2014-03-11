@@ -10,7 +10,7 @@ namespace BusinessLogicLayer.Otros
 {
     public class Helper
     {
-        public static ArrayList CalcularGrid(DataGridView gridView, decimal descuento, string nombreTotalLinea, string nombreImpuestoLinea)
+        public static ArrayList CalcularGrid(DataGridView gridView, decimal descuento, string nombreTotalLinea, string nombreImpuestoLinea, string nombreCantidadLinea)
         {
             decimal subTotal;
             decimal totalDescuento;
@@ -26,7 +26,7 @@ namespace BusinessLogicLayer.Otros
                 try
                 {
                     totalLinea += Convert.ToDecimal(row.Cells[nombreTotalLinea].Value);
-                    totalImpuesto += Convert.ToDecimal(row.Cells[nombreImpuestoLinea].Value);
+                    totalImpuesto += Convert.ToDecimal(row.Cells[nombreImpuestoLinea].Value) * Convert.ToDecimal(row.Cells[nombreCantidadLinea].Value);
                 }
                 catch (Exception)
                 {
@@ -36,7 +36,7 @@ namespace BusinessLogicLayer.Otros
             
             }
             //Subtotal
-            valores.Add(subTotal = totalLinea - totalImpuesto);
+            valores.Add(subTotal = totalLinea);
             //Impuesto
             valores.Add(totalImpuesto);
             //TotalDescuento
@@ -48,23 +48,31 @@ namespace BusinessLogicLayer.Otros
 
         }
 
-        public static decimal ConvertirANumero(string Valor)
+        public static decimal ConvertirANumero(string valor)
         {
             decimal _valorNew = 0.00m;
 
             while (true)
             {
-                if (Valor.Contains("RD$") == true)
+                if (valor.Contains("RD$") == true)
                 {
-                    _valorNew = Convert.ToDecimal(Valor.Replace("RD$", ""));
+                    _valorNew = Convert.ToDecimal(valor.Replace("RD$", ""));
                 }
-                else if (Valor.Contains(",") == true)
+                else if (valor.Contains(",") == true)
                 {
-                    _valorNew = Convert.ToDecimal(Valor.Replace("RD$", ""));
+                    _valorNew = Convert.ToDecimal(valor.Replace("RD$", ""));
+                }
+                else if (valor.Contains("%") == true) 
+                {
+                    _valorNew = Convert.ToDecimal(valor.Replace("%", ""));
+                }
+                else if (string.IsNullOrEmpty(valor))
+                {
+                    _valorNew = 0.00m;
                 }
                 else
                 {
-                    _valorNew = Convert.ToDecimal(Valor);
+                    _valorNew = Convert.ToDecimal(valor);
                 }
                 return _valorNew;
             }
@@ -76,6 +84,15 @@ namespace BusinessLogicLayer.Otros
             Consultando,
             Editando,
             Creando
+        }
+
+        public static void ConvertiraPorcentaje(TextBox text)
+        {
+            Double value;
+            if (Double.TryParse(text.Text, out value))
+                text.Text = String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:P02}", value / 100);
+            /*  else if(
+                  text.Text = String.Empty;*/
         }
     }
 }

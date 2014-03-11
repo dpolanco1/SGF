@@ -31,12 +31,16 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.DGV_Articulos = new System.Windows.Forms.DataGridView();
+            this.DGV_Terminos = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Articulos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Terminos)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -63,23 +67,31 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.DGV_Articulos);
+            this.groupBox2.Controls.Add(this.DGV_Terminos);
             this.groupBox2.Location = new System.Drawing.Point(14, 83);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(461, 189);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
-            // DGV_Articulos
+            // DGV_Terminos
             // 
-            this.DGV_Articulos.AllowUserToAddRows = false;
-            this.DGV_Articulos.AllowUserToDeleteRows = false;
-            this.DGV_Articulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_Articulos.Location = new System.Drawing.Point(16, 19);
-            this.DGV_Articulos.Name = "DGV_Articulos";
-            this.DGV_Articulos.ReadOnly = true;
-            this.DGV_Articulos.Size = new System.Drawing.Size(430, 164);
-            this.DGV_Articulos.TabIndex = 0;
+            this.DGV_Terminos.AllowUserToAddRows = false;
+            this.DGV_Terminos.AllowUserToDeleteRows = false;
+            this.DGV_Terminos.AllowUserToOrderColumns = true;
+            this.DGV_Terminos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Terminos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Codigo,
+            this.Nombre,
+            this.Dias,
+            this.Nota});
+            this.DGV_Terminos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGV_Terminos.Location = new System.Drawing.Point(3, 16);
+            this.DGV_Terminos.Name = "DGV_Terminos";
+            this.DGV_Terminos.ReadOnly = true;
+            this.DGV_Terminos.Size = new System.Drawing.Size(455, 170);
+            this.DGV_Terminos.TabIndex = 0;
+            this.DGV_Terminos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Terminos_CellContentClick);
             // 
             // groupBox1
             // 
@@ -90,6 +102,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
             // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "Codigo";
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Dias
+            // 
+            this.Dias.DataPropertyName = "Dias";
+            this.Dias.HeaderText = "Dias";
+            this.Dias.Name = "Dias";
+            this.Dias.ReadOnly = true;
+            // 
+            // Nota
+            // 
+            this.Nota.DataPropertyName = "Nota";
+            this.Nota.HeaderText = "Nota";
+            this.Nota.Name = "Nota";
+            this.Nota.ReadOnly = true;
+            // 
             // Frm_Buscar_Terminos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -98,10 +138,11 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Frm_Buscar_Terminos";
             this.Text = "Frm_Buscar_Terminos";
+            this.Load += new System.EventHandler(this.Frm_Buscar_Terminos_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Articulos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Terminos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -111,7 +152,11 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView DGV_Articulos;
+        private System.Windows.Forms.DataGridView DGV_Terminos;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dias;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nota;
     }
 }

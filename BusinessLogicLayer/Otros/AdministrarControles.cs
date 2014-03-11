@@ -33,9 +33,16 @@ namespace BusinessLogicLayer.Otros
             {
                 if (contHijo.HasChildren) this.HabilitarText(contHijo);
                 if (contHijo is TextBox)
-                {
+
                     contHijo.Enabled = true;
-                }
+
+                else if (contHijo is DateTimePicker)
+
+                    contHijo.Enabled = true;
+
+                else if (contHijo is ComboBox)
+
+                    contHijo.Enabled = true;
             }
         }
 
@@ -46,9 +53,16 @@ namespace BusinessLogicLayer.Otros
             {
                 if (contHijo.HasChildren) this.DeshabilitarText(contHijo);
                 if (contHijo is TextBox)
-                {
+
                     contHijo.Enabled = false;
-                }
+
+                else if (contHijo is DateTimePicker)
+                    
+                    contHijo.Enabled = false;
+
+                else if (contHijo is ComboBox)
+
+                    contHijo.Enabled = false;
             }
         }
 

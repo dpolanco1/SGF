@@ -22,7 +22,7 @@ namespace aPrestentationLayer.Comunes
         Enl_Impuestos enlImpuestos = new Enl_Impuestos();
         Bll_Impuestos bllImpuestos = new Bll_Impuestos();
 
-
+        //esto se utiliza para traer la lista desde el formulario padre al hijo y pasarla como variable publica
         public List<Enl_Articulos> ListaArticulos = new List<Enl_Articulos>();
 
         public Frm_Buscar_Articulos()
@@ -63,12 +63,12 @@ namespace aPrestentationLayer.Comunes
                         // Llamamos el impuesto que esta asociado al Articulo
                         if (!String.IsNullOrEmpty(ListaArticulos2[0].Impuesto))
                         {
-                            enlImpuestos.Codigo = ListaArticulos2[0].Impuesto;
+                            /*enlImpuestos.Codigo = ListaArticulos2[0].Impuesto;
                             enlImpuestos.Nombre = string.Empty;
-                            var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
+                            var ListaImpuesto = bllImpuestos.Search(enlImpuestos);*/
 
                             //Calculamos el Impuesto 
-                            ValorImpuesto = (ListaImpuesto[0].Porcentaje / 100) * ListaArticulos2[0].Precio;
+                            ValorImpuesto = (Convert.ToDecimal(ListaArticulos2[0].Impuesto) / 100) * ListaArticulos2[0].Precio;
                         }
                         else
                         {
