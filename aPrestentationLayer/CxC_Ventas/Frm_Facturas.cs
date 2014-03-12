@@ -671,7 +671,7 @@ namespace aPrestentationLayer.CxC_Ventas
             foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
             {
                 //esta linea multiplica el precio por la cantidad del item seleccionado y lo agrega al grid
-                totalLineagrid += Convert.ToDecimal(row.Cells["PrecioFacturaGrid"].Value) * Convert.ToInt32(row.Cells["CantidadFacturaGrid"].Value);
+                totalLineagrid += (Convert.ToDecimal(row.Cells["PrecioFacturaGrid"].Value) * Convert.ToInt32(row.Cells["CantidadFacturaGrid"].Value));// + Convert.ToDecimal(row.Cells["ImpuestoFacturaGrid"].Value);
                 row.Cells["TotalLineaFacturaGrid"].Value = totalLineagrid;
                 totalLineagrid = 0.00m;
             }
@@ -847,8 +847,8 @@ namespace aPrestentationLayer.CxC_Ventas
                             }
                             
                         }
-                        //DGV_DetailFactura.DataSource = null;
-                        //DGV_DetailFactura.DataSource = this.listArticulos;
+                        DGV_DetailFactura.DataSource = null;
+                        DGV_DetailFactura.DataSource = this.listArticulos;
                         lblCantidaArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailFactura.RowCount);
 
                     }
@@ -877,7 +877,7 @@ namespace aPrestentationLayer.CxC_Ventas
         private void DGV_DetailFactura_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
 
-            // Helper.CalcularGrid(DGV_DetailFactura, nudDescuento.Value / 100);
+            //Helper.CalcularGrid(DGV_DetailFactura, Convert.ToDecimal(txtTotalDescuento.Text), "FacturaTotalLineaGrid", "FacturaTotalImpuestoGrid", "CantidadFacturaGrid");
 
         }
 
@@ -980,6 +980,11 @@ namespace aPrestentationLayer.CxC_Ventas
                 ActualizarGrid();
                 txtVendedor.Focus();
             }*/
+        }
+
+        private void DGV_DetailFactura_CellEndEdit_1(object sender, DataGridViewCellEventArgs e)
+        {
+            ActualizarGrid();
         }
 
     }
