@@ -666,6 +666,12 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void DGV_DetailFactura_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+            //se calcula el precio por la cantidad y se actualiza.
+            CalcularTotalLinea();
+        }
+
+        private void CalcularTotalLinea() 
+        {
             decimal totalLineagrid = 0.00m;
 
             foreach (DataGridViewRow row in DGV_DetailFactura.Rows)
@@ -876,7 +882,9 @@ namespace aPrestentationLayer.CxC_Ventas
 
         private void DGV_DetailFactura_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-
+             //se calcula el precio por la cantidad y se actualiza.
+            CalcularTotalLinea();
+            ActualizarGrid();
             //Helper.CalcularGrid(DGV_DetailFactura, Convert.ToDecimal(txtTotalDescuento.Text), "FacturaTotalLineaGrid", "FacturaTotalImpuestoGrid", "CantidadFacturaGrid");
 
         }
@@ -985,6 +993,29 @@ namespace aPrestentationLayer.CxC_Ventas
         private void DGV_DetailFactura_CellEndEdit_1(object sender, DataGridViewCellEventArgs e)
         {
             ActualizarGrid();
+        }
+
+        private void DGV_DetailFactura_EditingControlShowing_1(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnaPrecioCantidad_KeyPress);
+            if (DGV_DetailFactura.CurrentCell.ColumnIndex == 3 || DGV_DetailFactura.CurrentCell.ColumnIndex == 2) //Cantidad o Precio
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(ColumnaPrecioCantidad_KeyPress);
+                }
+            }
+        }
+
+        private void ColumnaPrecioCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //si es un digito pasar.
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
     }
