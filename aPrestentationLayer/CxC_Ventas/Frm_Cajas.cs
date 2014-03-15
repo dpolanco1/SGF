@@ -45,8 +45,6 @@ namespace aPrestentationLayer.CxC_Ventas
            
         }
 
-
-
         void btnNuevo_Click(object sender, EventArgs e)
         {
             //Estado = NUEVO;
