@@ -63,12 +63,17 @@ namespace aPrestentationLayer.Comunes
                         // Llamamos el impuesto que esta asociado al Articulo
                         if (!String.IsNullOrEmpty(ListaArticulos2[0].Impuesto))
                         {
-                            enlImpuestos.Codigo = ListaArticulos2[0].Impuesto;
-                            enlImpuestos.Nombre = string.Empty;
-                            var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
+                            /*se esta calculando dos veces la misma cosa aqui, 
+                            ya en la lista de articulos viene el impuesto n0 hay que buscarlo de nuevo, 
+                            por eso comento el codigo s*/
 
+
+                           /* enlImpuestos.Codigo = ListaArticulos2[0].Impuesto;
+                            enlImpuestos.Nombre = string.Empty;
+                            var ListaImpuesto = bllImpuestos.Search(enlImpuestos);*/ 
+                            
                             //Calculamos el Impuesto 
-                            ValorImpuesto = (Convert.ToDecimal(ListaImpuesto[0].Porcentaje) / 100) * ListaArticulos2[0].Precio;
+                            ValorImpuesto = (Convert.ToDecimal(ListaArticulos2[0].Impuesto) / 100) * ListaArticulos2[0].Precio;
                         }
                         else
                         {
