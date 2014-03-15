@@ -13,6 +13,7 @@ using BusinessLogicLayer.Administracion;
 using BusinessLogicLayer.Otros;
 
 
+
 namespace aPrestentationLayer.CxC_Ventas
 {
     public partial class Frm_Clientes : Frm_Plantilla, ImaestraCliente
@@ -262,12 +263,12 @@ namespace aPrestentationLayer.CxC_Ventas
             }
 
             enlClientes.Codigo = txtCodigo.Text;
-            bllClientes.Delete(enlClientes);
 
-            BotonEliminar();
-
-            ActualizarDGV = true;
-
+            if (bllClientes.Delete(enlClientes))
+            {
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
           
         }
 

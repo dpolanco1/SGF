@@ -229,11 +229,12 @@ namespace aPrestentationLayer.CxP_Compras
             }
 
             enlSuplidores.Codigo = txtCodigo.Text;
-            bllSuplidores.Delete(enlSuplidores);
 
-            BotonEliminar();
-
-            ActualizarDGV = true;
+            if (bllSuplidores.Delete(enlSuplidores))
+            {
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
         }
 
         private void Frm_Suplidores_Load(object sender, EventArgs e)

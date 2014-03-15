@@ -181,16 +181,13 @@ namespace aPrestentationLayer.Inventario
 
 
             enlSubCategoriaArticulos.Codigo = txtCodigo.Text;
-            bllSubCategoriaArticulos.Delete(enlSubCategoriaArticulos);
 
+            if (bllSubCategoriaArticulos.Delete(enlSubCategoriaArticulos))
+            {
 
-            BotonEliminar();
-
-            ActualizarDGV = true;
-            //Limpiar Textox
-
-            //Vaciar TexBox
-
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
         }
 
         void btnVista_Click(object sender, EventArgs e)

@@ -745,15 +745,15 @@ namespace aPrestentationLayer.CxC_Ventas
 
 
 
-                bllFacturaDetail.Delete(enlFacturaDetail);
-                bllFacturaMaster.Delete(enlFacturaMaster);
+                if (bllFacturaDetail.Delete(enlFacturaDetail))
+                {
+                    bllFacturaMaster.Delete(enlFacturaMaster);
 
-                DGV_Facturas_Pos_List.DataSource = null;
-
-                ActualizarDGV = true;
-                AC.VaciarText(this);
-                //AC.VaciarDGV(this);
-                DGV_Factura_Pos.DataSource = null;
+                    DGV_Facturas_Pos_List.DataSource = null;
+                    ActualizarDGV = true;
+                    AC.VaciarText(this);
+                    DGV_Factura_Pos.DataSource = null;
+                }
 
             }
 

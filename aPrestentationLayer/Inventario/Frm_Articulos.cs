@@ -253,14 +253,11 @@ namespace aPrestentationLayer.Inventario
 
 
             enlArticulos.Codigo = txtCodigo.Text;
-            bllArticulos.Delete(enlArticulos);
-
-
-            BotonEliminar();
-
-            ActualizarDGV = true;
-
-            
+            if (bllArticulos.Delete(enlArticulos))
+            {
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
         }
 
         void btnVista_Click(object sender, EventArgs e)

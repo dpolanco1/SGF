@@ -12,6 +12,8 @@ using BusinessLogicLayer.Administracion;
 using EntityLayer.CxC_Ventas;
 using BusinessLogicLayer.Otros;
 
+
+
 namespace aPrestentationLayer.CxC_Ventas
 {
     public partial class Frm_SubCategoriaClientes : Frm_Plantilla
@@ -210,11 +212,12 @@ namespace aPrestentationLayer.CxC_Ventas
             }
 
             enlSubCategoriaCliente.Codigo = txtCodigo.Text;
-            bllSubCategoriaCliente.Delete(enlSubCategoriaCliente);
+            if (bllSubCategoriaCliente.Delete(enlSubCategoriaCliente))
+            {
 
-            BotonEliminar();
-
-            ActualizarDGV = true;
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
         }
 
         void btnBuscar_Click(object sender, EventArgs e)

@@ -170,11 +170,12 @@ namespace aPrestentationLayer.Administracion
             }
 
             enlModoPago.Codigo = txtCodigo.Text;
-            bllModoPago.Delete(enlModoPago);
 
-            BotonEliminar();
-
-            ActualizarDGV = true;
+            if (bllModoPago.Delete(enlModoPago))
+            {
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
         }
 
         void btnBuscar_Click(object sender, EventArgs e)

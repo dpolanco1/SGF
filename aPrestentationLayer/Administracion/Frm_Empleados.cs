@@ -229,11 +229,11 @@ namespace aPrestentationLayer.Administracion
             }
 
             enlEmpleados.Codigo = txtCodigo.Text;
-            bllEmpleados.Delete(enlEmpleados);
-
-            BotonEliminar();
-
-            ActualizarDGV = true;
+            if (bllEmpleados.Delete(enlEmpleados))
+            {
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
            
         }
 

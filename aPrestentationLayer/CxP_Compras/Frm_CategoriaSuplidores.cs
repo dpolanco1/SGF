@@ -178,12 +178,13 @@ namespace aPrestentationLayer.CxP_Compras
             }
 
             enlCategoriaSuplidores.Codigo = txtCodigo.Text;
-            bllCategoriaSuplidores.Delete(enlCategoriaSuplidores);
-         
-            BotonEliminar();
 
-            ActualizarDGV = true;
+            if (bllCategoriaSuplidores.Delete(enlCategoriaSuplidores))
+            {
 
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
 
         }
 

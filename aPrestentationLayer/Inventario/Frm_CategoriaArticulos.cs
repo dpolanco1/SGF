@@ -182,13 +182,14 @@ namespace aPrestentationLayer.Inventario
 
 
             enlCategoriaArticulos.Codigo = txtCodigo.Text;
-            bllCategoriaArticulos.Delete(enlCategoriaArticulos);
 
+            if (bllCategoriaArticulos.Delete(enlCategoriaArticulos))
+            {
 
-            BotonEliminar();
-
-            ActualizarDGV = true;
-            //Limpiar Textox
+                BotonEliminar();
+                ActualizarDGV = true;
+                //Limpiar Textox
+            }
         }
 
         void btnBuscar_Click(object sender, EventArgs e)

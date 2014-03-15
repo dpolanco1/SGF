@@ -172,12 +172,16 @@ namespace aPrestentationLayer.CxP_Compras
             }
 
             enlSubCategoriaSuplidores.Codigo = txtCodigo.Text;
-            bllSubCategoriaSuplidores.Delete(enlSubCategoriaSuplidores);
+           
+            if(bllSubCategoriaSuplidores.Delete(enlSubCategoriaSuplidores))
+            {
 
             BotonEliminar();
 
             ActualizarDGV = true;
+             }
         }
+
 
         private void Frm_SubCategoriaSuplidores_Load(object sender, EventArgs e)
         {

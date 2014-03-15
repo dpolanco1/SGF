@@ -60,7 +60,7 @@ namespace BusinessLogicLayer.Inventario
 
         }
 
-        public void Delete(Enl_Almacen enlAlmacen)
+        public bool Delete(Enl_Almacen enlAlmacen)
         {
 
             //Validaciones De Lugar
@@ -72,8 +72,10 @@ namespace BusinessLogicLayer.Inventario
                 {
                     dalAlmacen.Delete(enlAlmacen);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                    return true;
                 }
             }
+            return false;
         }
 
         public IList<Enl_Almacen> Search(Enl_Almacen enlAlmacen)

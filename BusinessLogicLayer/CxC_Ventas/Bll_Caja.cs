@@ -57,7 +57,7 @@ namespace BusinessLogicLayer.CxC_Ventas
 
         }
 
-        public void Delete(Enl_Caja enlCaja)
+        public bool Delete(Enl_Caja enlCaja)
         {
 
             //Validaciones De Lugar
@@ -69,8 +69,10 @@ namespace BusinessLogicLayer.CxC_Ventas
                 {
                     dalCaja.Delete(enlCaja);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                    return true;
                 }
             }
+            return false;
         }
 
         public IList<Enl_Caja> Search(Enl_Caja enlCaja)

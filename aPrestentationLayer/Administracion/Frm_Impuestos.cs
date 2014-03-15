@@ -185,12 +185,12 @@ namespace aPrestentationLayer.Administracion
 
 
             enlImpuestos.Codigo = txtCodigo.Text;
-            bllImpuestos.Delete(enlImpuestos);
 
-            BotonEliminar();
-
-            ActualizarDGV = true;
-
+            if (bllImpuestos.Delete(enlImpuestos))
+            {
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
 
 
         }

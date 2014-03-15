@@ -56,7 +56,7 @@ namespace BusinessLogicLayer.CxP_Compras
 
         }
 
-        public void Delete(Enl_CategoriaSuplidores enlCategoriaSuplidores)
+        public bool  Delete(Enl_CategoriaSuplidores enlCategoriaSuplidores)
         {
 
             //Validaciones De Lugar
@@ -67,8 +67,11 @@ namespace BusinessLogicLayer.CxP_Compras
                 if (MessageBox.Show("Realmente Desea Eliminar El Registro", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
                 {
                     dalCategoriaSuplidores.Delete(enlCategoriaSuplidores);
+                    MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                    return true;
                 }
             }
+            return false;
         }
 
         public IList<Enl_CategoriaSuplidores> Search(Enl_CategoriaSuplidores enlCategoriaSuplidores)

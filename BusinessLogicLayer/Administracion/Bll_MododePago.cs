@@ -57,7 +57,7 @@ namespace BusinessLogicLayer.Administracion
 
         }
 
-        public void Delete(Enl_MododePago enlModoPago)
+        public bool Delete(Enl_MododePago enlModoPago)
         {
 
             //Validaciones De Lugar
@@ -69,8 +69,10 @@ namespace BusinessLogicLayer.Administracion
                 {
                     dalModoPago.Delete(enlModoPago);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                    return true;
                 }
             }
+            return false;
         }
 
         public IList<Enl_MododePago> Search(Enl_MododePago enlModoPago)

@@ -180,13 +180,14 @@ namespace aPrestentationLayer.Inventario
 
 
             enlMarcas.Codigo = txtCodigo.Text;
-            bllMarcas.Delete(enlMarcas);
 
+            if (bllMarcas.Delete(enlMarcas))
+            {
 
-            BotonEliminar();
-
-            ActualizarDGV = true;
-            //Limpiar Textox
+                BotonEliminar();
+                ActualizarDGV = true;
+                //Limpiar Textox
+            }
         }
 
         void btnVista_Click(object sender, EventArgs e)

@@ -182,12 +182,13 @@ namespace aPrestentationLayer.CxC_Ventas
             }
 
             enlCaja.Codigo = txtCodigo.Text;
-            bllCaja.Delete(enlCaja);
 
-            BotonEliminar();
+            if (bllCaja.Delete(enlCaja))
+            {
 
-            ActualizarDGV = true;
-                
+                BotonEliminar();
+                ActualizarDGV = true;
+            }   
 
         }
 

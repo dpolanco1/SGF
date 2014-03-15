@@ -195,12 +195,12 @@ namespace aPrestentationLayer.Inventario
 
 
             enlAlmacen.Codigo = txtCodigo.Text;
-            bllAlmacen.Delete(enlAlmacen);
+            if (bllAlmacen.Delete(enlAlmacen))
+            {
 
-
-            BotonEliminar();
-
-            ActualizarDGV = true;
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
         }
 
         void btnBuscar_Click(object sender, EventArgs e)

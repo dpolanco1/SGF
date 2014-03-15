@@ -57,7 +57,7 @@ namespace BusinessLogicLayer.CxC_Ventas
 
       }
 
-      public void Delete(Enl_CategoriaClientes enlCategoriaClientes)
+      public bool Delete(Enl_CategoriaClientes enlCategoriaClientes)
       {
 
           //Validaciones De Lugar
@@ -69,9 +69,11 @@ namespace BusinessLogicLayer.CxC_Ventas
               {
                   dalCategoriaClientes.Delete(enlCategoriaClientes);
                   MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                  return true;
                     
               }
           }
+          return false;
       }
 
       public IList <Enl_CategoriaClientes> Search(Enl_CategoriaClientes enlCategoriaClientes)

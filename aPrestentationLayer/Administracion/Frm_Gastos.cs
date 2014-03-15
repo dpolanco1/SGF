@@ -181,11 +181,11 @@ namespace aPrestentationLayer.Administracion
 
 
             enlGastos.Numero = txtNumero.Text;
-            bllGastos.Delete(enlGastos);
-
-            BotonEliminar();
-
-            ActualizarDGV = true;
+            if (bllGastos.Delete(enlGastos))
+            {
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
 
 
 

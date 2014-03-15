@@ -179,12 +179,13 @@ namespace aPrestentationLayer.CxC_Ventas
                 }
             }
            enlCategoriaClientes.Codigo= txtCodigo.Text;
-           bllCategoriaClientes.Delete(enlCategoriaClientes);
 
-           BotonEliminar();
 
-           ActualizarDGV = true;
-                
+           if (bllCategoriaClientes.Delete(enlCategoriaClientes))
+           {
+               BotonEliminar();
+               ActualizarDGV = true;
+           }    
             
         }
 

@@ -13,6 +13,7 @@ using BusinessLogicLayer.Administracion;
 using BusinessLogicLayer.Otros;
 
 
+
 namespace aPrestentationLayer.CxC_Ventas
 {
     public partial class Frm_Terminos : Frm_Plantilla
@@ -179,12 +180,12 @@ namespace aPrestentationLayer.CxC_Ventas
             }
 
             enlTermino.Codigo = txtCodigo.Text;
-            bllTerminos.Delete(enlTermino);
+            if (bllTerminos.Delete(enlTermino))
+            {
 
-            BotonEliminar();
-
-            ActualizarDGV = true;
-
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
         }
 
         void btnBuscar_Click(object sender, EventArgs e)

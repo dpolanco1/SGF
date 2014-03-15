@@ -54,7 +54,7 @@ namespace BusinessLogicLayer.Inventario
 
         }
 
-        public void Delete(Enl_CategoriaArticulos enlCategoriaArticulo)
+        public bool Delete(Enl_CategoriaArticulos enlCategoriaArticulo)
         {
 
             //Validaciones De Lugar
@@ -66,8 +66,10 @@ namespace BusinessLogicLayer.Inventario
                 {
                     dalCategoriaArticulos.Delete(enlCategoriaArticulo);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                    return true;
                 }
             }
+            return false;
         }
 
         public IList<Enl_CategoriaArticulos> Search(Enl_CategoriaArticulos enlCategoriaArticulo)

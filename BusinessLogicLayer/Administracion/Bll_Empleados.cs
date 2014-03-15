@@ -56,7 +56,7 @@ namespace BusinessLogicLayer.Administracion
 
         }
 
-        public void Delete(Enl_Empleados enlEmpleados)
+        public bool Delete(Enl_Empleados enlEmpleados)
         {
 
             //Validaciones De Lugar
@@ -68,8 +68,10 @@ namespace BusinessLogicLayer.Administracion
                 {
                     dalEmpleados.Delete(enlEmpleados);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                    return true;
                 }
             }
+            return false;
         }
 
         public IList<Enl_Empleados> Search(Enl_Empleados enlEmpleados)

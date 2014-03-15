@@ -62,17 +62,10 @@ namespace BusinessLogicLayer.CxP_Compras
 
             //Validaciones De Lugar
 
-            if (!string.IsNullOrEmpty(enlCompraMaster.Numero))
-            {
-
-                if (MessageBox.Show("Realmente Desea Eliminar El Registro", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
-                {
                     dalCompraMaster.Delete(enlCompraMaster);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
-                }
-            }
+               
         }
-
         public IList<Enl_ComprasMaster> Search(Enl_ComprasMaster enlCompraMaster)
         {
 

@@ -32,13 +32,21 @@ namespace BusinessLogicLayer.CxP_Compras
 
         }
 
-        public void Delete(Enl_ComprasDetail enlCompraDetail)
+        public bool Delete(Enl_ComprasDetail enlCompraDetail)
         {
 
             //Validaciones De Lugar
 
-            dalComprasDetail.Delete(enlCompraDetail);
+            if (!string.IsNullOrEmpty(enlCompraDetail.NoCompra))
+            {
 
+                if (MessageBox.Show("Realmente Desea Eliminar El Registro", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                {
+                    dalComprasDetail.Delete(enlCompraDetail);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public IList<Enl_ComprasDetail> Search(Enl_ComprasDetail enlCompraDetail)

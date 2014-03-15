@@ -197,10 +197,12 @@ namespace aPrestentationLayer.Administracion
             }
 
             enlUsuarios.NombreUsuario = txtNombreUsuario.Text;
-            bllUsuarios.Delete(enlUsuarios);
 
-            BotonEliminar();
-            ActualizarDGV = true;
+            if (bllUsuarios.Delete(enlUsuarios))
+            {
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
 
         }
 

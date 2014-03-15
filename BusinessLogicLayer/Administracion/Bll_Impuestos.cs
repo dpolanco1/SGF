@@ -55,7 +55,7 @@ namespace BusinessLogicLayer.Administracion
 
         }
 
-        public void Delete(Enl_Impuestos enlImpuestos)
+        public bool Delete(Enl_Impuestos enlImpuestos)
         {
 
             //Validaciones De Lugar
@@ -67,8 +67,10 @@ namespace BusinessLogicLayer.Administracion
                 {
                     dalImpuestos.Delete(enlImpuestos);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                    return true;
                 }
             }
+            return false;
         }
 
         public IList<Enl_Impuestos> Search(Enl_Impuestos enlImpuestos)

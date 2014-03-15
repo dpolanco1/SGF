@@ -61,7 +61,7 @@ namespace BusinessLogicLayer.Administracion
 
         }
 
-        public void Delete(Enl_Gastos enlGastos)
+        public bool Delete(Enl_Gastos enlGastos)
         {
 
             //Validaciones De Lugar
@@ -73,8 +73,10 @@ namespace BusinessLogicLayer.Administracion
                 {
                     dalGastos.Delete(enlGastos);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                    return true;
                 }
             }
+            return false;
         }
 
         public IList<Enl_Gastos> Search(Enl_Gastos enlGastos)

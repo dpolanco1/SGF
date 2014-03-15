@@ -307,13 +307,17 @@ namespace aPrestentationLayer.CxP_Compras
                 }
             }
 
-            //Eliminamos el Detalle
             enlCompraDetail.NoCompra = txtNoCompra.Text;
             enlCompraMaster.Numero = txtNoCompra.Text;
-            //Eliminamos el Master
-            bllCompraDetail.Delete(enlCompraDetail);
-            bllCompraMaster.Delete(enlCompraMaster);
 
+             //Eliminamos el Detalle y luego el Master
+            
+            if (bllCompraDetail.Delete(enlCompraDetail))
+            {
+                bllCompraMaster.Delete(enlCompraMaster);
+                BotonEliminar();
+                ActualizarDGV = true;
+            }
         }
 
         void btnVista_Click(object sender, EventArgs e)
@@ -588,7 +592,6 @@ namespace aPrestentationLayer.CxP_Compras
 
         }
       
-        
         public void CargarSuplidor(string Suplidor, string Nombre)
         {
             txtSuplidor.Text = Suplidor;

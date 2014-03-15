@@ -67,7 +67,7 @@ namespace BusinessLogicLayer.CxC_Ventas
 
         }
 
-        public void Delete(Enl_Termino enlTermino)
+        public bool Delete(Enl_Termino enlTermino)
         {
 
             //Validaciones De Lugar
@@ -79,8 +79,10 @@ namespace BusinessLogicLayer.CxC_Ventas
                 {
                     dalTerminos.Delete(enlTermino);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
+                    return true;
                 }
             }
+            return false;
         }
 
         public IList<Enl_Termino> Search(Enl_Termino enlTermino)
