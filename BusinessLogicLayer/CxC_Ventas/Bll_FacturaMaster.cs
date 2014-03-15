@@ -75,15 +75,10 @@ namespace BusinessLogicLayer.CxC_Ventas
 
             //Validaciones De Lugar
 
-            if (!string.IsNullOrEmpty(enlFacturasMaster.Numero))
-            {
-
-                if (MessageBox.Show("Realmente Desea Eliminar El Registro", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
-                {
                     dalFacturasMaster.Delete(enlFacturasMaster);
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
-                }
-            }
+                
+            
         }
 
         public IList<Enl_FacturaMaster> Search(Enl_FacturaMaster enlFacturasMaster)

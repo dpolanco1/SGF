@@ -33,13 +33,24 @@ namespace BusinessLogicLayer.CxC_Ventas
 
         }
 
-        public void Delete(Enl_CotizacionesDetail enlCotizacionesDetail)
+        public bool Delete(Enl_CotizacionesDetail enlCotizacionesDetail)
         {
 
             //Validaciones De Lugar
 
-            dalCotizacionDetail.Delete(enlCotizacionesDetail);
 
+            if (!string.IsNullOrEmpty(enlCotizacionesDetail.NoCotizacion))
+            {
+
+                if (MessageBox.Show("Realmente Desea Eliminar El Registro", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                {
+
+                    dalCotizacionDetail.Delete(enlCotizacionesDetail);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public IList<Enl_CotizacionesDetail> Search(Enl_CotizacionesDetail enlCotizacionesDetail)

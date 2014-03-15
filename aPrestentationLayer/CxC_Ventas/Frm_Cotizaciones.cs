@@ -313,9 +313,14 @@ namespace aPrestentationLayer.CxC_Ventas
             enlCotizacionMaster.Numero = txtNoCotizacion.Text;
             enlCotizacionDetail.NoCotizacion = txtNoCotizacion.Text;
 
-            bllCotizacionDetail.Delete(enlCotizacionDetail);
-            bllCotizacionMaster.Delete(enlCotizacionMaster);
 
+
+            if (bllCotizacionDetail.Delete(enlCotizacionDetail))
+            {
+                
+                bllCotizacionMaster.Delete(enlCotizacionMaster);
+
+            }
         }
 
         void btnBuscar_Click(object sender, EventArgs e)
