@@ -150,10 +150,18 @@ namespace aPrestentationLayer.CxC_Ventas
             }
 
 
+                    //listArticulos
 
+            // TODO: Arreglar esto hay que amarrarlo a la listArticulos
             enlFacturaDetail.NoFactura = txtNoFactura.Text;
-            DGV_DetailFactura.DataSource = bllFacturaDetail.Search(enlFacturaDetail);
+           var ListaDetail = bllFacturaDetail.Search(enlFacturaDetail);
 
+
+           //foreach (Enl_Articulos item in ListaDetail)
+           //{
+           //    listArticulos.Add(item);
+           //}
+        
         }
 
         void btnNuevo_Click(object sender, EventArgs e)
@@ -226,7 +234,7 @@ namespace aPrestentationLayer.CxC_Ventas
                             enlFacturaMaster.BalancePendiente = 0;
 
                         }
-
+                        
                         if (enlFacturaMaster.Tipo == "Credito")
                         {
                             enlFacturaMaster.TotalPagado = 0;
@@ -242,8 +250,8 @@ namespace aPrestentationLayer.CxC_Ventas
                             //hago la insercion en los DGV
                             for (int a = 0; a < DGV_DetailFactura.RowCount; a++)
                             {
-                                enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
-                                enlFacturaDetail.Articulo = DGV_DetailFactura[0, a].Value.ToString();
+                                enlFacturaDetail.NoFactura = NoFactura;//No Factura
+                                enlFacturaDetail.Codigo = DGV_DetailFactura[0, a].Value.ToString();
                                 enlFacturaDetail.Descripcion = DGV_DetailFactura[1, a].Value.ToString();
                                 enlFacturaDetail.Precio = Convert.ToDecimal(DGV_DetailFactura[2, a].Value);
                                 enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_DetailFactura[3, a].Value);
@@ -259,7 +267,7 @@ namespace aPrestentationLayer.CxC_Ventas
                                 if (IsGuardarFactura)
                                 {
                                     // Actualizo la existencia del Articulo
-                                    enlArticulos.Codigo = enlFacturaDetail.Articulo;
+                                    enlArticulos.Codigo = enlFacturaDetail.Codigo;
                                     enlArticulos.Existencia = (enlFacturaDetail.Cantidad) * -1;
                                     bllArticulos.UpdateExitencia(enlArticulos);
                                 }
@@ -288,8 +296,8 @@ namespace aPrestentationLayer.CxC_Ventas
 
                                 for (int a = 0; a < DGV_DetailFactura.RowCount - 1; a++)
                                 {
-                                    enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
-                                    enlFacturaDetail.Articulo = DGV_DetailFactura[0, a].Value.ToString();
+                                    enlFacturaDetail.NoFactura = NoFactura;//No Factura
+                                    enlFacturaDetail.Codigo = DGV_DetailFactura[0, a].Value.ToString();
                                     enlFacturaDetail.Descripcion = DGV_DetailFactura[1, a].Value.ToString();
                                     enlFacturaDetail.Precio = Convert.ToDecimal(DGV_DetailFactura[2, a].Value);
                                     enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_DetailFactura[3, a].Value);
@@ -465,13 +473,14 @@ namespace aPrestentationLayer.CxC_Ventas
             enlFacturaMaster.Numero = txtNoFactura.Text;
             enlFacturaDetail.NoFactura = txtNoFactura.Text;
 
-            bllFacturaDetail.Delete(enlFacturaDetail);
-            bllFacturaMaster.Delete(enlFacturaMaster);
+            if (bllFacturaDetail.Delete(enlFacturaDetail))
+            {
+                bllFacturaMaster.Delete(enlFacturaMaster);
+            }
+
 
             DGV_DetailFactura.DataSource = null;
-
             BotonEliminar();
-
             ActualizarDGV = true;
         }
 
@@ -596,7 +605,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
                     list.Add(new Enl_FacturaDetail
                     {
-                        Articulo = txtArticulo.Text,
+                        Codigo = txtArticulo.Text,
                         Descripcion = txtDescripcion.Text,
                         Precio = Convert.ToDecimal(txtPrecio.Text),
                         Cantidad = Convert.ToDecimal(txtCantidad.Text),

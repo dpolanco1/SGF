@@ -32,7 +32,7 @@ namespace BusinessLogicLayer.CxC_Ventas
             // Verificamos si el articulo se esta vendiendo igual o por debajo del costo, lo cual 
             // no es permitido
 
-            enlArticulos.Codigo = enlFacturaDetail.Articulo;
+            enlArticulos.Codigo = enlFacturaDetail.Codigo;
             enlArticulos.Nombre = string.Empty;
             enlArticulos.Descripcion = string.Empty;
             enlArticulos.Impuesto = string.Empty;
@@ -46,7 +46,7 @@ namespace BusinessLogicLayer.CxC_Ventas
             // la factura, de lo contrario devolvemos true
             if (enlFacturaDetail.Precio <= ListaArticulos[0].Costo)
             {
-                MessageBox.Show("El Articulo " + enlFacturaDetail.Articulo + " tiene un precio menor que el costo");
+                MessageBox.Show("El Articulo " + enlFacturaDetail.Codigo + " tiene un precio menor que el costo");
                 return false;
             }
             else
@@ -66,12 +66,22 @@ namespace BusinessLogicLayer.CxC_Ventas
 
         }
 
-        public void Delete(Enl_FacturaDetail enlfFacturaDetail)
+        public bool Delete(Enl_FacturaDetail enlfFacturaDetail)
         {
 
             //Validaciones De Lugar
 
-            dalFacturaDetail.Delete(enlfFacturaDetail);
+            if (!string.IsNullOrEmpty(enlfFacturaDetail.NoFactura))
+            {
+
+                if (MessageBox.Show("Realmente Desea Eliminar El Registro", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                {
+
+                    dalFacturaDetail.Delete(enlfFacturaDetail);
+                    return true;
+                }
+            }
+            return false;
                   
         }
 

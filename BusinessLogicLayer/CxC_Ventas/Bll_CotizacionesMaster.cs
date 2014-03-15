@@ -61,15 +61,11 @@ namespace BusinessLogicLayer.CxC_Ventas
 
             //Validaciones De Lugar
 
-            if (!string.IsNullOrEmpty(enlCotizacionesMaster.Numero))
-            {
-
-                if (MessageBox.Show("Realmente Desea Eliminar El Registro", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
-                {
                     dalCotizacionesMaster.Delete(enlCotizacionesMaster);
+
                     MessageBox.Show("Registro Eliminado Exitosamente", "SGF");
-                }
-            }
+                
+            
         }
 
         public IList<Enl_CotizacionesMaster> Search(Enl_CotizacionesMaster enlCotizacionesMaster)

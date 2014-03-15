@@ -144,7 +144,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
                     list.Add(new Enl_FacturaDetail
                     {
-                     Articulo = txtArticulo.Text,
+                     Codigo = txtArticulo.Text,
                      Descripcion = txtDescripcion.Text,
                      Precio = Convert.ToDecimal(txtPrecio.Text),
                      Cantidad = Convert.ToDecimal(txtCantidad.Text),
@@ -255,7 +255,7 @@ namespace aPrestentationLayer.CxC_Ventas
                 for (int a = 0; a < DGV_Factura_Pos.RowCount; a++)
                 {
                     enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
-                    enlFacturaDetail.Articulo = DGV_Factura_Pos[0, a].Value.ToString();
+                    enlFacturaDetail.Codigo = DGV_Factura_Pos[0, a].Value.ToString();
                     enlFacturaDetail.Descripcion = DGV_Factura_Pos[1, a].Value.ToString();
                     enlFacturaDetail.Precio = Convert.ToDecimal(DGV_Factura_Pos[2, a].Value);
                     enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_Factura_Pos[3, a].Value);
@@ -267,7 +267,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     bllFacturaDetail.Insert(enlFacturaDetail);
 
                     //Rebajo la existencia de la maestra de Articulo
-                    enlArticulos.Codigo = enlFacturaDetail.Articulo;
+                    enlArticulos.Codigo = enlFacturaDetail.Codigo;
                     enlArticulos.Existencia = (enlFacturaDetail.Cantidad) * -1;
                     bllArticulos.UpdateExitencia(enlArticulos);
 
@@ -293,7 +293,7 @@ namespace aPrestentationLayer.CxC_Ventas
                     for (int a = 0; a <= DGV_Factura_Pos.RowCount - 1; a++)
                     {
                         enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
-                        enlFacturaDetail.Articulo = DGV_Factura_Pos[0, a].Value.ToString();
+                        enlFacturaDetail.Codigo = DGV_Factura_Pos[0, a].Value.ToString();
                         enlFacturaDetail.Descripcion = DGV_Factura_Pos[1, a].Value.ToString();
                         enlFacturaDetail.Precio = Convert.ToDecimal(DGV_Factura_Pos[2, a].Value);
                         enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_Factura_Pos[3, a].Value);
@@ -376,7 +376,7 @@ namespace aPrestentationLayer.CxC_Ventas
                         for (int a = 0; a < DGV_Factura_Pos.RowCount; a++)
                         {
                             enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
-                            enlFacturaDetail.Articulo = DGV_Factura_Pos[0, a].Value.ToString();
+                            enlFacturaDetail.Codigo = DGV_Factura_Pos[0, a].Value.ToString();
                             enlFacturaDetail.Descripcion = DGV_Factura_Pos[1, a].Value.ToString();
                             enlFacturaDetail.Precio = Convert.ToDecimal(DGV_Factura_Pos[2, a].Value);
                             enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_Factura_Pos[3, a].Value);
@@ -386,7 +386,7 @@ namespace aPrestentationLayer.CxC_Ventas
 
                             bllFacturaDetail.Insert(enlFacturaDetail);
 
-                            enlArticulos.Codigo = enlFacturaDetail.Articulo;
+                            enlArticulos.Codigo = enlFacturaDetail.Codigo;
                             enlArticulos.Existencia = (enlFacturaDetail.Cantidad) * -1;
                             bllArticulos.UpdateExitencia(enlArticulos);
 
@@ -413,7 +413,7 @@ namespace aPrestentationLayer.CxC_Ventas
                             for (int a = 0; a < DGV_Factura_Pos.RowCount - 1; a++)
                             {
                                 enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
-                                enlFacturaDetail.Articulo = DGV_Factura_Pos[0, a].Value.ToString();
+                                enlFacturaDetail.Codigo = DGV_Factura_Pos[0, a].Value.ToString();
                                 enlFacturaDetail.Descripcion = DGV_Factura_Pos[1, a].Value.ToString();
                                 enlFacturaDetail.Precio = Convert.ToDecimal(DGV_Factura_Pos[2, a].Value);
                                 enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_Factura_Pos[3, a].Value);
@@ -424,7 +424,7 @@ namespace aPrestentationLayer.CxC_Ventas
                                 bllFacturaDetail.Insert(enlFacturaDetail);
 
 
-                                enlArticulos.Codigo = enlFacturaDetail.Articulo;
+                                enlArticulos.Codigo = enlFacturaDetail.Codigo;
                                 enlArticulos.Existencia = (enlFacturaDetail.Cantidad) * -1;
                                 bllArticulos.UpdateExitencia(enlArticulos);
                             }
@@ -735,10 +735,10 @@ namespace aPrestentationLayer.CxC_Ventas
                 // Antes de Borrar el Detalle, acutlizamos la existencia.
                 for (int a = 0; a < DGV_Factura_Pos.RowCount; a++)
                 {
-                    enlFacturaDetail.Articulo = DGV_Factura_Pos[0, a].Value.ToString();
+                    enlFacturaDetail.Codigo = DGV_Factura_Pos[0, a].Value.ToString();
                     enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_Factura_Pos[3, a].Value);
 
-                    enlArticulos.Codigo = enlFacturaDetail.Articulo;
+                    enlArticulos.Codigo = enlFacturaDetail.Codigo;
                     enlArticulos.Existencia = (enlFacturaDetail.Cantidad) * 1;
                     bllArticulos.UpdateExitencia(enlArticulos);
                 }
