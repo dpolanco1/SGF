@@ -81,10 +81,12 @@ namespace BusinessLogicLayer.Inventario
 
             //Validaciones de Lugar
 
-            if (dalAlmacen.Search(enlAlmacen).Count != 0)
+            var ListaAlmacen = dalAlmacen.Search(enlAlmacen);
+
+            if (ListaAlmacen.Count != 0)
             {
 
-                return dalAlmacen.Search(enlAlmacen);
+                return ListaAlmacen;
 
             }
             else

@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Facturas));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbpMaster = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -89,13 +89,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblCantidaArticulos = new System.Windows.Forms.Label();
             this.DGV_DetailFactura = new System.Windows.Forms.DataGridView();
-            this.ArticuloFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescripcionFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ImpuestoFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalLineaFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CostoFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTotalImpuesto = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtSubTotal = new System.Windows.Forms.TextBox();
@@ -138,6 +131,13 @@
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ArticuloFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescripcionFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ImpuestoFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalLineaFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostoFacturaGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tbpMaster.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -709,71 +709,6 @@
             this.DGV_DetailFactura.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DGV_DetailFactura_EditingControlShowing_1);
             this.DGV_DetailFactura.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_DetailFactura_RowsAdded);
             // 
-            // ArticuloFactura
-            // 
-            this.ArticuloFactura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ArticuloFactura.DataPropertyName = "Codigo";
-            this.ArticuloFactura.HeaderText = "Articulo";
-            this.ArticuloFactura.Name = "ArticuloFactura";
-            this.ArticuloFactura.ReadOnly = true;
-            // 
-            // DescripcionFacturaGrid
-            // 
-            this.DescripcionFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DescripcionFacturaGrid.DataPropertyName = "Descripcion";
-            this.DescripcionFacturaGrid.HeaderText = "Descripcion";
-            this.DescripcionFacturaGrid.Name = "DescripcionFacturaGrid";
-            // 
-            // PrecioFacturaGrid
-            // 
-            this.PrecioFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PrecioFacturaGrid.DataPropertyName = "Precio";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.PrecioFacturaGrid.DefaultCellStyle = dataGridViewCellStyle1;
-            this.PrecioFacturaGrid.HeaderText = "Precio";
-            this.PrecioFacturaGrid.Name = "PrecioFacturaGrid";
-            // 
-            // CantidadFacturaGrid
-            // 
-            this.CantidadFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CantidadFacturaGrid.DataPropertyName = "Cantidad";
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.CantidadFacturaGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.CantidadFacturaGrid.HeaderText = "Cantidad";
-            this.CantidadFacturaGrid.Name = "CantidadFacturaGrid";
-            // 
-            // ImpuestoFacturaGrid
-            // 
-            this.ImpuestoFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ImpuestoFacturaGrid.DataPropertyName = "Impuesto";
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.ImpuestoFacturaGrid.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ImpuestoFacturaGrid.HeaderText = "Impuesto";
-            this.ImpuestoFacturaGrid.Name = "ImpuestoFacturaGrid";
-            this.ImpuestoFacturaGrid.Visible = false;
-            // 
-            // TotalLineaFacturaGrid
-            // 
-            this.TotalLineaFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TotalLineaFacturaGrid.DataPropertyName = "TotalLinea";
-            dataGridViewCellStyle4.Format = "N2";
-            this.TotalLineaFacturaGrid.DefaultCellStyle = dataGridViewCellStyle4;
-            this.TotalLineaFacturaGrid.HeaderText = "Subtotal";
-            this.TotalLineaFacturaGrid.Name = "TotalLineaFacturaGrid";
-            this.TotalLineaFacturaGrid.ReadOnly = true;
-            // 
-            // CostoFacturaGrid
-            // 
-            this.CostoFacturaGrid.DataPropertyName = "Costo";
-            dataGridViewCellStyle5.Format = "N2";
-            this.CostoFacturaGrid.DefaultCellStyle = dataGridViewCellStyle5;
-            this.CostoFacturaGrid.HeaderText = "Costo";
-            this.CostoFacturaGrid.Name = "CostoFacturaGrid";
-            this.CostoFacturaGrid.Visible = false;
-            // 
             // txtTotalImpuesto
             // 
             this.txtTotalImpuesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1181,6 +1116,71 @@
             this.Precio.DefaultCellStyle = dataGridViewCellStyle6;
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
+            // 
+            // ArticuloFactura
+            // 
+            this.ArticuloFactura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ArticuloFactura.DataPropertyName = "Codigo";
+            this.ArticuloFactura.HeaderText = "Articulo";
+            this.ArticuloFactura.Name = "ArticuloFactura";
+            this.ArticuloFactura.ReadOnly = true;
+            // 
+            // DescripcionFacturaGrid
+            // 
+            this.DescripcionFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DescripcionFacturaGrid.DataPropertyName = "Descripcion";
+            this.DescripcionFacturaGrid.HeaderText = "Descripcion";
+            this.DescripcionFacturaGrid.Name = "DescripcionFacturaGrid";
+            // 
+            // PrecioFacturaGrid
+            // 
+            this.PrecioFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PrecioFacturaGrid.DataPropertyName = "Precio";
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.PrecioFacturaGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            this.PrecioFacturaGrid.HeaderText = "Precio";
+            this.PrecioFacturaGrid.Name = "PrecioFacturaGrid";
+            // 
+            // CantidadFacturaGrid
+            // 
+            this.CantidadFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CantidadFacturaGrid.DataPropertyName = "Cantidad";
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.CantidadFacturaGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CantidadFacturaGrid.HeaderText = "Cantidad";
+            this.CantidadFacturaGrid.Name = "CantidadFacturaGrid";
+            // 
+            // ImpuestoFacturaGrid
+            // 
+            this.ImpuestoFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ImpuestoFacturaGrid.DataPropertyName = "Impuesto";
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.ImpuestoFacturaGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ImpuestoFacturaGrid.HeaderText = "Impuesto";
+            this.ImpuestoFacturaGrid.Name = "ImpuestoFacturaGrid";
+            this.ImpuestoFacturaGrid.Visible = false;
+            // 
+            // TotalLineaFacturaGrid
+            // 
+            this.TotalLineaFacturaGrid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TotalLineaFacturaGrid.DataPropertyName = "TotalLinea";
+            dataGridViewCellStyle4.Format = "N2";
+            this.TotalLineaFacturaGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            this.TotalLineaFacturaGrid.HeaderText = "Subtotal";
+            this.TotalLineaFacturaGrid.Name = "TotalLineaFacturaGrid";
+            this.TotalLineaFacturaGrid.ReadOnly = true;
+            // 
+            // CostoFacturaGrid
+            // 
+            this.CostoFacturaGrid.DataPropertyName = "Costo";
+            dataGridViewCellStyle5.Format = "N2";
+            this.CostoFacturaGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            this.CostoFacturaGrid.HeaderText = "Costo";
+            this.CostoFacturaGrid.Name = "CostoFacturaGrid";
+            this.CostoFacturaGrid.Visible = false;
             // 
             // Frm_Facturas
             // 

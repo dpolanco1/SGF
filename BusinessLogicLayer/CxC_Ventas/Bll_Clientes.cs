@@ -77,10 +77,12 @@ namespace BusinessLogicLayer.CxC_Ventas
 
             //Validaciones de Lugar
 
-            if (dalClientes.Search(enlClientes).Count != 0)
+            var ListaClientes = dalClientes.Search(enlClientes);
+
+            if (ListaClientes.Count != 0)
             {
 
-                return dalClientes.Search(enlClientes);
+                return ListaClientes;
 
             }
             else

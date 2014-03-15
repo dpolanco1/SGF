@@ -88,10 +88,12 @@ namespace BusinessLogicLayer.CxC_Ventas
 
             //Validaciones de Lugar
 
-            if (dalTerminos.Search(enlTermino).Count != 0)
+            var ListaTerminos = dalTerminos.Search(enlTermino);
+
+            if (ListaTerminos.Count != 0)
             {
 
-                return dalTerminos.Search(enlTermino);
+                return ListaTerminos;
 
             }
             else

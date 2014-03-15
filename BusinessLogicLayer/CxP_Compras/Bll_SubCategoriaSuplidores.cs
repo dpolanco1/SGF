@@ -76,10 +76,12 @@ namespace BusinessLogicLayer.CxP_Compras
 
             //Validaciones de Lugar
 
-            if (dalSubCategoriaSuplidores.Search(enlSubCategoriaSuplidores).Count != 0)
+            var ListaSubCategoriaSuplidores = dalSubCategoriaSuplidores.Search(enlSubCategoriaSuplidores);
+
+            if (ListaSubCategoriaSuplidores.Count != 0)
             {
 
-                return dalSubCategoriaSuplidores.Search(enlSubCategoriaSuplidores);
+                return ListaSubCategoriaSuplidores;
 
             }
             else

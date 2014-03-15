@@ -78,10 +78,12 @@ namespace BusinessLogicLayer.CxP_Compras
 
             //Validaciones de Lugar
 
-            if (dalCompraMaster.Search(enlCompraMaster).Count != 0)
+            var ListaCompra = dalCompraMaster.Search(enlCompraMaster);
+
+            if (ListaCompra.Count != 0)
             {
 
-                return dalCompraMaster.Search(enlCompraMaster);
+                return ListaCompra;
 
             }
             else

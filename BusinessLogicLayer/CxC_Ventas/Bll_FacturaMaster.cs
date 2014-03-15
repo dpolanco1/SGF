@@ -90,11 +90,12 @@ namespace BusinessLogicLayer.CxC_Ventas
         {
 
             //Validaciones de Lugar
+            var ListaFactura = (dalFacturasMaster.Search(enlFacturasMaster));
 
-            if (dalFacturasMaster.Search(enlFacturasMaster).Count != 0)
+            if (ListaFactura.Count != 0)
             {
 
-                return dalFacturasMaster.Search(enlFacturasMaster);
+                return ListaFactura;
 
             }
             else

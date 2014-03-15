@@ -76,10 +76,12 @@ namespace BusinessLogicLayer.Administracion
 
             //Validaciones de Lugar
 
-            if (dalImpuestos.Search(enlImpuestos).Count != 0)
+            var ListaImpuesto = dalImpuestos.Search(enlImpuestos);
+
+            if (ListaImpuesto.Count != 0)
             {
 
-                return dalImpuestos.Search(enlImpuestos);
+                return ListaImpuesto;
 
             }
             else

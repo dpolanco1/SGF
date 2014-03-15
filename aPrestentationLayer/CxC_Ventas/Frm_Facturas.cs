@@ -148,8 +148,10 @@ namespace aPrestentationLayer.CxC_Ventas
                     txtTotalFactura.Text = DGV_Facturas[12, DGV_Facturas.CurrentCell.RowIndex].Value.ToString();
                 }
             }
-            enlFacturaDetail.NoFactura = txtNoFactura.Text;
 
+
+
+            enlFacturaDetail.NoFactura = txtNoFactura.Text;
             DGV_DetailFactura.DataSource = bllFacturaDetail.Search(enlFacturaDetail);
 
         }

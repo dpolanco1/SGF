@@ -77,10 +77,12 @@ namespace BusinessLogicLayer.CxC_Ventas
 
             //Validaciones de Lugar
 
-            if (dalCotizacionesMaster.Search(enlCotizacionesMaster).Count != 0)
+            var ListaCotizacion = dalCotizacionesMaster.Search(enlCotizacionesMaster);
+
+            if (ListaCotizacion.Count != 0)
             {
 
-                return dalCotizacionesMaster.Search(enlCotizacionesMaster);
+                return ListaCotizacion;
 
             }
             else

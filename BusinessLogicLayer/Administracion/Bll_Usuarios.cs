@@ -84,10 +84,12 @@ namespace BusinessLogicLayer.Administracion
 
             //Validaciones de Lugar
 
-            if (dalUsuarios.Search(enlUsuarios).Count != 0)
+            var ListaUsuarios = dalUsuarios.Search(enlUsuarios);
+
+            if (ListaUsuarios.Count != 0)
             {
 
-                return dalUsuarios.Search(enlUsuarios);
+                return ListaUsuarios;
 
             }
             else

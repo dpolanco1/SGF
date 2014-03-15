@@ -79,10 +79,12 @@ namespace BusinessLogicLayer.CxC_Ventas
 
            //Validaciones de Luga
 
-           if (dalSubCategoriaCliente.Search(enlSubCategoriaClientes).Count != 0)
+           var ListaSubCategoriacliente = dalSubCategoriaCliente.Search(enlSubCategoriaClientes);
+
+           if (ListaSubCategoriacliente.Count != 0)
            {
 
-               return dalSubCategoriaCliente.Search(enlSubCategoriaClientes);
+               return ListaSubCategoriacliente;
 
            }
            else

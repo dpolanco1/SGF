@@ -76,10 +76,12 @@ namespace BusinessLogicLayer.Inventario
 
             //Validaciones de Lugar
 
-            if (dalMarcas.Search(enlMarcas).Count != 0)
+            var ListaMarcas = dalMarcas.Search(enlMarcas);
+
+            if (ListaMarcas.Count != 0)
             {
 
-                return dalMarcas.Search(enlMarcas);
+                return ListaMarcas;
 
             }
             else

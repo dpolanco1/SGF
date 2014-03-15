@@ -82,10 +82,12 @@ namespace BusinessLogicLayer.Administracion
 
             //Validaciones de Lugar
 
-            if (dalGastos.Search(enlGastos).Count != 0)
+            var ListaGastos = dalGastos.Search(enlGastos);
+
+            if (ListaGastos.Count != 0)
             {
 
-                return dalGastos.Search(enlGastos);
+                return ListaGastos;
 
             }
             else

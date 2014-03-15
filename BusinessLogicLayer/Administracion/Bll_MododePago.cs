@@ -78,10 +78,12 @@ namespace BusinessLogicLayer.Administracion
 
             //Validaciones de Lugar
 
-            if (dalModoPago.Search(enlModoPago).Count != 0)
+            var ListaModoPago = dalModoPago.Search(enlModoPago);
+
+            if (ListaModoPago.Count != 0)
             {
 
-                return dalModoPago.Search(enlModoPago);
+                return ListaModoPago;
 
             }
             else

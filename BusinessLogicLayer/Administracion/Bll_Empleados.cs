@@ -77,10 +77,12 @@ namespace BusinessLogicLayer.Administracion
 
             //Validaciones de Lugar
 
-            if (dalEmpleados.Search(enlEmpleados).Count != 0)
+            var ListaEmpleados = dalEmpleados.Search(enlEmpleados);
+
+            if (ListaEmpleados.Count != 0)
             {
 
-                return dalEmpleados.Search(enlEmpleados);
+                return ListaEmpleados;
 
             }
             else

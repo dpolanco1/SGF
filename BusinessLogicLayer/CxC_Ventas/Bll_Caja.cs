@@ -78,10 +78,12 @@ namespace BusinessLogicLayer.CxC_Ventas
 
             //Validaciones de Lugar
 
-            if (dalCaja.Search(enlCaja).Count != 0)
+            var ListaCaja = dalCaja.Search(enlCaja);
+
+            if (ListaCaja.Count != 0)
             {
 
-                return dalCaja.Search(enlCaja);
+                return ListaCaja;
 
             }
             else

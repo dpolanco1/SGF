@@ -67,13 +67,16 @@ namespace aPrestentationLayer.Comunes
                             ya en la lista de articulos viene el impuesto n0 hay que buscarlo de nuevo, 
                             por eso comento el codigo s*/
 
+                            /*Lo que viene en la lista del impuesto no es el porcentaje del impuesto sino el ID Ej: 000000002 
+                             con ese codigo debemos de buscar en la maestra de impuesto para obtener el porcentaje
+                             */
 
-                           /* enlImpuestos.Codigo = ListaArticulos2[0].Impuesto;
+                            enlImpuestos.Codigo = ListaArticulos2[0].Impuesto;
                             enlImpuestos.Nombre = string.Empty;
-                            var ListaImpuesto = bllImpuestos.Search(enlImpuestos);*/ 
+                            var ListaImpuesto = bllImpuestos.Search(enlImpuestos);
                             
                             //Calculamos el Impuesto 
-                            ValorImpuesto = (Convert.ToDecimal(ListaArticulos2[0].Impuesto) / 100) * ListaArticulos2[0].Precio;
+                            ValorImpuesto = (Convert.ToDecimal(ListaImpuesto[0].Porcentaje) / 100) * ListaArticulos2[0].Precio;
                         }
                         else
                         {
