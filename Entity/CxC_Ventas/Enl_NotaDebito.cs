@@ -7,5 +7,7 @@ namespace EntityLayer.CxC_Ventas
 {
    public class Enl_NotaDebito
     {
+
+
     }
 }
