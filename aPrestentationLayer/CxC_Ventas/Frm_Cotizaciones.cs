@@ -110,12 +110,12 @@ namespace aPrestentationLayer.CxC_Ventas
 
             if (bllNumeracion.ObtenerTipo("Cotizaciones") == "Automatico")
             {
-                txtNoCotizacion.Enabled = false;
-                txtNoCotizacion.Focus();
+               txtNoCotizacion.ReadOnly = true;
+               txtCliente.Focus();
             }
             else
             {
-                txtNoCotizacion.Enabled = true;
+                txtNoCotizacion.ReadOnly = false;
                 txtNoCotizacion.Focus();
             }
 

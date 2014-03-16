@@ -62,12 +62,12 @@ namespace aPrestentationLayer.CxC_Ventas
 
             if (bllNumeracion.ObtenerTipo("Caja") == "Automatico")
             {
-                txtCodigo.Enabled = false;
+                txtCodigo.ReadOnly= true;
                 txtNombre.Focus();
             }
             else
             {
-                txtCodigo.Enabled = true;
+                txtCodigo.ReadOnly = false;
                 txtCodigo.Focus();
             }
 

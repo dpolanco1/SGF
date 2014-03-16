@@ -62,12 +62,12 @@ namespace aPrestentationLayer.Administracion
 
             if (bllNumeracion.ObtenerTipo("Gastos") == "Automatico")
             {
-                txtNumero.Enabled = false;
+                txtNumero.ReadOnly = true; 
                 dtpFecha.Focus();
             }
             else
             {
-                txtNumero.Enabled = true;
+                txtNumero.ReadOnly = false;
                 txtNumero.Focus();
             }
 

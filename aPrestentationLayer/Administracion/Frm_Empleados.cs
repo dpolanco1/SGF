@@ -59,16 +59,15 @@ namespace aPrestentationLayer.Administracion
 
             if (bllNumeracion.ObtenerTipo("Empleados") == "Automatico")
             {
-                txtCodigo.Enabled = false;
+                txtCodigo.ReadOnly = true; ;
                 txtNombre.Focus();
              
             }
             else
             {
-                txtCodigo.Enabled = true;
+                txtCodigo.ReadOnly = false;
                 txtCodigo.Focus();
             }
-
            
         }
 

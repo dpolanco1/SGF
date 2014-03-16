@@ -62,12 +62,12 @@ namespace aPrestentationLayer.Administracion
 
             if (bllNumeracion.ObtenerTipo("Usuario") == "Automatico")
             {
-                txtNombreUsuario.Enabled = false;
+                txtNombreUsuario.ReadOnly = true;
                 txtNombre.Focus();
             }
             else
             {
-                txtNombreUsuario.Enabled = true;
+                txtNombreUsuario.ReadOnly = false;
                 txtNombreUsuario.Focus();
             }
 

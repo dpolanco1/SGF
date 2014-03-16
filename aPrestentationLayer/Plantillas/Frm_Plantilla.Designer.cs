@@ -36,6 +36,7 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnVista = new System.Windows.Forms.ToolStripButton();
             this.btnImprimir = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolBarsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +50,8 @@
             this.btnCancelar,
             this.btnEliminar,
             this.btnVista,
-            this.btnImprimir});
+            this.btnImprimir,
+            this.btnSalir});
             this.toolBarsPrincipal.Location = new System.Drawing.Point(0, 0);
             this.toolBarsPrincipal.Name = "toolBarsPrincipal";
             this.toolBarsPrincipal.Size = new System.Drawing.Size(723, 31);
@@ -118,6 +120,14 @@
             this.btnImprimir.Size = new System.Drawing.Size(81, 28);
             this.btnImprimir.Text = "Imprimir";
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::aPrestentationLayer.Properties.Resources.door_in;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(57, 28);
+            this.btnSalir.Text = "Salir";
+            // 
             // Frm_Plantilla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,5 +158,6 @@
         protected System.Windows.Forms.ToolStripButton btnVista;
         protected System.Windows.Forms.ToolStripButton btnImprimir;
         protected System.Windows.Forms.ToolStrip toolBarsPrincipal;
+        protected System.Windows.Forms.ToolStripButton btnSalir;
     }
 }

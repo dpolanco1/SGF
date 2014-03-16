@@ -85,12 +85,12 @@ namespace aPrestentationLayer.CxP_Compras
 
             if (bllNumeracion.ObtenerTipo("Compras") == "Automatico")
             {
-                txtNoCompra.Enabled = false;
+                txtNoCompra.ReadOnly = true;
                 txtSuplidor.Focus();
             }
             else
             {
-                txtNoCompra.Enabled = true;
+                txtNoCompra.ReadOnly = false;
                 txtNoCompra.Focus();
             }
 

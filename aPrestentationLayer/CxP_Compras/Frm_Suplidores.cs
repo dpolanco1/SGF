@@ -61,12 +61,12 @@ namespace aPrestentationLayer.CxP_Compras
 
             if (bllNumeracion.ObtenerTipo("Suplidores") == "Automatico")
             {
-                txtCodigo.Enabled = false;
+                txtCodigo.ReadOnly = true;
                 txtRazonSocial.Focus();
             }
             else
             {
-                txtCodigo.Enabled = true;
+                txtCodigo.ReadOnly = false;
                 txtCodigo.Focus();
             }
 

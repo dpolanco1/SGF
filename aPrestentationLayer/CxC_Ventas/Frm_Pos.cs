@@ -683,12 +683,12 @@ namespace aPrestentationLayer.CxC_Ventas
 
             if (bllNumeracion.ObtenerTipo("Facturas") == "Automatico")
             {
-                txtNoFactura.Enabled = false;
+                txtNoFactura.ReadOnly = true;
                 txtArticulo.Focus();
             }
             else
             {
-                txtNoFactura.Enabled = true;
+                txtNoFactura.ReadOnly = false;
                 txtNoFactura.Focus();
             }
 
