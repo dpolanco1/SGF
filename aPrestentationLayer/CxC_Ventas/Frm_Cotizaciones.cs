@@ -708,15 +708,26 @@ namespace aPrestentationLayer.CxC_Ventas
                     {
                         foreach (Enl_Articulos item in frmBuscarArticulos.ListaArticulos)
                         {
-                            this.listArticulos.Add(item);
+    
+                            foreach (DataGridViewRow fila in DGV_DetailCotizaciones.Rows)
+                            {                           
+                                //si el articulo que selecciono es igual al que esta en el grid sumar la cantidad , actualizar grid y actualizar el totallinea
+                                if (item.Codigo == fila.Cells["ArticuloCotizacion"].Value.ToString())
+                                {
+                                    fila.Cells["CantidadCotizacionGrid"].Value = Convert.ToInt32(fila.Cells["CantidadCotizacionGrid"].Value) + 1;
+                                    fila.Cells["TotalLineaCotizacion"].Value = Convert.ToInt32(fila.Cells["PrecioCotizacion"].Value) * Convert.ToInt32(fila.Cells["CantidadCotizacionGrid"].Value);
+                                    ActualizarGrid();
+                                }
+                                else//de lo contrario agregarlo a la lista de articulos
+                                    this.listArticulos.Add(item);
+                            }
+
                         }
                         DGV_DetailCotizaciones.DataSource = null;
                         DGV_DetailCotizaciones.DataSource = this.listArticulos;
-                        lblCantidadArticulos.Text = string.Format("Cantidad: {0}", DGV_DetailCotizaciones.RowCount);
+                        lblCantidadArticulos.Text = string.Format("Cantidad: {0}", DGV_Cotizacion_List.RowCount);
 
                     }
-
-                    MessageBox.Show(listArticulos[0].Impuesto);
 
                     ActualizarGrid();
                 }
@@ -732,8 +743,25 @@ namespace aPrestentationLayer.CxC_Ventas
             }
         }
 
+        private void CalcularTotalLinea()
+        {
+            decimal totalLineagrid = 0.00m;
+
+            foreach (DataGridViewRow row in DGV_DetailCotizaciones.Rows)
+            {
+                //esta linea multiplica el precio por la cantidad del item seleccionado y lo agrega al grid
+                totalLineagrid += (Convert.ToDecimal(row.Cells["PrecioCotizacion"].Value) * Convert.ToInt32(row.Cells["CantidadCotizacionGrid"].Value));// + Convert.ToDecimal(row.Cells["ImpuestoFacturaGrid"].Value);
+                row.Cells["TotalLineaCotizacion"].Value = totalLineagrid;
+                totalLineagrid = 0.00m;
+            }
+        }
+
         private void DGV_DetailCotizaciones_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+
+
+            CalcularTotalLinea();
+            /*
             //Obtener los valores de impuesto y el total de linea antes de agregarlos al grid 
            
 
@@ -759,7 +787,7 @@ namespace aPrestentationLayer.CxC_Ventas
        
                 }
               
-            }
+            }*/
 
             
         }
