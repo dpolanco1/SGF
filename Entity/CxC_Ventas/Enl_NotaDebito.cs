@@ -9,5 +9,7 @@ namespace EntityLayer.CxC_Ventas
     {
 
 
+
+
     }
 }

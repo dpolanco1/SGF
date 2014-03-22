@@ -29,8 +29,6 @@ namespace aPrestentationLayer.Administracion
         Bll_Gastos bllGastos = new Bll_Gastos();
         Bll_Numeracion bllNumeracion = new Bll_Numeracion();
 
-
-
         public Frm_Gastos()
         {
             InitializeComponent();
@@ -44,7 +42,6 @@ namespace aPrestentationLayer.Administracion
             btnVista.Click += btnVista_Click;
             DGV_Gastos.AutoGenerateColumns = false;
         }
-
 
         void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -131,7 +128,7 @@ namespace aPrestentationLayer.Administracion
                 BotonEditar();
                 Estado = Helper.EstadoSystema.Editando;
                 dtpFecha.Focus();
-                txtNumero.Enabled = false;
+                txtNumero.ReadOnly = true;
 
             }
         }
@@ -249,7 +246,6 @@ namespace aPrestentationLayer.Administracion
             DGV_Gastos.DataSource = bllGastos.Search(enlGastos);
         }
  
-
         private void DGV_Gastos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnVista_Click(btnVista, null);
