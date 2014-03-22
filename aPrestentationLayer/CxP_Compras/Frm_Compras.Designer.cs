@@ -104,10 +104,10 @@
             this.tabControl1.Controls.Add(this.tbpMaster);
             this.tabControl1.Controls.Add(this.tbpDetail);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Location = new System.Drawing.Point(0, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(837, 518);
+            this.tabControl1.Size = new System.Drawing.Size(837, 512);
             this.tabControl1.TabIndex = 3;
             // 
             // tbpMaster
@@ -126,7 +126,7 @@
             this.tbpMaster.Location = new System.Drawing.Point(4, 22);
             this.tbpMaster.Name = "tbpMaster";
             this.tbpMaster.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpMaster.Size = new System.Drawing.Size(829, 492);
+            this.tbpMaster.Size = new System.Drawing.Size(829, 486);
             this.tbpMaster.TabIndex = 0;
             this.tbpMaster.Text = "Compras";
             this.tbpMaster.UseVisualStyleBackColor = true;
@@ -249,65 +249,77 @@
             // 
             // txtTotalCompra
             // 
-            this.txtTotalCompra.Location = new System.Drawing.Point(556, 453);
+            this.txtTotalCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalCompra.Location = new System.Drawing.Point(608, 454);
             this.txtTotalCompra.Name = "txtTotalCompra";
-            this.txtTotalCompra.Size = new System.Drawing.Size(144, 20);
+            this.txtTotalCompra.ReadOnly = true;
+            this.txtTotalCompra.Size = new System.Drawing.Size(183, 26);
             this.txtTotalCompra.TabIndex = 15;
             // 
             // txtTotalDescuento
             // 
-            this.txtTotalDescuento.Location = new System.Drawing.Point(362, 453);
+            this.txtTotalDescuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalDescuento.Location = new System.Drawing.Point(406, 454);
             this.txtTotalDescuento.Name = "txtTotalDescuento";
-            this.txtTotalDescuento.Size = new System.Drawing.Size(144, 20);
+            this.txtTotalDescuento.ReadOnly = true;
+            this.txtTotalDescuento.Size = new System.Drawing.Size(175, 26);
             this.txtTotalDescuento.TabIndex = 14;
             // 
             // txtTotalImpuesto
             // 
-            this.txtTotalImpuesto.Location = new System.Drawing.Point(193, 453);
+            this.txtTotalImpuesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalImpuesto.Location = new System.Drawing.Point(207, 454);
             this.txtTotalImpuesto.Name = "txtTotalImpuesto";
-            this.txtTotalImpuesto.Size = new System.Drawing.Size(144, 20);
+            this.txtTotalImpuesto.ReadOnly = true;
+            this.txtTotalImpuesto.Size = new System.Drawing.Size(169, 26);
             this.txtTotalImpuesto.TabIndex = 13;
             // 
             // txtSubTotal
             // 
+            this.txtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSubTotal.Location = new System.Drawing.Point(35, 453);
             this.txtSubTotal.Name = "txtSubTotal";
-            this.txtSubTotal.Size = new System.Drawing.Size(135, 20);
+            this.txtSubTotal.ReadOnly = true;
+            this.txtSubTotal.Size = new System.Drawing.Size(152, 26);
             this.txtSubTotal.TabIndex = 12;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(553, 437);
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(656, 427);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 13);
+            this.label8.Size = new System.Drawing.Size(135, 24);
             this.label8.TabIndex = 11;
             this.label8.Text = "Total Compra";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(359, 437);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(419, 427);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 13);
+            this.label5.Size = new System.Drawing.Size(162, 24);
             this.label5.TabIndex = 10;
             this.label5.Text = "Total Descuento";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(190, 437);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(229, 427);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
+            this.label3.Size = new System.Drawing.Size(147, 24);
             this.label3.TabIndex = 9;
             this.label3.Text = "Total Impuesto";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 437);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(31, 427);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.Size = new System.Drawing.Size(93, 24);
             this.label2.TabIndex = 8;
             this.label2.Text = "SubTotal";
             // 

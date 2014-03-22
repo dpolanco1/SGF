@@ -36,8 +36,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.DGV_Articulos = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.Check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +43,8 @@
             this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Impuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -126,26 +126,6 @@
             this.DGV_Articulos.TabIndex = 0;
             this.DGV_Articulos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Articulos_CellContentClick);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Location = new System.Drawing.Point(14, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(616, 48);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Buscar";
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(534, 19);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(70, 23);
-            this.btnBuscar.TabIndex = 0;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Check
             // 
             this.Check.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -205,6 +185,26 @@
             this.Impuesto.ReadOnly = true;
             this.Impuesto.Visible = false;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnBuscar);
+            this.groupBox1.Location = new System.Drawing.Point(14, 20);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(616, 48);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Buscar";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(534, 19);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(70, 23);
+            this.btnBuscar.TabIndex = 0;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Frm_Buscar_Articulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,6 +214,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Frm_Buscar_Articulos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Frm_Buscar_Articulos";
             this.Load += new System.EventHandler(this.Frm_Buscar_Articulos_Load);
             this.tabControl1.ResumeLayout(false);
