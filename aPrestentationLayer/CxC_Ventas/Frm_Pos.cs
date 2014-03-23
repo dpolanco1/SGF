@@ -218,118 +218,134 @@ namespace aPrestentationLayer.CxC_Ventas
 
                 try
                 {
-
-            enlFacturaMaster.Numero = txtNoFactura.Text;
-            enlFacturaMaster.Cliente = txtCliente.Text;
-            enlFacturaMaster.Fecha = dtpFecha.Value; ;
-            enlFacturaMaster.Almacen = String.Empty;
-            enlFacturaMaster.Terminos = String.Empty;
-            enlFacturaMaster.Tipo = "POS";
-            enlFacturaMaster.Descuento = 0;
-            enlFacturaMaster.Vendedor = String.Empty;
-            enlFacturaMaster.Caja = String.Empty;
-
-            enlFacturaMaster.SubTotal = 0;
-            enlFacturaMaster.TotalImpuesto = 0;
-            enlFacturaMaster.TotalDescuento = 0;
-
-            TotalFactura = 0;
-            foreach (DataGridViewRow row in DGV_Factura_Pos.Rows)
-            {
-                TotalFactura += Convert.ToDecimal(row.Cells["TotalLinea"].Value);
-            }
-
-            enlFacturaMaster.TotalFactura = TotalFactura;
-
-            enlFacturaMaster.Status = "Guardada";
-            enlFacturaMaster.TotalPagado = 0;
-            enlFacturaMaster.BalancePendiente = enlFacturaMaster.TotalFactura;
-
-
-
-            if (Estado == Helper.EstadoSystema.Creando)
-            {
-                // Inserto el Header de la Factura
-                txtNoFactura.Text = bllFacturaMaster.Insert(enlFacturaMaster);
-
-                for (int a = 0; a < DGV_Factura_Pos.RowCount; a++)
-                {
-                    enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
-                    enlFacturaDetail.Codigo = DGV_Factura_Pos[0, a].Value.ToString();
-                    enlFacturaDetail.Descripcion = DGV_Factura_Pos[1, a].Value.ToString();
-                    enlFacturaDetail.Precio = Convert.ToDecimal(DGV_Factura_Pos[2, a].Value);
-                    enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_Factura_Pos[3, a].Value);
-                    enlFacturaDetail.Impuesto = 0;
-                    enlFacturaDetail.TotalLinea = Convert.ToDecimal(DGV_Factura_Pos[5, a].Value);
-                    enlFacturaDetail.Costo = Convert.ToDecimal(DGV_Factura_Pos[6, a].Value);
-
-                    // Insertando el Detalle de la Factura
-                    bllFacturaDetail.Insert(enlFacturaDetail);
-
-                    //Rebajo la existencia de la maestra de Articulo
-                    enlArticulos.Codigo = enlFacturaDetail.Codigo;
-                    enlArticulos.Existencia = (enlFacturaDetail.Cantidad) * -1;
-                    bllArticulos.UpdateExitencia(enlArticulos);
-
-                }
-
-                if (bllNumeracion.ObtenerTipo("Facturas") == "Automatico")
-                {
-                    bllNumeracion.ActualizarNumero(bllNumeracion.ObtenerNumero("Facturas"), "Facturas");
-                }
-            }
-            else {
-
-                if (Estado == Helper.EstadoSystema.Editando)
-                {
-                    bllFacturaMaster.Update(enlFacturaMaster);
-
-                    //Eliminados El Detalle de la Factura
-                    enlFacturaDetail.NoFactura = txtNoFactura.Text;
-                    bllFacturaDetail.Delete(enlFacturaDetail);
-
-                    //Insertamos el Detalle de la Factura
-
-                    for (int a = 0; a <= DGV_Factura_Pos.RowCount - 1; a++)
+                    if (DGV_Factura_Pos.RowCount > 0 )
                     {
-                        enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
-                        enlFacturaDetail.Codigo = DGV_Factura_Pos[0, a].Value.ToString();
-                        enlFacturaDetail.Descripcion = DGV_Factura_Pos[1, a].Value.ToString();
-                        enlFacturaDetail.Precio = Convert.ToDecimal(DGV_Factura_Pos[2, a].Value);
-                        enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_Factura_Pos[3, a].Value);
-                        enlFacturaDetail.Impuesto = 0;
-                        enlFacturaDetail.TotalLinea = Convert.ToDecimal(DGV_Factura_Pos[4, a].Value);
 
-                        bllFacturaDetail.Insert(enlFacturaDetail);
-                    }
+                            enlFacturaMaster.Numero = txtNoFactura.Text;
+                            enlFacturaMaster.Cliente = txtCliente.Text;
+                            enlFacturaMaster.Fecha = dtpFecha.Value; ;
+                            enlFacturaMaster.Almacen = String.Empty;
+                            enlFacturaMaster.Terminos = String.Empty;
+                            enlFacturaMaster.Tipo = "POS";
+                            enlFacturaMaster.Descuento = 0;
+                            enlFacturaMaster.Vendedor = String.Empty;
+                            enlFacturaMaster.Caja = String.Empty;
+
+                            enlFacturaMaster.SubTotal = 0;
+                            enlFacturaMaster.TotalImpuesto = 0;
+                            enlFacturaMaster.TotalDescuento = 0;
+
+                            TotalFactura = 0;
+                            foreach (DataGridViewRow row in DGV_Factura_Pos.Rows)
+                            {
+                                TotalFactura += Convert.ToDecimal(row.Cells["TotalLinea"].Value);
+                            }
+
+                            enlFacturaMaster.TotalFactura = TotalFactura;
+
+                            enlFacturaMaster.Status = "Guardada";
+                            enlFacturaMaster.TotalPagado = 0;
+                            enlFacturaMaster.BalancePendiente = enlFacturaMaster.TotalFactura;
+
+
+
+                            if (Estado == Helper.EstadoSystema.Creando)
+                            {
+                                // Inserto el Header de la Factura
+                                txtNoFactura.Text = bllFacturaMaster.Insert(enlFacturaMaster);
+
+                                for (int a = 0; a < DGV_Factura_Pos.RowCount; a++)
+                                {
+                                    enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
+                                    enlFacturaDetail.Codigo = DGV_Factura_Pos[0, a].Value.ToString();
+                                    enlFacturaDetail.Descripcion = DGV_Factura_Pos[1, a].Value.ToString();
+                                    enlFacturaDetail.Precio = Convert.ToDecimal(DGV_Factura_Pos[2, a].Value);
+                                    enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_Factura_Pos[3, a].Value);
+                                    enlFacturaDetail.Impuesto = 0;
+                                    enlFacturaDetail.TotalLinea = Convert.ToDecimal(DGV_Factura_Pos[5, a].Value);
+                                    enlFacturaDetail.Costo = Convert.ToDecimal(DGV_Factura_Pos[6, a].Value);
+
+                                    // Insertando el Detalle de la Factura
+                                    bllFacturaDetail.Insert(enlFacturaDetail);
+
+                                    //Rebajo la existencia de la maestra de Articulo
+                                    enlArticulos.Codigo = enlFacturaDetail.Codigo;
+                                    enlArticulos.Existencia = (enlFacturaDetail.Cantidad) * -1;
+                                    bllArticulos.UpdateExitencia(enlArticulos);
+
+                                }
+
+                                if (bllNumeracion.ObtenerTipo("Facturas") == "Automatico")
+                                {
+                                    bllNumeracion.ActualizarNumero(bllNumeracion.ObtenerNumero("Facturas"), "Facturas");
+                                }
+                            }
+                            else {
+
+                                if (Estado == Helper.EstadoSystema.Editando)
+                                {
+                                    bllFacturaMaster.Update(enlFacturaMaster);
+
+                                    //Eliminados El Detalle de la Factura
+                                    enlFacturaDetail.NoFactura = txtNoFactura.Text;
+                                    bllFacturaDetail.Delete(enlFacturaDetail);
+
+                                    //Insertamos el Detalle de la Factura
+
+                                    for (int a = 0; a <= DGV_Factura_Pos.RowCount - 1; a++)
+                                    {
+                                        enlFacturaDetail.NoFactura = txtNoFactura.Text;//No Factura
+                                        enlFacturaDetail.Codigo = DGV_Factura_Pos[0, a].Value.ToString();
+                                        enlFacturaDetail.Descripcion = DGV_Factura_Pos[1, a].Value.ToString();
+                                        enlFacturaDetail.Precio = Convert.ToDecimal(DGV_Factura_Pos[2, a].Value);
+                                        enlFacturaDetail.Cantidad = Convert.ToDecimal(DGV_Factura_Pos[3, a].Value);
+                                        enlFacturaDetail.Impuesto = 0;
+                                        enlFacturaDetail.TotalLinea = Convert.ToDecimal(DGV_Factura_Pos[4, a].Value);
+
+                                        bllFacturaDetail.Insert(enlFacturaDetail);
+                                    }
                 
                 
-                }
+                                }
 
             
-            }
+                            }
 
-            this.btnNuevo.Enabled = true;
-            this.btnModificar.Enabled = true;
-            this.btnEliminar.Enabled = true;
-            this.btnImprimir.Enabled = true;
-            this.btnGuardar.Enabled = false;
+                            this.btnNuevo.Enabled = true;
+                            this.btnModificar.Enabled = true;
+                            this.btnEliminar.Enabled = true;
+                            this.btnImprimir.Enabled = true;
+                            this.btnVista.Enabled = true;
+                            this.btnCancelar.Enabled = false;
+                            this.btnGuardar.Enabled = false;
+                            this.btnGuardarCerrar.Enabled = false;
 
-            AC.DeshabilitarText(this);
-            ActualizarDGV = true;
-            lblMensaje.Text = "Guardado Correctamente";
-            ts.Complete();
-            Estado = Helper.EstadoSystema.Consultando;
 
+                            
+                            ts.Complete();
+                            AC.DeshabilitarText(this);
+                            ActualizarDGV = true;
+                            txtEstatus.Text = "Guardada";
+                            lblMensaje.Text = "Guardado Correctamente";
+                            Estado = Helper.EstadoSystema.Consultando;
+
+                        }
+                    else
+                    {
+                        // si el DGV_DetailFactura no tiene Filas no podemos agregar la factura
+                        MessageBox.Show("Es necesario agregar un articulo a la factura", "Intente de Nuevo");
+
+                    }
                 }
                 catch (Exception x)
                 {
 
                     MessageBox.Show(x.Message);
+                    ts.Dispose();
+                    MessageBox.Show("Error al guardar el registro, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                ts.Dispose();
-                //MessageBox.Show("Error al guardar el registro, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                
+             }
         }
 
         private void btnGuardarCerrar_Click(object sender, EventArgs e)
@@ -340,6 +356,8 @@ namespace aPrestentationLayer.CxC_Ventas
 
                 try
                 {
+                    if(DGV_Factura_Pos.RowCount > 0)
+                    {
                     enlFacturaMaster.Numero = txtNoFactura.Text;
                     enlFacturaMaster.Cliente = txtCliente.Text;
                     enlFacturaMaster.Fecha = dtpFecha.Value; ;
@@ -437,23 +455,32 @@ namespace aPrestentationLayer.CxC_Ventas
                     this.btnEliminar.Enabled = true;
                     this.btnImprimir.Enabled = true;
                     this.btnGuardar.Enabled = false;
+                    this.btnVista.Enabled = true;
                     this.btnGuardarCerrar.Enabled = false;
 
                     AC.DeshabilitarText(this);
 
                     lblMensaje.Text = "Guardado Correctamente";
                     txtEstatus.Text = "Cerrada";
-
+                    ActualizarDGV = true;
                     ts.Complete();
 
+                }
+                    else
+                    {
+                        // si el DGV_DetailFactura no tiene Filas no podemos agregar la factura
+                        MessageBox.Show("Es necesario agregar un articulo a la factura", "Intente de Nuevo");
+
+                    }
                 }
                 catch (Exception x )
                 {
                     MessageBox.Show(x.Message);
+                    ts.Dispose();
+                    MessageBox.Show("Error al guardar el registro, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                   
                 }
-                ts.Dispose();
-               // MessageBox.Show("Error al guardar el registro, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               
             }
         }
        
@@ -518,6 +545,7 @@ namespace aPrestentationLayer.CxC_Ventas
             enlFacturaMaster.Tipo = "POS";
             enlFacturaMaster.Vendedor = string.Empty;
             enlFacturaMaster.BalancePendiente = -1;
+            enlFacturaMaster.Status = string.Empty;
 
             enlFacturaMaster.DesdeFecha = dtpDesde.Value.Date;
             enlFacturaMaster.HastaFecha = dtpHasta.Value.Date; 
@@ -823,6 +851,7 @@ namespace aPrestentationLayer.CxC_Ventas
                 enlFacturaMaster.Tipo = "POS";
                 enlFacturaMaster.Vendedor = string.Empty;
                 enlFacturaMaster.BalancePendiente = -1;
+                enlFacturaMaster.Status = string.Empty;
 
                 DGV_Facturas_Pos_List.DataSource = bllFacturaMaster.Search(enlFacturaMaster);
 
