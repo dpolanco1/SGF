@@ -465,6 +465,11 @@ namespace aPrestentationLayer.CxC_Ventas
                     ActualizarDGV = true;
                     ts.Complete();
 
+                        // Llamar Formulario para Calcular Total de la Factura y el monto pagado para determinar Monto a Devolver
+
+                    Frm_MontoDevolver frmMontoDevolver = new Frm_MontoDevolver(TotalFactura);
+                    frmMontoDevolver.ShowDialog();
+
                 }
                     else
                     {
@@ -675,7 +680,7 @@ namespace aPrestentationLayer.CxC_Ventas
             this.btnGuardarCerrar.Enabled = false;
             this.btnCancelar.Enabled = false;
 
-        
+            this.lblMensaje.Text = string.Empty;
 
             AC.DeshabilitarText(this);
             Estado = Helper.EstadoSystema.Consultando;
