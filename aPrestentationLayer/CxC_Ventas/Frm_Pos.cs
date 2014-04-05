@@ -534,6 +534,11 @@ namespace aPrestentationLayer.CxC_Ventas
             txtBuscarCliente.Enabled = true;
             txtBuscarNoFactura.Enabled = true;
 
+            dtpDesde.Enabled = true;
+            dtpHasta.Enabled = true;
+
+            cmbEstatus.Enabled = true;
+
             Estado = Helper.EstadoSystema.Consultando;
             tabControl1.TabPages.Remove(tbpMaster);
 

@@ -25,6 +25,9 @@ namespace aPrestentationLayer.Comunes
         //esto se utiliza para traer la lista desde el formulario padre al hijo y pasarla como variable publica
         public List<Enl_Articulos> ListaArticulos = new List<Enl_Articulos>();
 
+
+        IList<Enl_Articulos> ListaArticulosLoad;
+
         public Frm_Buscar_Articulos()
         {
             InitializeComponent();
@@ -137,10 +140,47 @@ namespace aPrestentationLayer.Comunes
             enlArticulos.Categoria = string.Empty;
             enlArticulos.SubCategoria = string.Empty;
 
+            ListaArticulosLoad = bllArticulos.Search(enlArticulos);
 
-
-            DGV_Articulos.DataSource = bllArticulos.Search(enlArticulos);
+            DGV_Articulos.DataSource = ListaArticulosLoad;
        
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            
+            if(!string.IsNullOrEmpty(txtArticulo.Text))
+            {
+
+            var query = (from a in ListaArticulosLoad
+                         where a.Codigo == txtArticulo.Text
+                         select a).ToList();
+
+            DGV_Articulos.DataSource = query;
+            }
+
+            if (!string.IsNullOrEmpty(txtDescripcion.Text))
+            {
+
+                var query = (from a in ListaArticulosLoad
+                             where a.Descripcion.ToString().Contains(txtDescripcion.Text)
+                             select a).ToList();
+
+                DGV_Articulos.DataSource = query;
+            }
+
+            if (string.IsNullOrEmpty(txtDescripcion.Text) &&
+                string.IsNullOrEmpty(txtArticulo.Text))
+            {
+
+                DGV_Articulos.DataSource = ListaArticulosLoad;
+            }
+
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            DGV_Articulos.DataSource = ListaArticulosLoad;
         }
     }
 }
